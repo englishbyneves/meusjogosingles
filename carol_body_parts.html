@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Parts — Carol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1426; --bg2:#141d36; --card:#1b2742; --card2:#22325a;
+    --ink:#eef3ff; --muted:#93a3c4; --line:rgba(255,255,255,.09);
+    --teal:#34d6b7; --coral:#ff7a59; --amber:#ffce4d; --pink:#ff6fa5; --blue:#5aa9ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{
+    font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);
+    min-height:100vh;line-height:1.5;
+    background-image:radial-gradient(900px 500px at 85% -10%,rgba(52,214,183,.10),transparent 60%),
+                     radial-gradient(800px 500px at 0% 110%,rgba(255,122,89,.10),transparent 55%);
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:22px 18px 60px;}
+  header{text-align:center;margin-bottom:18px;}
+  .kicker{font-family:'Fredoka';font-weight:500;letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--teal);}
+  h1{font-family:'Fredoka';font-weight:700;font-size:clamp(28px,7vw,42px);line-height:1.05;margin:2px 0 4px;}
+  h1 span{color:var(--coral);}
+  .sub{color:var(--muted);font-size:14px;}
+  /* progress */
+  .steps{display:flex;gap:7px;margin:18px 0 22px;}
+  .steps .seg{flex:1;height:7px;border-radius:99px;background:var(--card);overflow:hidden;cursor:pointer;}
+  .steps .seg i{display:block;height:100%;width:0;background:var(--teal);transition:width .4s ease;}
+  .steps .seg.done i{width:100%;}
+  .steps .seg.now i{width:100%;background:var(--coral);}
+  /* rounds */
+  .round{display:none;animation:pop .35s ease;}
+  .round.active{display:block;}
+  @keyframes pop{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+  .rtag{font-family:'Fredoka';font-weight:600;font-size:13px;color:var(--amber);text-transform:uppercase;letter-spacing:.1em;}
+  .rtitle{font-family:'Fredoka';font-weight:700;font-size:clamp(22px,5vw,30px);margin:2px 0 16px;}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:560px){.grid2{grid-template-columns:1fr;}}
+  /* body map */
+  .mapbox{background:var(--bg2);border-radius:18px;padding:10px;display:flex;justify-content:center;}
+  svg{width:100%;max-width:230px;display:block;}
+  .base{fill:#2b3c63;stroke:#3d5488;stroke-width:1.5;}
+  .hot{fill:rgba(52,214,183,.22);stroke:var(--teal);stroke-width:1.3;cursor:pointer;transition:.12s;}
+  .hot:hover{fill:rgba(52,214,183,.5);}
+  .hot.active{fill:var(--coral);stroke:var(--coral);}
+  path.hot{fill:none;stroke:var(--teal);stroke-width:3;}
+  path.hot.active{stroke:var(--coral);}
+  .count{font-size:13px;color:var(--muted);margin-bottom:10px;}
+  .count b{color:var(--teal);font-size:16px;}
+  .reveal{min-height:150px;display:flex;flex-direction:column;justify-content:center;}
+  .word{font-family:'Fredoka';font-weight:700;font-size:34px;line-height:1;}
+  .wpt{color:var(--muted);font-size:15px;margin:2px 0 16px;}
+  .frame{display:flex;align-items:center;gap:10px;font-size:17px;margin-bottom:11px;}
+  .frame .dot{width:9px;height:9px;border-radius:99px;background:var(--coral);flex:none;}
+  .frame b{font-weight:700;}
+  .empty{color:var(--muted);font-size:16px;display:flex;align-items:center;gap:8px;}
+  /* buttons */
+  button{font-family:'Nunito';font-weight:700;cursor:pointer;border:none;}
+  .sound{display:inline-flex;align-items:center;gap:7px;background:var(--teal);color:#06241d;
+    padding:10px 16px;border-radius:99px;font-size:14px;margin-top:6px;}
+  .sound:active{transform:scale(.96);}
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px;gap:12px;}
+  .btn{background:var(--card2);color:var(--ink);padding:13px 22px;border-radius:14px;font-size:15px;border:1px solid var(--line);}
+  .btn.primary{background:var(--coral);color:#3a160c;border-color:transparent;}
+  .btn:disabled{opacity:.35;cursor:default;}
+  /* symptom chips */
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px;}
+  .chip{background:var(--card2);border:1px solid var(--line);color:var(--ink);padding:11px 15px;border-radius:13px;font-size:15px;}
+  .chip:active{transform:scale(.96);}
+  .chip.on{background:var(--amber);color:#3a2c00;border-color:transparent;}
+  /* face / monster */
+  .stage{background:var(--bg2);border-radius:18px;padding:14px;display:flex;justify-content:center;align-items:center;min-height:240px;}
+  .hint{color:var(--muted);font-size:15px;margin:14px 0 4px;}
+  .hint b{color:var(--ink);}
+  /* timer */
+  .timer{font-family:'Fredoka';font-weight:700;font-size:60px;text-align:center;letter-spacing:.02em;}
+  .timer.go{color:var(--teal);} .timer.end{color:var(--coral);}
+  /* pharmacy */
+  .scene{background:var(--bg2);border-radius:18px;padding:16px;min-height:60px;}
+  .bubble{max-width:88%;padding:12px 15px;border-radius:16px;font-size:16px;margin-bottom:12px;animation:pop .3s ease;}
+  .them{background:var(--card2);border-bottom-left-radius:4px;}
+  .you{background:var(--teal);color:#06241d;margin-left:auto;border-bottom-right-radius:4px;font-weight:700;}
+  .who{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:0 0 4px 4px;}
+  .done-msg{text-align:center;font-family:'Fredoka';font-weight:700;font-size:24px;color:var(--teal);padding:18px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Speaking Game</div>
+    <h1>Body <span>Parts</span></h1>
+    <div class="sub">Tap, listen, and say it out loud</div>
+  </header>
+
+  <div class="steps" id="steps">
+    <div class="seg now"><i></i></div>
+    <div class="seg"><i></i></div>
+    <div class="seg"><i></i></div>
+    <div class="seg"><i></i></div>
+    <div class="seg"><i></i></div>
+  </div>
+
+  <!-- ROUND 1 -->
+  <section class="round active" data-r="0">
+    <div class="rtag">Round 1</div>
+    <div class="rtitle">Touch & say</div>
+    <div class="panel grid2">
+      <div class="mapbox" id="map1"></div>
+      <div>
+        <div class="count"><b id="cnt">0</b> / 14 parts</div>
+        <div class="reveal" id="rev1">
+          <div class="empty">👆 Tap a part of the body</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUND 2 -->
+  <section class="round" data-r="1">
+    <div class="rtag">Round 2</div>
+    <div class="rtitle">Where does it hurt?</div>
+    <div class="panel grid2">
+      <div class="mapbox" id="map2"></div>
+      <div>
+        <div class="reveal" id="rev2">
+          <div class="empty">👆 Tap where it hurts</div>
+        </div>
+        <div class="hint">Or say a problem:</div>
+        <div class="chips" id="symp"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUND 3 -->
+  <section class="round" data-r="2">
+    <div class="rtag">Round 3</div>
+    <div class="rtitle">Guess the face</div>
+    <div class="panel">
+      <div class="stage"><div id="face"></div></div>
+      <div class="hint">Describe this person. Start with: <b>“He / She has…”</b></div>
+      <div class="frame"><span class="dot"></span><span>He has <b>long / short</b> hair.</span></div>
+      <div class="frame"><span class="dot"></span><span>He has <b>big / small</b> eyes and a <b>big / small</b> nose.</span></div>
+      <button class="btn primary" id="newFace" style="margin-top:10px">New face →</button>
+    </div>
+  </section>
+
+  <!-- ROUND 4 -->
+  <section class="round" data-r="3">
+    <div class="rtag">Round 4</div>
+    <div class="rtitle">60-second monster</div>
+    <div class="panel">
+      <div class="stage"><div id="monster"></div></div>
+      <div class="hint">Describe the monster, non-stop! <b>“It has three eyes and four arms…”</b></div>
+      <div class="timer go" id="timer">0:60</div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:6px">
+        <button class="btn primary" id="startT">Start ▶</button>
+        <button class="btn" id="newMon">New monster</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUND 5 -->
+  <section class="round" data-r="4">
+    <div class="rtag">Round 5</div>
+    <div class="rtitle">At the pharmacy</div>
+    <div class="panel">
+      <div class="scene" id="scene"></div>
+      <button class="btn primary" id="nextLine" style="margin-top:14px;width:100%">Say your line →</button>
+    </div>
+  </section>
+
+  <div class="nav">
+    <button class="btn" id="prev" disabled>← Back</button>
+    <button class="btn primary" id="next">Next round →</button>
+  </div>
+</div>
+
+<script>
+/* ---------- speech ---------- */
+function say(t){try{var u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+
+/* ---------- body data ---------- */
+var PARTS=[
+  ['hair','cabelo'],['ear','orelha'],['eye','olho'],['nose','nariz'],['mouth','boca'],
+  ['neck','pescoço'],['shoulder','ombro'],['chest','peito'],['stomach','barriga'],
+  ['arm','braço'],['hand','mão'],['leg','perna'],['knee','joelho'],['foot','pé']
+];
+var BODY='<svg viewBox="0 0 200 360" role="img" aria-label="Body">'
++'<ellipse class="hot" data-en="hair" cx="100" cy="28" rx="31" ry="17"/>'
++'<circle class="base" cx="100" cy="48" r="30"/>'
++'<circle class="hot" data-en="ear" cx="70" cy="50" r="8"/><circle class="hot" data-en="ear" cx="130" cy="50" r="8"/>'
++'<ellipse class="hot" data-en="eye" cx="90" cy="44" rx="6" ry="5"/><ellipse class="hot" data-en="eye" cx="110" cy="44" rx="6" ry="5"/>'
++'<ellipse class="hot" data-en="nose" cx="100" cy="53" rx="5" ry="6"/>'
++'<path class="hot" data-en="mouth" d="M89,63 Q100,71 111,63"/>'
++'<rect class="hot" data-en="neck" x="90" y="74" width="20" height="13" rx="5"/>'
++'<path class="base" d="M58,98 Q100,86 142,98 L134,184 Q100,200 66,184 Z"/>'
++'<ellipse class="hot" data-en="shoulder" cx="64" cy="100" rx="11" ry="8"/><ellipse class="hot" data-en="shoulder" cx="136" cy="100" rx="11" ry="8"/>'
++'<ellipse class="hot" data-en="chest" cx="100" cy="124" rx="26" ry="16"/>'
++'<ellipse class="hot" data-en="stomach" cx="100" cy="166" rx="24" ry="16"/>'
++'<rect class="hot" data-en="arm" x="42" y="100" width="16" height="88" rx="8"/><rect class="hot" data-en="arm" x="142" y="100" width="16" height="88" rx="8"/>'
++'<circle class="hot" data-en="hand" cx="50" cy="196" r="11"/><circle class="hot" data-en="hand" cx="150" cy="196" r="11"/>'
++'<rect class="hot" data-en="leg" x="70" y="194" width="22" height="140" rx="11"/><rect class="hot" data-en="leg" x="108" y="194" width="22" height="140" rx="11"/>'
++'<ellipse class="hot" data-en="knee" cx="81" cy="264" rx="12" ry="11"/><ellipse class="hot" data-en="knee" cx="119" cy="264" rx="12" ry="11"/>'
++'<ellipse class="hot" data-en="foot" cx="81" cy="343" rx="16" ry="9"/><ellipse class="hot" data-en="foot" cx="119" cy="343" rx="16" ry="9"/>'
++'</svg>';
+var ptOf={};PARTS.forEach(function(p){ptOf[p[0]]=p[1];});
+
+/* ---------- round 1: touch & say ---------- */
+document.getElementById('map1').innerHTML=BODY;
+var named=new Set();
+function wireMap(container,mode){
+  container.querySelectorAll('.hot').forEach(function(h){
+    h.addEventListener('click',function(){
+      var en=h.getAttribute('data-en');
+      container.querySelectorAll('.hot.active').forEach(function(x){x.classList.remove('active');});
+      container.querySelectorAll('.hot[data-en="'+en+'"]').forEach(function(x){x.classList.add('active');});
+      if(mode===1){
+        named.add(en);document.getElementById('cnt').textContent=named.size;
+        document.getElementById('rev1').innerHTML=
+          '<div class="word">'+en+'</div><div class="wpt">'+ptOf[en]+'</div>'
+          +'<div class="frame"><span class="dot"></span><span>This is my <b>'+en+'</b>.</span></div>'
+          +'<button class="sound">🔊 Hear it</button>';
+        document.querySelector('#rev1 .sound').onclick=function(){say(en);};
+        say(en);
+      }else{
+        document.getElementById('rev2').innerHTML=
+          '<div class="word">my '+en+' hurts</div><div class="wpt">meu/minha '+ptOf[en]+' dói</div>'
+          +'<div class="frame"><span class="dot"></span><span>Ow! <b>My '+en+' hurts.</b></span></div>'
+          +'<button class="sound">🔊 Hear it</button>';
+        document.querySelector('#rev2 .sound').onclick=function(){say('My '+en+' hurts');};
+        say('My '+en+' hurts');
+      }
+    });
+  });
+}
+wireMap(document.getElementById('map1'),1);
+
+/* ---------- round 2: where does it hurt ---------- */
+document.getElementById('map2').innerHTML=BODY;
+wireMap(document.getElementById('map2'),2);
+var SYMPTOMS=[['a headache','dor de cabeça'],['a stomachache','dor de barriga'],['a sore throat','dor de garganta'],['a fever','febre'],['a cough','tosse']];
+var sc=document.getElementById('symp');
+SYMPTOMS.forEach(function(s){
+  var b=document.createElement('button');b.className='chip';b.textContent=s[0];
+  b.onclick=function(){
+    sc.querySelectorAll('.chip.on').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    document.getElementById('rev2').innerHTML=
+      '<div class="word">'+s[0]+'</div><div class="wpt">'+s[1]+'</div>'
+      +'<div class="frame"><span class="dot"></span><span>I have <b>'+s[0]+'</b>.</span></div>'
+      +'<button class="sound">🔊 Hear it</button>';
+    document.querySelector('#rev2 .sound').onclick=function(){say('I have '+s[0]);};
+    say('I have '+s[0]);
+  };
+  sc.appendChild(b);
+});
+
+/* ---------- round 3: faces ---------- */
+function rnd(a){return a[Math.floor(Math.random()*a.length)];}
+function buildFace(){
+  var skin=rnd(['#f1c27d','#e0ac69','#c68642','#ffdbac']);
+  var hairC=rnd(['#2b2b2b','#5a3210','#caa84a','#888']);
+  var longHair=Math.random()>.5, bald=Math.random()>.78, beard=Math.random()>.6, glasses=Math.random()>.6;
+  var bigEye=Math.random()>.5, bigNose=Math.random()>.5;
+  var s='<svg viewBox="0 0 200 220" width="190" role="img" aria-label="Face">';
+  if(longHair&&!bald)s+='<path d="M45,90 Q40,200 70,205 L130,205 Q160,200 155,90 Z" fill="'+hairC+'"/>';
+  s+='<ellipse cx="100" cy="105" rx="56" ry="62" fill="'+skin+'"/>';
+  if(!bald)s+='<path d="M44,92 Q100,20 156,92 Q150,55 100,48 Q50,55 44,92 Z" fill="'+hairC+'"/>';
+  var er=bigEye?12:7;
+  s+='<ellipse cx="78" cy="100" rx="'+er+'" ry="'+er+'" fill="#fff"/><circle cx="78" cy="100" r="'+(er-3)+'" fill="#33271a"/>';
+  s+='<ellipse cx="122" cy="100" rx="'+er+'" ry="'+er+'" fill="#fff"/><circle cx="122" cy="100" r="'+(er-3)+'" fill="#33271a"/>';
+  if(glasses)s+='<g fill="none" stroke="#1b2742" stroke-width="3"><circle cx="78" cy="100" r="'+(er+5)+'"/><circle cx="122" cy="100" r="'+(er+5)+'"/><line x1="'+(78+er+5)+'" y1="100" x2="'+(122-er-5)+'" y2="100"/></g>';
+  var nr=bigNose?14:8;
+  s+='<path d="M100,108 Q'+(100-nr)+','+(120+nr)+' 100,'+(124+nr)+' Q'+(100+nr)+','+(120+nr)+' 100,108" fill="none" stroke="'+skin+'" stroke-width="3" style="filter:brightness(.8)"/>';
+  s+='<path d="M82,148 Q100,162 118,148" fill="none" stroke="#a23b3b" stroke-width="4" stroke-linecap="round"/>';
+  if(beard)s+='<path d="M52,118 Q60,185 100,190 Q140,185 148,118 Q130,150 100,150 Q70,150 52,118 Z" fill="'+hairC+'" opacity=".85"/>';
+  s+='</svg>';
+  return s;
+}
+function newFace(){document.getElementById('face').innerHTML=buildFace();}
+document.getElementById('newFace').onclick=newFace;newFace();
+
+/* ---------- round 4: monster + timer ---------- */
+function buildMonster(){
+  var c=rnd(['#34d6b7','#ff6fa5','#ffce4d','#5aa9ff','#ff7a59']);
+  var eyes=2+Math.floor(Math.random()*3), arms=2+Math.floor(Math.random()*4), legs=1+Math.floor(Math.random()*4), horns=Math.random()>.5;
+  var s='<svg viewBox="0 0 220 220" width="200" role="img" aria-label="Monster">';
+  var i,ang;
+  for(i=0;i<arms;i++){ang=Math.PI*(0.15+0.7*i/(arms-1||1));var ax=110-90*Math.cos(ang),ay=120-40*Math.sin(ang);
+    s+='<line x1="110" y1="120" x2="'+ax+'" y2="'+ay+'" stroke="'+c+'" stroke-width="9" stroke-linecap="round"/><circle cx="'+ax+'" cy="'+ay+'" r="8" fill="'+c+'"/>';}
+  for(i=0;i<legs;i++){var lx=110+(i-(legs-1)/2)*26;s+='<line x1="'+lx+'" y1="175" x2="'+lx+'" y2="205" stroke="'+c+'" stroke-width="10" stroke-linecap="round"/><ellipse cx="'+lx+'" cy="208" rx="11" ry="6" fill="'+c+'"/>';}
+  if(horns){s+='<polygon points="80,55 88,20 96,55" fill="'+c+'"/><polygon points="124,55 132,20 140,55" fill="'+c+'"/>';}
+  s+='<rect x="60" y="60" width="100" height="115" rx="34" fill="'+c+'"/>';
+  for(i=0;i<eyes;i++){var ex=110+(i-(eyes-1)/2)*30, ey=100;
+    s+='<circle cx="'+ex+'" cy="'+ey+'" r="13" fill="#fff"/><circle cx="'+ex+'" cy="'+ey+'" r="6" fill="#16203a"/>';}
+  s+='<path d="M85,140 Q110,158 135,140" fill="none" stroke="#16203a" stroke-width="5" stroke-linecap="round"/>';
+  s+='</svg>';
+  return s;
+}
+function newMon(){document.getElementById('monster').innerHTML=buildMonster();}
+document.getElementById('newMon').onclick=newMon;newMon();
+var tInt=null,tLeft=60,tEl=document.getElementById('timer');
+function fmt(n){return '0:'+(n<10?'0':'')+n;}
+document.getElementById('startT').onclick=function(){
+  if(tInt){clearInterval(tInt);tInt=null;this.textContent='Start ▶';tEl.className='timer go';tEl.textContent=fmt(tLeft=60);return;}
+  this.textContent='Stop ■';tLeft=60;tEl.textContent=fmt(tLeft);tEl.className='timer go';
+  var btn=this;
+  tInt=setInterval(function(){tLeft--;tEl.textContent=fmt(tLeft);if(tLeft<=10)tEl.className='timer end';
+    if(tLeft<=0){clearInterval(tInt);tInt=null;btn.textContent='Start ▶';tEl.textContent="Time's up!";}},1000);
+};
+
+/* ---------- round 5: pharmacy ---------- */
+var DIALOG=[
+  ['them','Hi! How can I help you?'],
+  ['you','Hello! I don\u2019t feel well.'],
+  ['them','Oh no. What\u2019s the matter?'],
+  ['you','I have a sore throat and a fever.'],
+  ['them','Since when?'],
+  ['you','Since yesterday.'],
+  ['them','Okay. Here is some medicine.'],
+  ['you','How do I take it?'],
+  ['them','One pill, two times a day.'],
+  ['you','Thank you very much!']
+];
+var dl=0,scene=document.getElementById('scene');
+function addLine(){
+  var d=DIALOG[dl];var div=document.createElement('div');
+  div.innerHTML='<div class="who">'+(d[0]==='you'?'You':'Pharmacist')+'</div><div class="bubble '+d[0]+'">'+d[1]+'</div>';
+  scene.appendChild(div);
+  if(d[0]==='you')say(d[1]);
+  scene.scrollTop=scene.scrollHeight;dl++;
+  if(dl>=DIALOG.length){var b=document.getElementById('nextLine');b.textContent='Done! 🎉';b.disabled=true;
+    var m=document.createElement('div');m.className='done-msg';m.textContent='You did it! 👏';scene.appendChild(m);}
+}
+document.getElementById('nextLine').onclick=addLine;addLine();
+
+/* ---------- navigation ---------- */
+var cur=0,rounds=document.querySelectorAll('.round'),segs=document.querySelectorAll('#steps .seg');
+var prevB=document.getElementById('prev'),nextB=document.getElementById('next');
+function show(i){
+  rounds.forEach(function(r,k){r.classList.toggle('active',k===i);});
+  segs.forEach(function(s,k){s.classList.remove('now','done');if(k<i)s.classList.add('done');if(k===i)s.classList.add('now');});
+  prevB.disabled=i===0;nextB.textContent=i===rounds.length-1?'Finish':'Next round →';
+  cur=i;window.scrollTo({top:0,behavior:'smooth'});speechSynthesis.cancel();
+}
+nextB.onclick=function(){if(cur<rounds.length-1)show(cur+1);};
+prevB.onclick=function(){if(cur>0)show(cur-1);};
+segs.forEach(function(s,k){s.onclick=function(){show(k);};});
+</script>
+</body>
+</html>
