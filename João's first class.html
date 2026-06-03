@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 01 · João Pedro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d0e; --bg2:#0f1416; --surface:#131a1c; --surface2:#182123;
+    --ink:#e9ece8; --muted:#8d9892; --faint:#5f6b66;
+    --teal:#46a89f; --teal-d:#2a6660; --amber:#d9963f; --blood:#b04632;
+    --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.045);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(900px 520px at 100% -8%, rgba(217,150,63,.14), transparent 58%),
+      radial-gradient(1000px 560px at 0% 6%, rgba(70,168,159,.12), transparent 55%),
+      var(--bg);
+    color:var(--ink); font-family:'Spectral',Georgia,serif; line-height:1.6;
+    min-height:100vh; padding:38px 20px 90px; -webkit-font-smoothing:antialiased; position:relative;
+  }
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .wrap{max-width:860px;margin:0 auto;position:relative;z-index:1}
+  .fade{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .mono{font-family:'Courier Prime',monospace;letter-spacing:.12em;text-transform:uppercase}
+
+  header{margin-bottom:28px;border-bottom:1px solid var(--line);padding-bottom:24px}
+  .eyebrow{font-size:.7rem;color:var(--teal);font-weight:700;margin-bottom:16px}
+  .eyebrow .bar{display:inline-block;width:38px;height:9px;background:var(--ink);vertical-align:middle;margin-right:9px;opacity:.85}
+  h1{font-weight:600;font-size:2.7rem;line-height:1.04;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--amber)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .chip{font-size:.68rem;padding:6px 12px;border:1px solid var(--line);border-radius:4px;color:var(--muted);font-family:'Courier Prime',monospace;letter-spacing:.08em;text-transform:uppercase}
+  .chip b{color:var(--teal)}
+
+  .clock{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:13px 18px;margin:24px 0 14px}
+  .clock .t{font-family:'Courier Prime',monospace;font-size:1.7rem;font-weight:700;letter-spacing:.04em;min-width:104px;color:var(--amber)}
+  .clock button{font-family:'Courier Prime',monospace;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:rgba(255,255,255,.04);border:1px solid var(--line);padding:9px 14px;border-radius:5px;cursor:pointer;transition:.2s}
+  .clock button:hover{background:rgba(70,168,159,.15);border-color:var(--teal)}
+  .clock .hint{font-size:.66rem;color:var(--faint);margin-left:auto;text-align:right;font-family:'Courier Prime',monospace;letter-spacing:.06em}
+
+  .tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .tab{flex:1;min-width:140px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:13px 15px;cursor:pointer;transition:.22s;color:var(--muted)}
+  .tab:hover{transform:translateY(-2px);border-color:var(--teal-d)}
+  .tab .tm{font-size:.62rem;font-family:'Courier Prime',monospace;letter-spacing:.1em;color:var(--faint)}
+  .tab .tt{font-size:1.05rem;color:var(--ink);margin-top:4px;font-weight:600}
+  .tab.active{background:var(--surface2);border-color:var(--teal)}
+  .tab.active .tm{color:var(--teal)} .tab.active .tt{color:var(--ink)}
+
+  .stage{display:none;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:32px;animation:rise .45s ease forwards;position:relative}
+  .stage::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--teal),transparent)}
+  .stage.show{display:block}
+  .stage h2{font-size:1.6rem;font-weight:600;margin-bottom:4px}
+  .stage .sub{color:var(--amber);font-family:'Courier Prime',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px}
+  .lead{color:var(--muted);font-size:1.02rem;margin-bottom:22px}
+  .lead b{color:var(--ink)}
+
+  .block{margin:22px 0}
+  .label{font-size:.68rem;font-family:'Courier Prime',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:9px}
+  .label::before{content:"";width:14px;height:1px;background:var(--teal)}
+  ul.q{list-style:none;display:flex;flex-direction:column;gap:8px}
+  ul.q li{background:var(--bg2);border:1px solid var(--line2);border-radius:7px;padding:13px 16px;font-size:1.04rem;font-style:italic;display:flex;gap:12px;align-items:flex-start}
+  ul.q li::before{content:attr(data-n);font-family:'Courier Prime',monospace;font-style:normal;color:var(--teal);font-weight:700;font-size:.8rem;padding-top:3px}
+
+  footer{text-align:center;color:var(--faint);font-size:.68rem;margin-top:40px;font-family:'Courier Prime',monospace;letter-spacing:.14em;text-transform:uppercase}
+  @media(max-width:640px){h1{font-size:2.05rem}.stage{padding:22px}.clock .t{font-size:1.4rem;min-width:90px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="fade">
+    <div class="eyebrow mono"><span class="bar"></span>English by Neves // Session 01</div>
+    <h1>First session, João.<br><em>Let's just talk.</em></h1>
+    <div class="chips">
+      <span class="chip">50 min</span>
+      <span class="chip">Sem <b>teste</b></span>
+      <span class="chip">Você <b>fala</b>, eu escuto</span>
+      <span class="chip">Tema: <b>o que você curtir</b></span>
+    </div>
+  </header>
+
+  <div class="clock fade" style="animation-delay:.1s">
+    <div class="t" id="t">00:00</div>
+    <button id="go">▶ Start</button>
+    <button id="rst">Reset</button>
+    <div class="hint">Sessão de 50 min</div>
+  </div>
+
+  <div class="tabs fade" style="animation-delay:.16s" id="tabs">
+    <button class="tab active" data-s="0"><div class="tm">00–05</div><div class="tt">Warm-up</div></button>
+    <button class="tab" data-s="1"><div class="tm">05–20</div><div class="tt">Let's talk</div></button>
+    <button class="tab" data-s="2"><div class="tm">20–45</div><div class="tt">The debate</div></button>
+    <button class="tab" data-s="3"><div class="tm">45–50</div><div class="tt">Wrap-up</div></button>
+  </div>
+
+  <!-- STAGE 1 -->
+  <section class="stage show" data-stage="0">
+    <h2>Warm-up</h2>
+    <div class="sub">First 5 minutes</div>
+    <p class="lead">Entrada leve, <b>sem teste e sem pressa</b>. Só pra entrar no clima e soltar a voz antes da conversa.</p>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section class="stage" data-stage="1">
+    <h2>Let's talk</h2>
+    <div class="sub">About you & what you love</div>
+    <p class="lead">Um papo sobre você, seu trabalho e o que você curte. Sem pressa — erro aqui não existe.</p>
+    <div class="block">
+      <div class="label">Conversa</div>
+      <ul class="q">
+        <li data-n="01">What have you been watching lately?</li>
+        <li data-n="02">What do you like about it?</li>
+        <li data-n="03">Tell me about your work — what do you do?</li>
+        <li data-n="04">Why do you want to improve your English?</li>
+        <li data-n="05">What work situations do you need English for?</li>
+        <li data-n="06">When was the last time you used English?</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- STAGE 3 -->
+  <section class="stage" data-stage="2">
+    <h2>The debate</h2>
+    <div class="sub">The main event</div>
+    <p class="lead">A parte boa: um tema que você curte, <b>debatido de verdade</b>. Opinião forte é bem-vinda — o objetivo é só um: <b>falar sem parar</b>.</p>
+    <div class="block">
+      <div class="label">Case files</div>
+      <ul class="q">
+        <li data-n="A">Can someone be <em>born</em> evil, or do they become evil?</li>
+        <li data-n="B">Should serial killers be studied by scientists, or just punished?</li>
+        <li data-n="C">Is it dangerous to understand a criminal too much?</li>
+        <li data-n="D">Does true crime content make society better or worse?</li>
+        <li data-n="E">Do people really change, or do they stay the same?</li>
+        <li data-n="F">Is mental health taken seriously enough today?</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- STAGE 4 -->
+  <section class="stage" data-stage="3">
+    <h2>Wrap-up</h2>
+    <div class="sub">What's next</div>
+    <p class="lead">Revisão rápida do papo de hoje e o <b>treino da semana</b> — uma técnica chamada <em>shadowing</em>: repetir cenas que você curte copiando o ritmo. Uns 15 min por dia.</p>
+  </section>
+
+  <footer>English by Neves · Session 01 · João Pedro</footer>
+</div>
+
+<script>
+  const tabs=[...document.querySelectorAll('.tab')];
+  const stages=[...document.querySelectorAll('.stage')];
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    stages.forEach(x=>x.classList.remove('show'));
+    t.classList.add('active');
+    stages[+t.dataset.s].classList.add('show');
+    window.scrollTo({top:document.querySelector('.tabs').offsetTop-20,behavior:'smooth'});
+  }));
+  let sec=0,timer=null;
+  const tEl=document.getElementById('t'),go=document.getElementById('go'),rst=document.getElementById('rst');
+  const fmt=s=>String((s/60|0)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+  go.addEventListener('click',()=>{
+    if(timer){clearInterval(timer);timer=null;go.textContent='▶ Resume';}
+    else{timer=setInterval(()=>{sec++;tEl.textContent=fmt(sec);},1000);go.textContent='⏸ Pause';}
+  });
+  rst.addEventListener('click',()=>{clearInterval(timer);timer=null;sec=0;tEl.textContent='00:00';go.textContent='▶ Start';});
+</script>
+</body>
+</html>
