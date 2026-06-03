@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seu treino da semana · João Pedro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d0e; --bg2:#0f1416; --surface:#131a1c; --surface2:#182123;
+    --ink:#e9ece8; --muted:#8d9892; --faint:#5f6b66;
+    --teal:#46a89f; --teal-d:#2a6660; --amber:#d9963f; --blood:#b04632;
+    --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.045);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(900px 520px at 0% -6%, rgba(217,150,63,.15), transparent 58%),
+      radial-gradient(1000px 560px at 100% 4%, rgba(70,168,159,.12), transparent 55%),
+      var(--bg);
+    color:var(--ink);font-family:'Spectral',Georgia,serif;line-height:1.62;
+    min-height:100vh;padding:42px 20px 80px;-webkit-font-smoothing:antialiased;position:relative;
+  }
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .wrap{max-width:720px;margin:0 auto;position:relative;z-index:1}
+  .fade{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .mono{font-family:'Courier Prime',monospace;letter-spacing:.12em;text-transform:uppercase}
+
+  header{text-align:center;margin-bottom:34px}
+  .eyebrow{font-size:.7rem;color:var(--teal);font-weight:700;margin-bottom:16px}
+  .eyebrow .bar{display:inline-block;width:34px;height:8px;background:var(--ink);vertical-align:middle;margin-right:9px;opacity:.85}
+  h1{font-weight:600;font-size:2.8rem;line-height:1.03;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--amber)}
+  .intro{color:var(--muted);font-size:1.06rem;margin:18px auto 0;max-width:520px}
+  .intro b{color:var(--ink)}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px;margin:18px 0;position:relative}
+  .card::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--teal),transparent)}
+  .card h2{font-size:1.45rem;font-weight:600;margin-bottom:12px}
+  .card h2 .ic{color:var(--amber);font-family:'Courier Prime',monospace}
+  .card p{color:var(--muted)} .card p b{color:var(--ink)}
+
+  .steps{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .step{display:flex;gap:14px;align-items:flex-start;background:var(--bg2);border:1px solid var(--line2);border-radius:8px;padding:13px 16px}
+  .step .num{flex:none;width:26px;height:26px;border-radius:4px;background:var(--surface2);border:1px solid var(--teal-d);color:var(--teal);font-family:'Courier Prime',monospace;font-weight:700;font-size:.82rem;display:grid;place-items:center}
+  .step span{font-size:.96rem;color:var(--ink)} .step span small{color:var(--faint);font-style:italic}
+
+  .src{display:flex;flex-direction:column;gap:9px;margin-top:16px}
+  .src div{display:flex;justify-content:space-between;gap:10px;background:var(--bg2);border:1px solid var(--line2);border-radius:7px;padding:12px 16px;color:var(--ink);font-size:.94rem}
+  .src .term{color:var(--teal);font-family:'Courier Prime',monospace;font-size:.74rem;letter-spacing:.04em;text-align:right}
+  .tip{font-size:.85rem;color:var(--amber);background:rgba(217,150,63,.08);border:1px solid rgba(217,150,63,.22);border-radius:7px;padding:12px 15px;margin-top:16px}
+
+  .seclabel{font-family:'Courier Prime',monospace;font-size:1.4rem;font-weight:700;margin:32px 0 6px;text-align:center;letter-spacing:.04em}
+  .secsub{text-align:center;color:var(--faint);font-size:.74rem;margin-bottom:18px;font-family:'Courier Prime',monospace;letter-spacing:.1em;text-transform:uppercase}
+
+  .days{display:flex;flex-direction:column;gap:11px}
+  .day{background:var(--surface);border:1px solid var(--line);border-radius:9px;overflow:hidden;transition:.2s}
+  .day:hover{border-color:var(--teal-d)}
+  .day .head{display:flex;align-items:center;gap:15px;padding:17px 20px;cursor:pointer;user-select:none}
+  .day .dd{flex:none;font-family:'Courier Prime',monospace;font-size:.8rem;color:var(--teal);width:48px;font-weight:700;letter-spacing:.06em}
+  .day .tt{font-weight:600;font-size:1.08rem;flex:1}
+  .day .send{font-family:'Courier Prime',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bg);background:var(--amber);padding:4px 9px;border-radius:3px;white-space:nowrap}
+  .day .arr{color:var(--faint);transition:.3s;font-size:1.1rem}
+  .day.open .arr{transform:rotate(90deg);color:var(--amber)}
+  .day .body{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 20px}
+  .day.open .body{max-height:360px;padding:0 20px 20px 83px}
+  .day .body p{color:var(--muted);font-size:.95rem}
+  .day .body .ex{background:var(--bg);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;padding:10px 14px;margin-top:11px;font-size:.9rem;color:var(--ink)}
+  .day .body .ex i{color:var(--teal)}
+
+  ul.q{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  ul.q li{background:var(--bg2);border:1px solid var(--line2);border-radius:7px;padding:13px 16px;font-size:1rem;font-style:italic;display:flex;gap:11px}
+  ul.q li::before{content:attr(data-n);font-family:'Courier Prime',monospace;font-style:normal;color:var(--teal);font-weight:700;font-size:.78rem;padding-top:3px}
+
+  .ai{border-color:var(--teal-d)}
+  .prompt{background:var(--bg);border:1px dashed var(--teal-d);border-radius:8px;padding:14px 17px;margin-top:14px;font-size:.96rem;color:var(--ink);font-style:italic}
+
+  .close{text-align:center;background:linear-gradient(180deg,var(--surface2),var(--surface));border:1px solid var(--teal-d);border-radius:12px;padding:30px;margin-top:26px}
+  .close .big{font-style:italic;font-size:1.5rem;line-height:1.3;color:var(--ink)}
+  .close .big span{color:var(--amber)}
+  .close p{margin-top:14px;font-size:.96rem;color:var(--muted)} .close p b{color:var(--teal)}
+
+  footer{text-align:center;color:var(--faint);font-size:.68rem;margin-top:36px;font-family:'Courier Prime',monospace;letter-spacing:.14em;text-transform:uppercase}
+  @media(max-width:560px){h1{font-size:2.15rem}.card{padding:20px}.day.open .body{padding-left:20px;max-height:440px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="fade">
+    <div class="eyebrow mono"><span class="bar"></span>English by Neves // Field Training</div>
+    <h1>Sua semana pra<br><em>destravar</em>.</h1>
+    <p class="intro">João, uns <b>15 min por dia</b> até nossa próxima aula. Não é pra decorar nem acertar tudo — é pra soltar a fala falando sobre coisas que você curte. <b>Começa fácil, termina você conversando.</b></p>
+  </header>
+
+  <div class="card fade" style="animation-delay:.07s">
+    <h2><span class="ic">&gt;</span> O que é shadowing</h2>
+    <p>É ouvir um trecho curto e <b>repetir copiando o som</b> — ritmo, melodia, velocidade. Sem traduzir, sem pensar. Tipo acompanhar uma música que você já conhece.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><span>Escolhe um clipe de <b>30–60s</b> que você curte, com legenda</span></div>
+      <div class="step"><div class="num">2</div><span>Ouve 1x só assistindo <small>— sem repetir ainda</small></span></div>
+      <div class="step"><div class="num">3</div><span>Ouve de novo, <b>pausando</b> a cada frase, e repete copiando o som</span></div>
+      <div class="step"><div class="num">4</div><span>Toca de novo e fala <b>ao mesmo tempo</b>, acompanhando <small>— pode perder palavra, tudo bem</small></span></div>
+    </div>
+  </div>
+
+  <div class="card fade" style="animation-delay:.12s">
+    <h2><span class="ic">&gt;</span> Onde achar clipe</h2>
+    <p>No YouTube, escolhe o que curtir mais (sempre 30–60s, com legenda):</p>
+    <div class="src">
+      <div><span>Mindhunter / true crime</span><span class="term">"Mindhunter best scenes"</span></div>
+      <div><span>Psicologia criminal real</span><span class="term">entrevistas · TED talks</span></div>
+      <div><span>Música que você curte</span><span class="term">"Morrissey interview"</span></div>
+      <div><span>Atualidades / história</span><span class="term">canais Vox · TED-Ed</span></div>
+    </div>
+    <div class="tip">Dica: escolhe fala clara, nem rápida demais. Foge de cena com música alta ou pessoa mumblando.</div>
+  </div>
+
+  <div class="seclabel fade">// O PLANO</div>
+  <div class="secsub fade">toque em cada dia pra abrir</div>
+
+  <div class="days fade" style="animation-delay:.05s">
+    <div class="day"><div class="head"><span class="dd">QUI</span><span class="tt">Conhece a técnica</span><span class="arr">›</span></div>
+      <div class="body"><p>Escolhe 1 clipe. Assiste 2x lendo a legenda. Depois faz shadowing <b>devagar</b>: pausa a cada frase e repete copiando o som.</p><div class="ex">Sem gravar nada hoje — só se acostumar.</div></div></div>
+
+    <div class="day"><div class="head"><span class="dd">SEX</span><span class="tt">Shadowing sincronizado</span><span class="send">áudio</span><span class="arr">›</span></div>
+      <div class="body"><p>Mesmo clipe. Agora fala <b>ao mesmo tempo</b> que a pessoa, sem pausar. Grava uns 40s fazendo isso e me manda.</p><div class="ex">Esse áudio já vai ter ritmo de inglês saindo de você.</div></div></div>
+
+    <div class="day"><div class="head"><span class="dd">SÁB</span><span class="tt">Sem a legenda</span><span class="arr">›</span></div>
+      <div class="body"><p>Mesmo clipe, <b>sem ler a legenda</b>. Shadowing de ouvido. Treina 2–3x.</p><div class="ex">Não precisa gravar.</div></div></div>
+
+    <div class="day"><div class="head"><span class="dd">DOM</span><span class="tt">Clipe novo</span><span class="arr">›</span></div>
+      <div class="body"><p>Escolhe outro clipe, de outro tema que você curte. Repete o processo: assiste 2x, shadowing devagar.</p></div></div>
+
+    <div class="day"><div class="head"><span class="dd">SEG</span><span class="tt">Conversa de verdade</span><span class="arr">›</span></div>
+      <div class="body"><p>Abre o <b>ChatGPT no celular, modo voz</b> (de graça) e bate papo 5–10 min sobre um tema que você ama. Ele puxa, você só responde.</p><div class="ex">Começa dizendo: <i>"Let's have a conversation in English about true crime. Ask me questions and correct me if I make big mistakes."</i></div></div></div>
+
+    <div class="day"><div class="head"><span class="dd">TER</span><span class="tt">Áudio final livre</span><span class="send">áudio</span><span class="arr">›</span></div>
+      <div class="body"><p>Responde uma das perguntas abaixo em áudio de ~1 min, sem preparar muito. Pode regravar quantas vezes quiser e me manda só a melhor.</p><div class="ex">Travou no meio? Normal. Respira e continua — é isso que a gente tá soltando.</div></div></div>
+  </div>
+
+  <div class="card ai fade">
+    <h2><span class="ic">&gt;</span> Perguntas pra responder</h2>
+    <p>Use uma por dia quando quiser provocar a fala (e na do áudio de terça):</p>
+    <ul class="q">
+      <li data-n="A">Can someone be <em>born</em> evil, or do they become evil?</li>
+      <li data-n="B">Should serial killers be studied by scientists, or just punished?</li>
+      <li data-n="C">Does true crime content make society better or worse?</li>
+      <li data-n="D">Do people really change, or do they stay the same?</li>
+      <li data-n="E">Is mental health taken seriously enough today?</li>
+    </ul>
+  </div>
+
+  <div class="close fade">
+    <div class="big">"Errar faz parte. Travar faz parte.<br><span>O que importa é não parar de falar.</span>"</div>
+    <p>Me manda áudio só na <b>sexta</b> e na <b>terça</b>. Sem traduzir, sem decorar — só ir na fluência. Bora?</p>
+  </div>
+
+  <footer>English by Neves · Field Training · João Pedro</footer>
+</div>
+
+<script>
+  document.querySelectorAll('.day .head').forEach(h=>{
+    h.addEventListener('click',()=>h.parentElement.classList.toggle('open'));
+  });
+</script>
+</body>
+</html>
