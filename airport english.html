@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airport English · B1–B2 — English by Neves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Raleway:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1e2647; --navy2:#2a3357; --ink:#1e2647; --muted:#666c8c;
+    --rose:#cf7e93; --rose-deep:#a85870; --rose-soft:#f7e8ec;
+    --gold:#e3a948; --green:#3f9d6d; --amber:#d98a2b;
+    --bg:#f1f2f7; --paper:#ffffff; --line:#e3e3ee;
+    --r:18px; --r-sm:12px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Raleway',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+
+  /* HERO */
+  .hero{position:relative;min-height:60vh;display:flex;align-items:flex-end;background:#1e2647 center/cover no-repeat;background-image:linear-gradient(180deg,rgba(20,26,48,.30),rgba(20,26,48,.55) 55%,rgba(20,26,48,.93)),url('https://commons.wikimedia.org/wiki/Special:FilePath/Cape_Town_International_Airport_Departures_Area.jpg?width=1600');}
+  .hero-in{padding:40px 0 36px;color:#fff;width:100%;}
+  .wm{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;}
+  .wm .d{width:8px;height:8px;border-radius:50%;background:var(--rose);}
+  .wm span{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:3px;color:#fff;text-transform:uppercase;}
+  .hero .ey{font-family:'IBM Plex Mono',monospace;color:var(--rose);font-size:12.5px;letter-spacing:3px;text-transform:uppercase;}
+  .hero h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(38px,8vw,68px);line-height:1.0;margin:8px 0 12px;text-shadow:0 2px 24px rgba(0,0,0,.3);}
+  .hero h1 em{font-style:italic;color:var(--rose);}
+  .hero .sub{font-size:clamp(15px,2.3vw,18px);color:#e7e8f2;max-width:560px;margin:0;}
+  .bpass{display:flex;background:var(--paper);border-radius:var(--r);overflow:hidden;box-shadow:0 20px 50px rgba(16,21,43,.4);margin-top:24px;max-width:520px;}
+  .bp-l{flex:1;padding:16px 20px;}
+  .bp-l .air{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:2px;color:var(--rose-deep);font-weight:600;}
+  .bp-route{display:flex;align-items:center;gap:13px;margin:7px 0 9px;}
+  .bp-route .pt{font-family:'Playfair Display',serif;font-weight:800;font-size:25px;color:var(--navy);}
+  .bp-route .ar{color:var(--gold);font-size:17px;}
+  .bp-meta{display:flex;gap:22px;}
+  .bp-meta .k{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+  .bp-meta .v{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--navy);font-weight:600;}
+  .bp-r{width:92px;border-left:2px dashed var(--line);background:var(--rose-soft);padding:14px 12px;display:flex;flex-direction:column;justify-content:space-between;position:relative;}
+  .bp-r::before,.bp-r::after{content:"";position:absolute;left:-9px;width:16px;height:16px;border-radius:50%;background:var(--navy);}
+  .bp-r::before{top:-8px;}.bp-r::after{bottom:-8px;}
+  .bp-r .seat{font-family:'Playfair Display',serif;font-weight:800;font-size:22px;color:var(--rose-deep);}
+  .bc{height:30px;background:repeating-linear-gradient(90deg,var(--navy) 0 2px,transparent 2px 4px,var(--navy) 4px 5px,transparent 5px 8px);border-radius:2px;margin-top:6px;}
+
+  /* MAP */
+  .map{background:var(--navy);padding:18px 0;}
+  .map .wrap{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:center;}
+  .stop{display:flex;align-items:center;gap:7px;text-decoration:none;}
+  .stop .c{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--navy);background:var(--rose);border-radius:6px;padding:3px 7px;}
+  .stop .nm{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#cfd2e6;}
+  .stop:hover .nm{color:#fff;}
+  .map .arrow{color:var(--rose);font-size:13px;opacity:.6;}
+
+  /* LESSON */
+  .lesson{padding:42px 0 8px;}
+  .lhd{display:flex;align-items:center;gap:12px;margin-bottom:4px;}
+  .lhd .tag{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:2px;color:#fff;background:var(--navy);padding:7px 14px;border-radius:7px;}
+  .lhd .tag.t2{background:var(--rose);}
+  .lesson>.wrap>h2{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(27px,5vw,40px);margin:10px 0 4px;line-height:1.03;}
+  .lesson>.wrap>.li{color:var(--muted);font-size:15.5px;max-width:600px;margin:0 0 6px;}
+
+  /* station shell */
+  .station{margin:26px 0;background:var(--paper);border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 30px rgba(30,38,71,.06);}
+  .banner{position:relative;min-height:190px;display:flex;align-items:flex-end;background:#1e2647 center/cover no-repeat;}
+  .banner::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,26,48,.12),rgba(20,26,48,.82));}
+  .banner-in{position:relative;padding:18px 22px;color:#fff;width:100%;display:flex;align-items:center;gap:14px;}
+  .banner .code{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:16px;color:var(--navy);background:var(--gold);border-radius:9px;padding:9px 13px;flex-shrink:0;}
+  .banner h3{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(21px,4vw,30px);margin:0;text-shadow:0 2px 14px rgba(0,0,0,.35);}
+  .banner .step{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--rose);text-transform:uppercase;display:block;margin-bottom:3px;}
+  .panel{padding:22px 22px 26px;}
+
+  /* block label */
+  .blk{margin-top:26px;}
+  .blk:first-child{margin-top:4px;}
+  .blabel{display:flex;align-items:center;gap:10px;margin-bottom:13px;flex-wrap:wrap;}
+  .bn{width:27px;height:27px;border-radius:7px;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .bn.i{background:var(--navy);color:var(--rose);} .bn.o{background:var(--rose);color:#fff;}
+  .bt{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);font-weight:600;}
+  .bs{font-size:12.5px;color:var(--muted);}
+  .pill{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;padding:2px 7px;border-radius:5px;font-weight:600;margin-left:auto;text-transform:uppercase;}
+  .pill.in{background:var(--rose-soft);color:var(--rose-deep);} .pill.out{background:#e7f3ec;color:var(--green);}
+
+  /* 1 cold try */
+  .cold{background:var(--navy);border-radius:var(--r-sm);padding:18px 20px;color:#fff;border-left:5px solid var(--rose);}
+  .cold .ct{font-size:15.5px;color:#e6e7f2;line-height:1.55;margin:0;}
+  .cold .ct b{color:#fff;}
+  .cold .nofear{margin:11px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.5px;color:var(--gold);}
+
+  /* 2 chunks */
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(204px,1fr));gap:11px;}
+  .vcard{background:transparent;border:none;padding:0;perspective:1000px;height:132px;cursor:pointer;font-family:inherit;text-align:left;}
+  .vci{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;}
+  .vcard.flipped .vci{transform:rotateY(180deg);}
+  .vf{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r-sm);padding:13px 14px;display:flex;flex-direction:column;}
+  .vfr{background:#fbfafc;border:1px solid var(--line);border-left:4px solid var(--gold);}
+  .vfr .tm{font-family:'Playfair Display',serif;font-weight:700;font-size:17px;color:var(--navy);line-height:1.12;}
+  .vfr .df{font-size:12.5px;color:#4a4f70;line-height:1.4;margin-top:6px;}
+  .vfr .fh{margin-top:auto;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--muted);}
+  .vbk{background:var(--navy);transform:rotateY(180deg);border-left:4px solid var(--rose);justify-content:center;}
+  .vbk .el{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;margin-bottom:7px;}
+  .vbk .ex{font-size:14px;color:#fff;line-height:1.45;font-style:italic;font-family:'Playfair Display',serif;}
+  .hearmini{margin-top:12px;background:var(--rose-soft);border-radius:10px;padding:11px 14px;}
+  .hearmini .hl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:1px;color:var(--rose-deep);text-transform:uppercase;margin-bottom:6px;}
+  .hearmini .hi{font-size:14px;color:var(--navy);margin:3px 0;}
+
+  /* 3 build */
+  .build .goal{font-size:14.5px;color:var(--navy);margin:0 0 13px;background:#eef0f7;border-radius:10px;padding:11px 14px;}
+  .build .goal b{color:var(--rose-deep);}
+  .frames{display:grid;gap:8px;}
+  .fl{background:#fbfafc;border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:15px;color:var(--navy);font-family:'Playfair Display',serif;}
+  .bl{color:var(--rose-deep);font-weight:700;letter-spacing:2px;font-family:'IBM Plex Mono',monospace;font-style:normal;}
+  .twice{margin-top:12px;display:flex;gap:11px;align-items:flex-start;background:#e7f3ec;border-radius:10px;padding:11px 14px;}
+  .twice .ic{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--green);font-size:10.5px;flex-shrink:0;border:1.5px solid var(--green);border-radius:5px;padding:3px 6px;}
+  .twice p{margin:0;font-size:14px;color:var(--navy);}
+  .cmp{margin-top:9px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 14px;}
+  .cmp .cq{font-size:14px;color:var(--navy);}
+  .cmp button{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--rose-deep);background:none;border:1px dashed var(--rose);border-radius:7px;padding:5px 11px;cursor:pointer;}
+  .cmp button:hover{background:var(--rose-soft);}
+  .reveal{display:none;margin-top:9px;font-size:14px;font-weight:500;font-style:italic;color:var(--green);}
+  .reveal.show{display:block;}
+
+  /* 4 pressure */
+  .pressure{background:linear-gradient(135deg,#2a1f3e,#1e2647);border-radius:var(--r-sm);padding:18px 20px;color:#fff;border-left:5px solid var(--gold);}
+  .psecs{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:1px;color:var(--navy);background:var(--gold);border-radius:999px;padding:5px 13px;margin-bottom:11px;}
+  .ptask{font-size:15.5px;color:#fff;margin:0 0 13px;line-height:1.5;}
+  .pressure button{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;background:var(--rose);color:#fff;border:none;border-radius:8px;padding:10px 16px;cursor:pointer;}
+  .pressure button:hover{filter:brightness(1.08);}
+  .pmodel{display:none;margin-top:12px;background:rgba(255,255,255,.07);border-left:3px solid var(--gold);border-radius:0 9px 9px 0;padding:12px 15px;font-size:14.5px;color:#fff;font-style:italic;line-height:1.5;}
+  .pmodel.show{display:block;}
+
+  /* 5 roleplays */
+  .rp3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:11px;}
+  .rp{border-radius:var(--r-sm);padding:15px 16px;border:1px solid var(--line);background:#fff;border-top:4px solid var(--green);}
+  .rp.problem{border-top-color:var(--amber);} .rp.challenge{border-top-color:var(--rose-deep);}
+  .rplv{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:600;color:var(--green);}
+  .rp.problem .rplv{color:var(--amber);} .rp.challenge .rplv{color:var(--rose-deep);}
+  .rp p{margin:7px 0 0;font-size:14px;color:var(--navy);line-height:1.45;}
+
+  /* 6 make it yours */
+  .yours{background:var(--rose-soft);border-radius:var(--r-sm);padding:18px 20px;}
+  .yours .yp{font-size:15px;color:var(--rose-deep);font-weight:600;margin:0 0 11px;}
+  .yours ul{margin:0 0 13px;padding:0;list-style:none;display:grid;gap:8px;}
+  .yours li{background:#fff;border-radius:9px;padding:10px 13px;font-size:14.5px;color:var(--navy);}
+  .twists{display:flex;gap:8px;flex-wrap:wrap;}
+  .tw{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--navy);background:#fff;border:1px solid var(--rose);border-radius:999px;padding:6px 12px;}
+
+  /* finish small */
+  .finishline{background:var(--navy);border-radius:var(--r);padding:20px 22px;color:#fff;margin:22px 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .finishline .fl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;}
+  .finishline p{margin:0;font-size:15px;color:#dadcec;}
+  .finishline b{color:#fff;}
+
+  /* SURVIVAL TEST */
+  .survival{background:linear-gradient(135deg,#1e2647,#3a2150);padding:46px 0;margin-top:18px;}
+  .survival .shd .e{color:var(--gold);} .survival .shd h2{color:#fff;} .survival .shd p{color:#cfd2e6;}
+  .shd{margin-bottom:22px;}
+  .shd .e{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;}
+  .shd h2{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(26px,5vw,38px);margin:8px 0 4px;}
+  .shd p{font-size:15px;margin:0;max-width:580px;}
+  .test-box{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:start;}
+  .draw{background:var(--paper);border-radius:var(--r);padding:24px 22px;min-height:200px;display:flex;flex-direction:column;}
+  .draw .sit-lbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:1.5px;color:var(--rose-deep);text-transform:uppercase;margin-bottom:10px;}
+  #sitText{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;color:var(--navy);line-height:1.25;flex:1;}
+  #sitText .ph{color:var(--muted);font-style:italic;font-weight:600;font-size:18px;}
+  .draw .acts{display:flex;gap:9px;margin-top:18px;}
+  .draw button{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12.5px;border:none;border-radius:9px;padding:11px 18px;cursor:pointer;}
+  .b-draw{background:var(--navy);color:#fff;} .b-draw:hover{filter:brightness(1.15);}
+  .b-next{background:#fff;color:var(--navy);border:1.5px solid var(--line)!important;} .b-next:hover{border-color:var(--rose)!important;}
+  .crit{background:rgba(255,255,255,.06);border:1px solid rgba(207,126,147,.35);border-radius:var(--r);padding:22px 22px;}
+  .crit .cl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+  .crit ul{margin:0;padding:0;list-style:none;display:grid;gap:11px;}
+  .crit li{display:flex;gap:11px;align-items:flex-start;color:#e7e8f2;font-size:14.5px;}
+  .crit li .ck{color:var(--green);font-weight:700;flex-shrink:0;}
+
+  footer{background:var(--navy);color:#aeb2cf;padding:26px 0 34px;}
+  footer .wrap{font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;}
+  footer a{color:var(--rose);text-decoration:none;}
+  footer .big{color:#fff;font-size:13px;letter-spacing:2px;margin-bottom:8px;}
+
+  button:focus-visible,.vcard:focus-visible,a:focus-visible{outline:3px solid var(--rose);outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important;}}
+  @media (max-width:620px){.test-box{grid-template-columns:1fr;}}
+  @media (max-width:560px){.vgrid{grid-template-columns:1fr;}.banner-in{flex-direction:column;align-items:flex-start;gap:9px;}.hero{min-height:68vh;}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero"><div class="wrap"><div class="hero-in">
+  <div class="wm"><span class="d"></span><span>English by Neves</span></div>
+  <p class="ey">Speaking lesson · B1–B2</p>
+  <h1>Airport <em>English</em></h1>
+  <p class="sub">Walk through the whole journey and rehearse what you'll really say at each step. At every stop you try first, learn the key chunks, then handle it under pressure — out loud.</p>
+  <div class="bpass">
+    <div class="bp-l">
+      <div class="air">BOARDING PASS · ENGLISH BY NEVES</div>
+      <div class="bp-route"><span class="pt">HOME</span><span class="ar">✈</span><span class="pt">WORLD</span></div>
+      <div class="bp-meta"><div><div class="k">Passenger</div><div class="v">YOU</div></div><div><div class="k">Level</div><div class="v">B1–B2</div></div><div><div class="k">Trip</div><div class="v">REAL LIFE</div></div></div>
+    </div>
+    <div class="bp-r"><div><div class="k mono" style="font-size:9px;color:var(--rose-deep);letter-spacing:1px;">SEAT</div><div class="seat">12A</div></div><div class="bc"></div></div>
+  </div>
+</div></div></header>
+
+<!-- MAP -->
+<nav class="map"><div class="wrap">
+  <a class="stop" href="#s1"><span class="c">A1</span><span class="nm">Check-in</span></a><span class="arrow">→</span>
+  <a class="stop" href="#s2"><span class="c">A2</span><span class="nm">Security</span></a><span class="arrow">→</span>
+  <a class="stop" href="#s3"><span class="c">A3</span><span class="nm">The Gate</span></a><span class="arrow">→</span>
+  <a class="stop" href="#s4"><span class="c">B1</span><span class="nm">Passport</span></a><span class="arrow">→</span>
+  <a class="stop" href="#s5"><span class="c">B2</span><span class="nm">Baggage</span></a><span class="arrow">→</span>
+  <a class="stop" href="#s6"><span class="c">B3</span><span class="nm">Arrivals</span></a>
+</div></nav>
+
+<!-- LESSON 1 -->
+<section class="lesson"><div class="wrap">
+  <div class="lhd"><span class="tag">LESSON 1</span></div>
+  <h2>Departures — getting on the plane</h2>
+  <p class="li">Check-in, security, the gate. At each stop: try it cold, learn only what you need, then speak under pressure.</p>
+  <div id="lesson1"></div>
+  <div class="finishline"><span class="fl">Lesson 1 · no notes</span><p><b>Run it back:</b> walk through check-in → security → gate out loud, one or two lines each — without looking.</p></div>
+</div></section>
+
+<!-- LESSON 2 -->
+<section class="lesson"><div class="wrap">
+  <div class="lhd"><span class="tag t2">LESSON 2</span></div>
+  <h2>Arrivals — landing in another country</h2>
+  <p class="li">Passport control, baggage, getting out. Same flow — and the immigration interview is the one to nail.</p>
+  <div id="lesson2"></div>
+  <div class="finishline"><span class="fl">Lesson 2 · no notes</span><p><b>Run it back:</b> passport control → baggage &amp; customs → finding your way out, out loud — without looking.</p></div>
+</div></section>
+
+<!-- SURVIVAL TEST -->
+<section class="survival"><div class="wrap">
+  <div class="shd"><p class="e">Final · no material</p><h2>Airport survival test</h2><p>Draw a random situation. Close the lesson. Respond out loud as if it's happening — then judge yourself on the four points.</p></div>
+  <div class="test-box">
+    <div class="draw">
+      <div class="sit-lbl">Your situation</div>
+      <div id="sitText"><span class="ph">Tap "Draw a situation" to start.</span></div>
+      <div class="acts"><button class="b-draw" onclick="drawSit()">Draw a situation</button><button class="b-next" onclick="drawSit()">Another</button></div>
+    </div>
+    <div class="crit">
+      <div class="cl">Did you…</div>
+      <ul>
+        <li><span class="ck">✓</span><span>answer clearly?</span></li>
+        <li><span class="ck">✓</span><span>use the right chunk?</span></li>
+        <li><span class="ck">✓</span><span>sound polite?</span></li>
+        <li><span class="ck">✓</span><span>solve the problem?</span></li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="big">ENGLISH BY NEVES · AIRPORT ENGLISH · B1–B2</div>
+  Photos: Wikimedia Commons (CC BY / CC BY-SA) — Cape Town, JFK, Munich, Hong Kong, Zürich, Beijing &amp; Proserpine airports.<br>
+  <a href="https://commons.wikimedia.org/wiki/Category:Interiors_of_airports">commons.wikimedia.org</a>
+</div></footer>
+
+<script>
+const S = [
+{
+ id:'s1',lesson:1,code:'A1',step:'Stop 1',title:`Check-in & bag drop`,
+ photo:`JFK_Terminal_5_Ticketing_and_Check-In.jpg`,
+ cold:`You walk up to the check-in desk with your bags. <b>What do you say?</b> Say it out loud now — just with the English you already have. Don't read ahead yet.`,
+ chunks:[
+  [`check in a bag`,`hand a bag to the airline for the hold`,`"I'd like to check in one bag."`],
+  [`hand luggage / carry-on`,`the bag you take onto the plane`,`"This is just my hand luggage."`],
+  [`aisle / window seat`,`by the walkway / by the window`,`"Could I have a window seat?"`],
+  [`overweight`,`heavier than the limit allowed`,`"My suitcase is a bit overweight."`],
+  [`boarding pass`,`the ticket that lets you board`,`"Here's your boarding pass — gate 22."`]
+ ],
+ hear:[`"Are you checking any bags?"`,`"Window or aisle?"`,`"Boarding at 2:30, gate 22."`],
+ goal:`say which flight · check one bag · ask for a window seat · ask about the gate`,
+ frames:[`Hi, I'm checking in for the flight to ___.`,`I'd like to check in ___.`,`Could I have ___, please?`,`Which ___ is it?`],
+ compare:[[`Agent: "Are you checking any bags?"`,`"Yes, just one suitcase — this is my hand luggage."`],[`You want a window seat.`,`"Could I have a window seat, please?"`]],
+ pressure:[`Your suitcase is overweight and you don't want to pay extra. Explain the problem and ask about your options.`,`"My suitcase is a bit overweight. Is there anything I can take out? And how much is the extra fee?"`],
+ rp:[`You have one suitcase and want a window seat.`,`Your suitcase is 4 kg overweight.`,`Your flight was changed and you don't understand the new gate.`],
+ yp:`Answer about your real next trip:`,
+ yitems:[`Where are you flying, and how many bags will you check in?`,`Window or aisle — and why?`],
+ twists:[`Now say it in one short sentence.`,`Now say it with more detail.`]
+},
+{
+ id:'s2',lesson:1,code:'A2',step:'Stop 2',title:`Security`,
+ photo:`Security_check_Munich_Airport_stitched_4.jpg`,
+ cold:`You reach the security check and the officer is waiting. <b>What do you ask or say?</b> Try it out loud first — before reading on.`,
+ chunks:[
+  [`tray`,`the plastic box for your things`,`"Put your phone in the tray."`],
+  [`liquids`,`drinks, gels, creams — in a clear bag`,`"Liquids go in a clear bag."`],
+  [`to take off`,`to remove (belt, shoes, jacket)`,`"Do I need to take off my belt?"`],
+  [`laptop`,`take it out of your bag`,`"Take your laptop out, please."`],
+  [`to get flagged`,`to be picked for an extra check`,`"My bag got flagged."`]
+ ],
+ hear:[`"Take out any liquids and laptops."`,`"Take off your belt, please."`,`"Could you step aside for a moment?"`],
+ goal:`ask about shoes · ask where the laptop goes · check a small bottle · fix a mistake`,
+ frames:[`Do I need to take off ___?`,`Where do I put ___?`,`Is this ___ okay?`,`Sorry, I forgot to ___.`],
+ compare:[[`Officer: "Take out any liquids."`,`"Sorry, they're in my bag — let me get them out."`],[`You're not sure about shoes.`,`"Do I need to take my shoes off?"`]],
+ pressure:[`The machine beeps and the officer asks you to step aside. Stay calm — ask what's happening and what you should do.`,`"Sorry, what do you need me to do? It might be my belt — should I take it off?"`],
+ rp:[`Normal screening: bag, laptop, belt.`,`You forgot a bottle of water in your bag.`,`You're pulled aside for a pat-down — ask what's happening, stay polite.`],
+ yp:`Make it real:`,
+ yitems:[`What's actually in your hand luggage right now?`,`What would you take out for the tray?`],
+ twists:[`Now ask one real question you'd ask at security.`]
+},
+{
+ id:'s3',lesson:1,code:'A3',step:'Stop 3',title:`The gate & boarding`,
+ photo:`Hong_Kong_International_Airport,_Terminal_1,_Boarding_gate_521_and_522.jpg`,
+ cold:`You're looking for your gate and you're not sure you're in the right place. <b>What do you ask?</b> Say it out loud first.`,
+ chunks:[
+  [`gate`,`the door where you board the plane`,`"Boarding is at gate 22."`],
+  [`boarding`,`getting onto the plane`,`"Boarding starts in ten minutes."`],
+  [`final call`,`the last announcement before the gate closes`,`"That was the final call!"`],
+  [`delayed`,`later than planned`,`"The flight is delayed by 40 minutes."`],
+  [`connecting flight`,`a second flight you change to`,`"I have a connecting flight in Lisbon."`]
+ ],
+ hear:[`"Now boarding at gate 22."`,`"Final call for flight BA245."`,`"Delayed by 40 minutes."`],
+ goal:`check it's the right gate · ask if boarding started · say someone's in your seat · ask for help`,
+ frames:[`Excuse me, is this the gate for ___?`,`Has ___ started?`,`Sorry, I think that's ___.`,`Could you help me with ___?`],
+ compare:[[`Not sure it's the right gate.`,`"Excuse me, is this the gate for the London flight?"`],[`Someone is in your seat (14A).`,`"Sorry, I think that's my seat — I'm 14A."`]],
+ pressure:[`The board says your flight is delayed and you have a connecting flight. Explain your problem to the gate agent and ask what to do.`,`"My flight's delayed and I have a connection in Lisbon at 6. Will I still make it? Is there anything I should do?"`],
+ rp:[`Find the gate and board.`,`Your flight is delayed by an hour.`,`The gate changes at the last minute and you have a tight connection.`],
+ yp:`Make it real:`,
+ yitems:[`Think of a real flight you might take — what time would boarding be?`,`Would you have a connection? Where?`],
+ twists:[`Now explain that trip in two sentences.`]
+},
+{
+ id:'s4',lesson:2,code:'B1',step:'Stop 4 · the big one',title:`Passport control & immigration`,
+ photo:`Zurich_International_Airport_e-Passport_control_gates.jpg`,
+ cold:`You step up to passport control and hand over your passport. The officer looks up. Before you read anything — <b>answer out loud:</b> why are you here, and how long are you staying?`,
+ chunks:[
+  [`passport control`,`where officers check your passport to enter`,`"There was a queue at passport control."`],
+  [`purpose of your visit`,`why you're coming (holiday, work, study)`,`"Purpose of your visit? — Holiday."`],
+  [`length of stay`,`how long you'll stay`,`"Length of stay? — Two weeks."`],
+  [`where are you staying`,`your hotel or address here`,`"I'm staying with family."`],
+  [`return ticket`,`proof that you'll fly back`,`"I showed my return ticket."`]
+ ],
+ hear:[`"What's the purpose of your visit?"`,`"How long are you staying? Where?"`,`"Do you have a return ticket?"`],
+ goal:`say why you're here · say how long · say where you'll stay · offer your documents`,
+ frames:[`I'm here on ___.`,`For ___.`,`I'm staying ___.`,`Yes, I have ___ — here it is.`],
+ compare:[[`"What's the purpose of your visit?"`,`"I'm here on holiday, visiting family."`],[`"How long are you staying?"`,`"Two weeks."`],[`"Where are you staying?"`,`"With my cousin, in the city centre."`]],
+ pressure:[`The officer asks why you're staying two weeks and who you're staying with. Answer calmly, clearly and politely — don't sound unsure.`,`"I'm visiting my cousin for two weeks. She lives in the city centre — I have her address, and my return ticket for the 30th."`],
+ rp:[`Holiday, one week, staying at a hotel.`,`The officer asks extra questions about money and your address.`,`You're staying a month with a friend — answer so it sounds clear and honest, not suspicious.`],
+ yp:`Answer with your REAL information:`,
+ yitems:[`Why are you travelling?`,`How long would you stay, and where?`,`What documents could you show?`],
+ twists:[`Now answer nervous but polite.`,`Now answer in one short sentence.`,`Now answer with more detail.`]
+},
+{
+ id:'s5',lesson:2,code:'B2',step:'Stop 5',title:`Baggage & customs`,
+ photo:`Beijing_Capital_International_Airport_Terminal_1_Baggage_Claim_Hall_20140329.JPG`,
+ cold:`You're at baggage reclaim and everyone's bag is coming out — except yours. <b>What do you do and say?</b> Try it out loud first.`,
+ chunks:[
+  [`baggage reclaim`,`where you collect your checked bags`,`"Follow the signs to baggage reclaim."`],
+  [`carousel`,`the moving belt with the bags`,`"My bag is on carousel 4."`],
+  [`lost luggage`,`bags that didn't arrive`,`"I went to the lost luggage desk."`],
+  [`to report`,`to tell staff about a problem`,`"I'd like to report a missing bag."`],
+  [`nothing to declare`,`no goods for customs`,`"Nothing to declare — green channel."`]
+ ],
+ hear:[`"Which flight were you on?"`,`"Can I see your baggage tag?"`,`"Anything to declare?"`],
+ goal:`ask which carousel · say your bag hasn't come · report a missing bag · answer customs`,
+ frames:[`Which carousel is for ___?`,`My ___ hasn't come out.`,`I'd like to report ___.`,`No, ___.`],
+ compare:[[`Your bag didn't arrive.`,`"My suitcase hasn't come out — I think it's missing."`],[`Customs asks; you have nothing.`,`"No, nothing to declare."`]],
+ pressure:[`Your bag is missing. Report it fast: your flight, what the bag looks like, and where you're staying.`,`"My bag's missing. I was on BA245 from Lisbon. It's a medium black suitcase with a red ribbon, and I'm staying at the Centro Hotel."`],
+ rp:[`Find your carousel and get your bag.`,`Your bag didn't arrive — report it.`,`Your bag arrived broken, or customs asks about something in it.`],
+ yp:`Make it real:`,
+ yitems:[`Describe YOUR suitcase so staff could find it — colour, size, anything special.`],
+ twists:[`Now do it in one clear sentence.`]
+},
+{
+ id:'s6',lesson:2,code:'B3',step:'Stop 6',title:`Arrivals & getting out`,
+ photo:`Proserpine_Airport_Arrivals_Hall_-_January_2012.JPG`,
+ cold:`You walk out into the arrivals hall and you need to get into the city. <b>Who do you ask, and what do you say?</b> Try it out loud first.`,
+ chunks:[
+  [`arrivals hall`,`the area where you exit`,`"I met my cousin in the arrivals hall."`],
+  [`taxi rank`,`where taxis wait outside`,`"The taxi rank is just outside."`],
+  [`public transport`,`buses, trains, the metro`,`"Is there public transport to the centre?"`],
+  [`city centre`,`the middle of the city`,`"How do I get to the city centre?"`],
+  [`to be picked up`,`to be collected by someone`,`"My friend is picking me up."`]
+ ],
+ hear:[`"Welcome to São Paulo."`,`"Taxis are this way."`,`"Are you being picked up?"`],
+ goal:`ask the way to the centre · ask about a taxi · ask about a train/bus · say you're being met`,
+ frames:[`How do I get to ___?`,`Where can I get ___?`,`Is there a ___ to ___?`,`I'm ___, thanks.`],
+ compare:[[`Ask how to reach the centre.`,`"Excuse me, how do I get to the city centre from here?"`],[`Ask about a taxi.`,`"Where can I get a taxi?"`]],
+ pressure:[`You're tired and you need the cheapest way to a hotel in the city centre. Ask clearly and get the key info you need.`,`"I need to get to a hotel in the city centre — what's the cheapest way? Is there a train or bus, and where do I catch it?"`],
+ rp:[`Ask where to get a taxi.`,`There are no taxis — find public transport.`,`You're lost, your phone's dead, and you need directions to a specific address.`],
+ yp:`Make it real:`,
+ yitems:[`How would YOU get from this airport to where you're actually going?`],
+ twists:[`Now ask for it in one sentence.`]
+}
+];
+
+function frameHTML(f){ return f.replace(/___/g,'<span class="bl">___</span>'); }
+
+function stationHTML(s){
+  const chunks = s.chunks.map(([tm,df,ex])=>
+    `<button class="vcard" onclick="this.classList.toggle('flipped')" aria-label="${tm}: ${df}"><div class="vci"><div class="vf vfr"><div class="tm">${tm}</div><div class="df">${df}</div><div class="fh">tap for example ›</div></div><div class="vf vbk"><div class="el">in use</div><div class="ex">${ex}</div></div></div></button>`).join('');
+  const hear = s.hear.map(h=>`<div class="hi">${h}</div>`).join('');
+  const frames = s.frames.map(f=>`<div class="fl">${frameHTML(f)}</div>`).join('');
+  const compare = s.compare.map(([q,a])=>`<div class="cmp"><div class="cq">${q}</div><button onclick="this.nextElementSibling.classList.toggle('show')">Say yours first — then compare</button><div class="reveal">${a}</div></div>`).join('');
+  const rp = [['Easy','',s.rp[0]],['Problem','problem',s.rp[1]],['Challenge','challenge',s.rp[2]]]
+    .map(([lv,cls,t])=>`<div class="rp ${cls}"><span class="rplv">${lv}</span><p>${t}</p></div>`).join('');
+  const yitems = s.yitems.map(i=>`<li>${i}</li>`).join('');
+  const twists = s.twists.map(t=>`<span class="tw">${t}</span>`).join('');
+
+  return `<div class="station" id="${s.id}">
+    <div class="banner" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/${s.photo}?width=1200')">
+      <div class="banner-in"><span class="code">${s.code}</span><div><span class="step">${s.step}</span><h3>${s.title}</h3></div></div>
+    </div>
+    <div class="panel">
+      <div class="blk"><div class="blabel"><span class="bn o">1</span><span class="bt">Try it first</span><span class="bs">no help yet</span><span class="pill out">speak</span></div>
+        <div class="cold"><p class="ct">${s.cold}</p><p class="nofear">Mistakes are fine — just get words out. You'll fix it below.</p></div></div>
+
+      <div class="blk"><div class="blabel"><span class="bn i">2</span><span class="bt">Useful chunks</span><span class="bs">just 5 — tap to flip</span><span class="pill in">input</span></div>
+        <div class="vgrid">${chunks}</div>
+        <div class="hearmini"><div class="hl">you might hear</div>${hear}</div></div>
+
+      <div class="blk"><div class="blabel"><span class="bn o">3</span><span class="bt">Build your sentence</span><span class="bs">fill the gaps, say it twice</span><span class="pill out">speak</span></div>
+        <div class="build"><div class="goal">You want to: ${s.goal}.</div><div class="frames">${frames}</div>
+          <div class="twice"><span class="ic">SAY 2×</span><p>Say each line with the frame. Then look away and say the whole thing again — no notes.</p></div>
+          ${compare}</div></div>
+
+      <div class="blk"><div class="blabel"><span class="bn o">4</span><span class="bt">Under pressure</span><span class="bs">think fast</span><span class="pill out">speak</span></div>
+        <div class="pressure"><span class="psecs">⏱ 30 SEC</span><p class="ptask">${s.pressure[0]}</p>
+          <button onclick="this.nextElementSibling.classList.toggle('show')">Try it first — then compare</button>
+          <div class="pmodel">${s.pressure[1]}</div></div></div>
+
+      <div class="blk"><div class="blabel"><span class="bn o">5</span><span class="bt">Role-play</span><span class="bs">same scene, 3 versions</span><span class="pill out">speak</span></div>
+        <div class="rp3">${rp}</div></div>
+
+      <div class="blk"><div class="blabel"><span class="bn o">6</span><span class="bt">Make it yours</span><span class="bs">your real life</span><span class="pill out">speak</span></div>
+        <div class="yours"><p class="yp">${s.yp}</p><ul>${yitems}</ul><div class="twists">${twists}</div></div></div>
+    </div>
+  </div>`;
+}
+
+document.getElementById('lesson1').innerHTML = S.filter(s=>s.lesson===1).map(stationHTML).join('');
+document.getElementById('lesson2').innerHTML = S.filter(s=>s.lesson===2).map(stationHTML).join('');
+
+/* survival test */
+const SITS = [
+ `Your bag didn't arrive at baggage reclaim.`,
+ `The officer asks: "What's the purpose of your visit?"`,
+ `You need the cheapest way to the city centre.`,
+ `Someone is sitting in your seat.`,
+ `Your flight is delayed and you have a connection.`,
+ `Your suitcase is overweight at check-in.`,
+ `The security officer asks you to step aside.`,
+ `Customs asks: "Do you have anything to declare?"`,
+ `You can't find your gate and boarding has started.`,
+ `You want a window seat and one bag checked in.`
+];
+let last=-1;
+function drawSit(){
+  let i; do{ i=Math.floor(Math.random()*SITS.length); }while(i===last && SITS.length>1);
+  last=i;
+  document.getElementById('sitText').textContent = SITS[i];
+}
+
+/* scroll reveal */
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none';io.unobserve(e.target);}}),{threshold:.06});
+  setTimeout(()=>document.querySelectorAll('.station').forEach(s=>{s.style.opacity=0;s.style.transform='translateY(20px)';s.style.transition='opacity .6s,transform .6s';io.observe(s);}),30);
+}
+</script>
+</body>
+</html>
