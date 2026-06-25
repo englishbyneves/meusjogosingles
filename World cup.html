@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B1 · The World Cup — English by Neves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1E2647;
+    --navy-soft:#2c365e;
+    --rose:#CF7E93;
+    --rose-soft:#f3dde3;
+    --paper:#fbfaf8;
+    --ink:#1E2647;
+    --muted:#6b7186;
+    --line:#e7e3dd;
+    --grass:#2f7d5b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Raleway',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    padding:0 0 80px;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px;}
+
+  /* HEADER */
+  header.hero{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);
+    color:#fff;padding:42px 0 36px;position:relative;overflow:hidden;
+  }
+  header.hero::after{
+    content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;
+    border-radius:50%;border:26px solid rgba(207,126,147,.16);
+  }
+  .mono{
+    font-family:'Playfair Display',serif;font-weight:800;letter-spacing:1px;
+    font-size:14px;color:var(--rose);
+  }
+  .hero h1{
+    font-family:'Playfair Display',serif;font-weight:800;font-size:40px;
+    line-height:1.1;margin:6px 0 14px;
+  }
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .tag{
+    font-size:12px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+    padding:5px 11px;border-radius:20px;
+  }
+  .tag.rose{background:var(--rose);border-color:var(--rose);color:var(--navy);}
+  .objective{
+    margin-top:18px;font-size:15px;max-width:640px;color:#e9eaf2;
+    border-left:3px solid var(--rose);padding-left:14px;
+  }
+  .objective b{color:#fff;}
+
+  /* SECTIONS */
+  section{margin-top:38px;}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+  .sec-num{
+    font-family:'Playfair Display',serif;font-weight:800;font-size:15px;
+    color:#fff;background:var(--rose);width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex:0 0 34px;
+  }
+  h2{font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--navy);}
+  .sec-time{font-size:12px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .lead{color:var(--muted);font-size:15px;margin:2px 0 18px 46px;}
+
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:22px 24px;margin:0 0 16px;box-shadow:0 1px 0 rgba(30,38,71,.03);
+  }
+  .card.tight{padding:18px 20px;}
+
+  /* SPEAKING PROMPTS */
+  .prompts{list-style:none;display:grid;gap:10px;}
+  .prompts li{
+    background:var(--rose-soft);border-radius:10px;padding:12px 16px;
+    font-weight:500;font-size:16px;position:relative;padding-left:42px;
+  }
+  .prompts li::before{
+    content:"\201C";font-family:'Playfair Display',serif;font-size:34px;color:var(--rose);
+    position:absolute;left:14px;top:10px;line-height:1;font-weight:800;
+  }
+  .hint{display:block;font-size:13px;color:var(--muted);font-weight:500;margin-top:3px;font-style:italic;}
+
+  /* CHALLENGE / TIMER */
+  .challenge{
+    background:var(--navy);color:#fff;border-radius:14px;padding:20px 22px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin:16px 0;
+  }
+  .challenge .txt{flex:1;min-width:220px;}
+  .challenge .label{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--rose);font-weight:700;}
+  .challenge .task{font-size:16px;font-weight:500;margin-top:2px;}
+  .timer{
+    display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);
+    border-radius:50px;padding:7px 8px 7px 18px;
+  }
+  .timer .count{font-family:'Playfair Display',serif;font-weight:800;font-size:26px;min-width:54px;text-align:center;}
+  .timer button{
+    border:none;cursor:pointer;font-family:'Raleway',sans-serif;font-weight:700;
+    font-size:13px;padding:9px 16px;border-radius:50px;transition:.15s;
+  }
+  .btn-go{background:var(--rose);color:var(--navy);}
+  .btn-go:hover{filter:brightness(1.06);}
+  .btn-reset{background:rgba(255,255,255,.14);color:#fff;}
+  .timer.done .count{color:var(--rose);}
+
+  /* VOCAB GRID */
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
+  .vcard{
+    border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff;
+    cursor:pointer;transition:.15s;
+  }
+  .vcard:hover{border-color:var(--rose);transform:translateY(-2px);}
+  .vcard .term{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--navy);}
+  .vcard .pos{font-size:12px;color:var(--rose);font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+  .vcard .ex{font-size:14px;color:var(--muted);margin-top:7px;display:none;}
+  .vcard.open .ex{display:block;}
+  .vcard .tap{font-size:11px;color:var(--muted);margin-top:6px;font-style:italic;}
+  .vcard.open .tap{display:none;}
+
+  /* RESULTS TABLE */
+  .results{display:grid;gap:8px;}
+  .res-row{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;
+    background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 16px;
+  }
+  .res-row .team{font-weight:600;font-size:15px;}
+  .res-row .team.right{text-align:right;}
+  .score{
+    font-family:'Playfair Display',serif;font-weight:800;font-size:18px;color:#fff;
+    background:var(--grass);border-radius:7px;padding:4px 12px;white-space:nowrap;
+  }
+  .say{font-size:13px;color:var(--muted);margin-top:5px;padding-left:2px;}
+  .say b{color:var(--navy);font-weight:700;}
+
+  /* PHRASE BANK */
+  .bank{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .bank .grp{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+  .bank h4{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--rose);margin-bottom:10px;font-weight:700;}
+  .bank p{font-size:15px;margin-bottom:7px;}
+  .bank p span{color:var(--muted);font-size:13px;}
+
+  /* REVEAL */
+  .reveal-btn{
+    background:none;border:1px dashed var(--rose);color:var(--rose);font-weight:700;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:'Raleway',sans-serif;
+    margin-top:8px;transition:.15s;
+  }
+  .reveal-btn:hover{background:var(--rose-soft);}
+  .model{
+    display:none;background:var(--rose-soft);border-radius:10px;padding:12px 16px;
+    margin-top:10px;font-size:14px;font-style:italic;color:var(--navy);
+  }
+  .model.show{display:block;}
+  .model b{font-style:normal;}
+
+  /* PREDICTION PICKER */
+  .picker{display:grid;gap:10px;}
+  .tie{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .pick{
+    border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:12px;
+    text-align:center;cursor:pointer;font-weight:600;font-size:15px;transition:.15s;
+  }
+  .pick:hover{border-color:var(--rose);}
+  .pick.sel{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  /* GRAMMAR (teacher reference, collapsed) */
+  details.gram{
+    background:#f4f3f0;border:1px solid var(--line);border-radius:12px;
+    padding:0;margin-top:14px;
+  }
+  details.gram summary{
+    cursor:pointer;padding:14px 18px;font-weight:600;font-size:13px;
+    color:var(--muted);list-style:none;display:flex;align-items:center;gap:8px;
+    text-transform:uppercase;letter-spacing:.5px;
+  }
+  details.gram summary::-webkit-details-marker{display:none;}
+  details.gram summary::before{content:"▸";color:var(--rose);font-size:14px;}
+  details.gram[open] summary::before{content:"▾";}
+  details.gram .body{padding:0 18px 18px;font-size:14px;color:#4a4f63;font-style:italic;}
+  details.gram .body b{font-style:normal;color:var(--navy);}
+  details.gram .body p{margin-bottom:8px;}
+
+  /* HOMEWORK + SUCCESS */
+  .hw{background:var(--navy);color:#fff;border-radius:14px;padding:24px 26px;}
+  .hw h2{color:#fff;}
+  .hw ol{margin:14px 0 0 20px;}
+  .hw li{margin-bottom:10px;font-size:15px;}
+  .hw li b{color:var(--rose);}
+
+  .check{list-style:none;display:grid;gap:9px;}
+  .check li{display:flex;align-items:flex-start;gap:11px;font-size:15px;font-weight:500;}
+  .check input{margin-top:5px;width:18px;height:18px;accent-color:var(--rose);flex:0 0 18px;cursor:pointer;}
+
+  footer{margin-top:46px;text-align:center;color:var(--muted);font-size:12px;}
+  footer .mono{font-size:13px;}
+
+  @media(max-width:640px){
+    .hero h1{font-size:30px;}
+    .bank{grid-template-columns:1fr;}
+    .lead{margin-left:0;}
+    .tie{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="mono">ENGLISH BY NEVES · SPEAKING-FIRST</div>
+    <h1>The World Cup</h1>
+    <div class="meta">
+      <span class="tag rose">Level B1</span>
+      <span class="tag">British English</span>
+      <span class="tag">Topic · Football</span>
+      <span class="tag">50 min · 1:1</span>
+    </div>
+    <p class="objective">
+      <b>By the end of this lesson you can</b> talk about football and the World Cup for a full minute without stopping — giving opinions, reacting to real results, and predicting who'll go through.
+    </p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 0 WARM-UP -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">0</span>
+      <h2>Get talking</h2>
+      <span class="sec-time">~5 min</span>
+    </div>
+    <p class="lead">Don't prepare. Just answer — say as much as you can.</p>
+    <div class="card">
+      <ul class="prompts">
+        <li>Do you follow football? Why, or why not?</li>
+        <li>Have you watched any of the World Cup this year? <span class="hint">It's on right now — USA, Canada &amp; Mexico are hosting.</span></li>
+        <li>Who do you <i>want</i> to win? And who do you <i>think</i> will actually win?</li>
+        <li>What's the best match you've ever seen?</li>
+      </ul>
+    </div>
+    <div class="challenge">
+      <div class="txt">
+        <div class="label">Cold-start challenge</div>
+        <div class="task">Tell me everything you know about the World Cup right now. Keep going — don't stop.</div>
+      </div>
+      <div class="timer" data-seconds="60">
+        <span class="count">0:60</span>
+        <button class="btn-go">Start</button>
+        <button class="btn-reset">↺</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 FOOTBALL ENGLISH -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">1</span>
+      <h2>Football English (the British way)</h2>
+      <span class="sec-time">~9 min</span>
+    </div>
+    <p class="lead">Tap a card to see it used in a real sentence.</p>
+    <div class="card">
+      <div class="vgrid">
+        <div class="vcard"><div class="pos">noun</div><div class="term">a match</div><div class="ex">"There's a brilliant <b>match</b> on tonight." <span class="say">(Americans say <i>game</i> — you say <b>match</b>.)</span></div><div class="tap">tap to reveal</div></div>
+        <div class="vcard"><div class="pos">noun</div><div class="term">the pitch</div><div class="ex">"The players are coming onto the <b>pitch</b>." <span class="say">(= the field)</span></div><div class="tap">tap to reveal</div></div>
+        <div class="vcard"><div class="pos">noun</div><div class="term">supporters</div><div class="ex">"Brazilian <b>supporters</b> took over New York." <span class="say">(= fans)</span></div><div class="tap">tap to reveal</div></div>
+        <div class="vcard"><div class="pos">noun</div><div class="term">a draw</div><div class="ex">"Brazil and Morocco ended in a 1–1 <b>draw</b>." <span class="say">(= a tie)</span></div><div class="tap">tap to reveal</div></div>
+        <div class="vcard"><div class="pos">verb</div><div class="term">to be through</div><div class="ex">"Brazil <b>are through</b> to the next round."</div><div class="tap">tap to reveal</div></div>
+        <div class="vcard"><div class="pos">verb</div><div class="term">to crash out</div><div class="ex">"Nobody expected them to <b>crash out</b> so early." <span class="say">(= get knocked out)</span></div><div class="tap">tap to reveal</div></div>
+        <div class="vcard"><div class="pos">verb</div><div class="term">to thrash</div><div class="ex">"Germany <b>thrashed</b> Curaçao 7–1." <span class="say">(= win heavily)</span></div><div class="tap">tap to reveal</div></div>
+        <div class="vcard"><div class="pos">noun</div><div class="term">the underdogs</div><div class="ex">"Scotland were the <b>underdogs</b>, but they made it." <span class="say">(= not expected to win)</span></div><div class="tap">tap to reveal</div></div>
+        <div class="vcard"><div class="pos">noun</div><div class="term">a hat-trick</div><div class="ex">"He scored a <b>hat-trick</b> — three goals in one match!"</div><div class="tap">tap to reveal</div></div>
+      </div>
+    </div>
+    <div class="challenge">
+      <div class="txt">
+        <div class="label">Use it now</div>
+        <div class="task">Pick any <b>three</b> words above and describe a match you've watched. Full sentences only.</div>
+      </div>
+      <div class="timer" data-seconds="45">
+        <span class="count">0:45</span>
+        <button class="btn-go">Start</button>
+        <button class="btn-reset">↺</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 RESULTS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">2</span>
+      <h2>Talking about results</h2>
+      <span class="sec-time">~9 min</span>
+    </div>
+    <p class="lead">In Britain, "0" in a score is <b>nil</b>. "Two–nil", "one–all". Read these real 2026 results out loud.</p>
+    <div class="card">
+      <div class="results">
+        <div class="res-row"><span class="team">Germany</span><span class="score">7–1</span><span class="team right">Curaçao</span></div>
+        <p class="say"><b>Say it:</b> "Germany thrashed Curaçao seven–one." &nbsp;/&nbsp; "Germany hammered them."</p>
+        <div class="res-row"><span class="team">Brazil</span><span class="score">3–0</span><span class="team right">Scotland</span></div>
+        <p class="say"><b>Say it:</b> "Brazil beat Scotland three–nil." &nbsp;/&nbsp; "Scotland crashed out."</p>
+        <div class="res-row"><span class="team">Brazil</span><span class="score">1–1</span><span class="team right">Morocco</span></div>
+        <p class="say"><b>Say it:</b> "Brazil drew one–all with Morocco." &nbsp;/&nbsp; "It ended in a draw."</p>
+        <div class="res-row"><span class="team">Canada</span><span class="score">6–0</span><span class="team right">Qatar</span></div>
+        <p class="say"><b>Say it:</b> "Canada thrashed Qatar six–nil at home."</p>
+      </div>
+      <button class="reveal-btn" data-target="m-react">Show reaction phrases</button>
+      <div class="model" id="m-react">
+        <b>React like a native:</b> "What a result!" · "I can't believe it." · "They were robbed!" · "That was never a penalty." · "He was miles offside." · "Brilliant goal, though."
+      </div>
+    </div>
+    <div class="challenge">
+      <div class="txt">
+        <div class="label">Speaking drill</div>
+        <div class="task">Read all four results out loud, then react to each one with a phrase. Don't pause between them.</div>
+      </div>
+      <div class="timer" data-seconds="45">
+        <span class="count">0:45</span>
+        <button class="btn-go">Start</button>
+        <button class="btn-reset">↺</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 OPINIONS & PREDICTIONS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">3</span>
+      <h2>Opinions &amp; predictions</h2>
+      <span class="sec-time">~10 min</span>
+    </div>
+    <p class="lead">Real conversations need <i>your view</i>. Steal these — they're how British people actually talk.</p>
+    <div class="card">
+      <div class="bank">
+        <div class="grp">
+          <h4>Giving an opinion</h4>
+          <p>"I reckon…" <span>(very British = I think)</span></p>
+          <p>"If you ask me…"</p>
+          <p>"I'd say…"</p>
+          <p>"To be honest…"</p>
+        </div>
+        <div class="grp">
+          <h4>Making a prediction</h4>
+          <p>"My money's on Brazil."</p>
+          <p>"They've got a good chance of winning."</p>
+          <p>"There's no chance they'll win."</p>
+          <p>"It could go either way."</p>
+        </div>
+      </div>
+      <button class="reveal-btn" data-target="m-opinion">Show a model answer</button>
+      <div class="model" id="m-opinion">
+        <b>"Who'll win the World Cup?"</b> → "To be honest, my money's on Brazil — they've got a good chance now Neymar's back. But I reckon France could go all the way too. England? There's no chance, if you ask me!"
+      </div>
+    </div>
+
+    <p class="lead" style="margin-top:4px;">Now decide. Tap your winner for each tie, then defend your choices out loud.</p>
+    <div class="card tight">
+      <div class="picker">
+        <div class="tie"><div class="pick">Brazil</div><div class="pick">France</div></div>
+        <div class="tie"><div class="pick">Argentina</div><div class="pick">Germany</div></div>
+        <div class="tie"><div class="pick">England</div><div class="pick">Spain</div></div>
+      </div>
+    </div>
+    <div class="challenge">
+      <div class="txt">
+        <div class="label">Defend it</div>
+        <div class="task">Pick your overall winner of the World Cup and give me three reasons. Use "I reckon" and "My money's on".</div>
+      </div>
+      <div class="timer" data-seconds="60">
+        <span class="count">0:60</span>
+        <button class="btn-go">Start</button>
+        <button class="btn-reset">↺</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 MAIN ACTIVITY -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">4</span>
+      <h2>Main activity — Be the pundit</h2>
+      <span class="sec-time">~13 min</span>
+    </div>
+    <p class="lead">You're a football pundit on a British TV show. Two segments, straight through. The clock is your audience — keep talking till it stops.</p>
+
+    <div class="card">
+      <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--rose);font-weight:700;margin-bottom:6px;">Segment 1 · Match preview</h4>
+      <p style="font-size:15px;">Preview tonight's match for the viewers: <b>Türkiye vs the USA</b>. Who's the favourite? What do both teams need? What's your prediction?</p>
+      <button class="reveal-btn" data-target="m-preview">Stuck? Show a sentence starter</button>
+      <div class="model" id="m-preview">
+        "Good evening. Tonight we've got a huge match — Türkiye against the hosts, the USA. If you ask me, the Americans are the favourites, but Türkiye are dangerous on the counter-attack. My prediction? A 2–1 win for the USA…"
+      </div>
+      <div class="challenge">
+        <div class="txt"><div class="label">On air</div><div class="task">Deliver your preview. No notes.</div></div>
+        <div class="timer" data-seconds="60"><span class="count">0:60</span><button class="btn-go">Start</button><button class="btn-reset">↺</button></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--rose);font-weight:700;margin-bottom:6px;">Segment 2 · The big story</h4>
+      <p style="font-size:15px;">React to the headline of the tournament: <b>Cristiano Ronaldo became the first player ever to score in six different World Cups.</b> Is he the greatest of all time? Agree or disagree — and say why.</p>
+      <button class="reveal-btn" data-target="m-story">Show useful language</button>
+      <div class="model" id="m-story">
+        <b>For:</b> "There's no doubt he's one of the best ever." · "Nobody has done what he's done."<br>
+        <b>Against:</b> "I'd say Messi is still better." · "Records aren't everything, are they?"
+      </div>
+      <div class="challenge">
+        <div class="txt"><div class="label">On air</div><div class="task">Give your take. Take a side and defend it.</div></div>
+        <div class="timer" data-seconds="60"><span class="count">0:60</span><button class="btn-go">Start</button><button class="btn-reset">↺</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEACHER REFERENCE: grammar collapsed -->
+  <details class="gram">
+    <summary>Grammar in context — quick reference</summary>
+    <div class="body">
+      <p><b>Present perfect</b> for tournament progress (no specific time): <b>"Brazil have won two matches." · "Have you ever been to a match?" · "He's scored in six World Cups."</b></p>
+      <p><b>Past simple</b> for finished, dated results: <b>"Germany thrashed Curaçao on Sunday." · "Scotland lost 3–0 yesterday."</b></p>
+      <p><b>Predictions:</b> <b>will</b> (sure) · <b>might / could</b> (possible) · <b>going to</b> (evidence now). "They <b>will</b> win." vs "They <b>might</b> win." vs "Look — they<b>'re going to</b> score!"</p>
+      <p><b>Comparatives &amp; superlatives:</b> "Brazil are <b>stronger than</b> Scotland." · "That was <b>the most exciting</b> match of the group stage."</p>
+    </div>
+  </details>
+
+  <!-- HOMEWORK -->
+  <section>
+    <div class="hw">
+      <div class="sec-head" style="margin-bottom:0;">
+        <h2>Homework — speaking only</h2>
+      </div>
+      <ol>
+        <li>Watch <b>10 minutes</b> of any World Cup highlights on YouTube (search "World Cup 2026 highlights").</li>
+        <li>Record a <b>60-second voice note</b> reacting to what you saw — like a pundit. Use <b>5 words</b> from today.</li>
+        <li>End with a prediction: <b>"My money's on ___ to win the whole thing, because…"</b> Send it to me before our next lesson.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SUCCESS CRITERIA -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">✓</span>
+      <h2>Did it work? Tick what you can now do</h2>
+    </div>
+    <div class="card">
+      <ul class="check">
+        <li><input type="checkbox"> I can talk about football for 60 seconds without stopping.</li>
+        <li><input type="checkbox"> I can read scores the British way ("two–nil", "one–all").</li>
+        <li><input type="checkbox"> I can give an opinion using "I reckon" and "if you ask me".</li>
+        <li><input type="checkbox"> I can make a prediction and give reasons for it.</li>
+        <li><input type="checkbox"> I used at least 5 new words out loud today.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mono">EN · ENGLISH BY NEVES</div>
+    <p>B1 · The World Cup · British English · Speaking-first methodology</p>
+  </footer>
+</div>
+
+<script>
+  // Vocab cards: tap to reveal example
+  document.querySelectorAll('.vcard').forEach(function(c){
+    c.addEventListener('click',function(){ c.classList.toggle('open'); });
+  });
+
+  // Reveal buttons (model answers / phrases)
+  document.querySelectorAll('.reveal-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=document.getElementById(b.dataset.target);
+      var open=t.classList.toggle('show');
+      b.textContent=open ? 'Hide' : b.textContent.replace('Hide','Show');
+    });
+  });
+
+  // Prediction picker: one choice per tie
+  document.querySelectorAll('.tie').forEach(function(tie){
+    tie.querySelectorAll('.pick').forEach(function(p){
+      p.addEventListener('click',function(){
+        tie.querySelectorAll('.pick').forEach(function(x){x.classList.remove('sel');});
+        p.classList.add('sel');
+      });
+    });
+  });
+
+  // Speaking timers
+  document.querySelectorAll('.timer').forEach(function(t){
+    var total=parseInt(t.dataset.seconds,10);
+    var count=t.querySelector('.count');
+    var go=t.querySelector('.btn-go');
+    var reset=t.querySelector('.btn-reset');
+    var left=total, id=null;
+    function fmt(s){return '0:'+(s<10?'0'+s:s);}
+    function render(){count.textContent=fmt(left);}
+    function stop(){clearInterval(id);id=null;go.textContent='Start';}
+    go.addEventListener('click',function(){
+      if(id){stop();return;}
+      if(left<=0){left=total;t.classList.remove('done');render();}
+      go.textContent='Pause';
+      id=setInterval(function(){
+        left--;render();
+        if(left<=0){stop();t.classList.add('done');count.textContent="Time!";}
+      },1000);
+    });
+    reset.addEventListener('click',function(){stop();left=total;t.classList.remove('done');render();});
+    render();
+  });
+</script>
+</body>
+</html>
