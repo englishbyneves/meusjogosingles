@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+<title>Inglês da Vida Real · A0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   INGLÊS DA VIDA REAL · A0  —  arquivo único, data-driven
+   Edite só o array LESSONS lá embaixo pra criar/ajustar aulas.
+   ============================================================ */
+:root{
+  --ink:#1F1B2E;        /* texto / cards escuros (plum-tinta) */
+  --ink-soft:#5A5368;   /* texto secundário */
+  --paper:#FBF7F2;      /* fundo papel quente */
+  --card:#FFFFFF;
+  --rose:#C75B7A;       /* acento principal */
+  --rose-deep:#A8345A;
+  --rose-tint:#F7E9EE;
+  --gold:#E0A458;       /* secundário / disponível */
+  --gold-tint:#F8EEDD;
+  --sage:#6E8B7B;       /* concluído / sucesso */
+  --sage-tint:#E6EEE9;
+  --line:#E9DFD4;
+  --shadow:0 10px 30px -12px rgba(31,27,46,.18);
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:'Inter',system-ui,sans-serif;color:var(--ink);
+  background:var(--paper);
+  background-image:linear-gradient(rgba(31,27,46,.025) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(31,27,46,.025) 1px,transparent 1px);
+  background-size:26px 26px;
+  line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif}
+.hand{font-family:'Caveat',cursive}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(251,247,242,.86);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:16px;height:84px}
+.mark{display:flex;align-items:center;gap:9px}
+.mark .logo-img{height:58px;width:auto;display:block}
+.level-badge{background:var(--ink);color:#fff;font-family:'Inter';font-weight:700;font-size:11px;
+  letter-spacing:.12em;padding:5px 10px;border-radius:7px}
+.progress-mini{flex:1;display:flex;align-items:center;gap:10px;max-width:360px}
+.bar{flex:1;height:7px;background:var(--rose-tint);border-radius:99px;overflow:hidden}
+.bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--gold));
+  border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.pct{font-size:12px;font-weight:700;color:var(--rose-deep);min-width:34px;text-align:right}
+.reset{margin-left:auto;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+  font-size:12px;font-weight:600;padding:7px 12px;border-radius:9px;transition:.2s}
+.reset:hover{border-color:var(--rose);color:var(--rose-deep)}
+
+/* ---------- HOME / trilha ---------- */
+.hero{position:relative;background:var(--ink);border-radius:28px;overflow:hidden;margin:26px 0 18px;
+  display:grid;grid-template-columns:1fr 1.1fr;align-items:center;min-height:420px}
+.hero-copy{position:relative;z-index:3;padding:30px 20px 30px 36px}
+.eyebrow{display:inline-block;background:var(--gold);color:var(--ink);font-size:12px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;padding:6px 13px;border-radius:99px;margin-bottom:16px}
+.hero h1{font-size:clamp(28px,4.2vw,42px);line-height:1.05;margin:.1em 0 .3em;letter-spacing:-.02em;color:#fff}
+.hero h1 .hl{color:var(--rose-tint);text-decoration:underline;text-decoration-color:var(--rose);
+  text-decoration-thickness:5px;text-underline-offset:5px}
+.hero .sub{font-size:15.5px;color:#D8D2E0;max-width:42ch;margin-bottom:18px}
+.hero .note{font-family:'Caveat';font-size:21px;color:var(--rose-tint);display:inline-block;margin-left:14px}
+.hero-cta{display:inline-flex;align-items:center;gap:9px;background:var(--rose);color:#fff;font-weight:800;
+  font-size:14.5px;padding:13px 22px;border-radius:99px;box-shadow:0 14px 30px -10px rgba(199,91,122,.55)}
+.hero-art{position:relative;height:100%;min-height:420px}
+.hero-art svg{position:absolute;inset:0;width:100%;height:100%}
+.hero-art .wm{position:absolute;top:18px;right:-24px;width:280px;opacity:.1;transform:rotate(-4deg);z-index:1}
+@media (max-width:760px){.hero{grid-template-columns:1fr;border-radius:20px}
+  .hero-art{min-height:240px;order:-1}.hero-copy{padding:26px 18px}}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;padding:18px 0 70px}
+.chunk{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;text-align:left;transition:transform .18s,box-shadow .18s,border-color .18s;
+  display:flex;flex-direction:column;min-height:230px;width:100%;padding:0}
+.chunk:not(.locked):hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--rose)}
+.chunk .art{height:96px;display:flex;align-items:center;justify-content:center}
+.chunk .art svg{width:46px;height:46px}
+.chunk .body{padding:18px 20px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.chunk .num{position:absolute;top:12px;left:14px;width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;font-family:'Fraunces';font-weight:700;font-size:14px;
+  background:var(--ink);color:#fff;border:3px solid var(--paper);z-index:2}
+.chunk.done .num{background:var(--sage)}
+.chunk.open .num{background:var(--rose)}
+.chunk .tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+.chunk h3{font-size:19px;line-height:1.2;margin:0;letter-spacing:-.01em}
+.chunk .cando{font-size:13.5px;color:var(--ink-soft);margin-top:auto}
+.chunk .cando b{color:var(--ink);font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;
+  padding:5px 10px;border-radius:99px;width:fit-content}
+.pill.lock{background:#F0EBE4;color:#9A8F84}
+.pill.go{background:var(--gold-tint);color:#9A6A1E}
+.pill.ok{background:var(--sage-tint);color:#3F6152}
+.chunk.locked{opacity:.62;cursor:not-allowed;background:#FBF8F4}
+.chunk.locked:hover{border-color:var(--line)}
+.chunk.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stamp{position:absolute;top:14px;right:14px;font-family:'Caveat';font-weight:700;font-size:18px;
+  color:var(--sage);transform:rotate(7deg);opacity:0;transition:.3s;z-index:2}
+.chunk.done .stamp{opacity:1}
+
+/* ---------- LESSON view ---------- */
+.lesson{display:none;padding:18px 0 90px;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.back{display:inline-flex;align-items:center;gap:7px;border:none;background:none;color:var(--rose-deep);
+  font-weight:600;font-size:14px;padding:6px 0;margin-bottom:8px}
+.back:hover{text-decoration:underline}
+.l-head{border-bottom:2px solid var(--line);padding-bottom:20px;margin-bottom:8px}
+.l-head .tag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.l-head h2{font-size:clamp(26px,4.5vw,38px);line-height:1.08;margin:.1em 0 .35em;letter-spacing:-.02em}
+.obj{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px}
+.obj div{display:flex;gap:8px;align-items:baseline}
+.obj .k{font-weight:700;color:var(--rose-deep);white-space:nowrap}
+.obj .en{font-style:italic;color:var(--ink-soft)}
+
+/* ---------- LESSON BANNER ---------- */
+.l-banner{position:relative;background:var(--ink);border-radius:22px;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:220px;margin-bottom:28px}
+.l-banner-copy{position:relative;z-index:3;padding:28px 20px 28px 32px;display:flex;flex-direction:column;gap:10px}
+.l-banner-copy img.blogo{height:44px;width:auto;display:block;opacity:.92}
+.l-banner-copy .btag{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.l-banner-copy h2{font-family:'Fraunces',Georgia,serif;font-size:clamp(20px,3vw,28px);
+  line-height:1.08;margin:0;letter-spacing:-.02em;color:#fff}
+.l-banner-art{position:relative;height:100%;min-height:220px}
+.l-banner-art svg{position:absolute;inset:0;width:100%;height:100%}
+.l-obj{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;padding:0 0 20px;border-bottom:2px solid var(--line);margin-bottom:8px}
+.l-obj div{display:flex;gap:8px;align-items:baseline}
+.l-obj .k{font-weight:700;color:var(--rose-deep);white-space:nowrap}
+.l-obj .en{font-style:italic;color:var(--ink-soft)}
+@media(max-width:640px){.l-banner{grid-template-columns:1fr;border-radius:16px}
+  .l-banner-art{min-height:140px}.l-banner-copy{padding:22px 18px 16px}}
+
+section.block{margin-top:30px}
+.b-label{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.b-label .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:15px;
+  background:var(--rose-tint);color:var(--rose-deep);flex:none}
+.b-label h3{font-size:20px;margin:0;letter-spacing:-.01em}
+.b-label .hint{font-size:13px;color:var(--ink-soft);margin-left:auto;font-style:italic}
+
+/* revisão ribbon */
+.review{background:linear-gradient(180deg,var(--gold-tint),#FBF4E6);border:1px dashed #E2BE80;
+  border-radius:14px;padding:16px 18px}
+.review .rt{font-weight:700;font-size:13px;color:#9A6A1E;letter-spacing:.04em;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.review p{margin:.2em 0 .6em;font-size:13.5px;color:#7A5A22}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#fff;border:1px solid #E7CFA0;color:#8A5E1E;font-size:13px;font-weight:600;
+  padding:6px 12px;border-radius:99px}
+
+/* warmup / generic prose card */
+.card-soft{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.card-soft p{margin:.3em 0}
+
+/* vocab */
+.vocab{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.vcard{background:var(--ink);color:#fff;border-radius:14px;padding:16px 14px;text-align:center;
+  cursor:pointer;transition:.2s;user-select:none;min-height:74px;display:grid;place-items:center}
+.vcard:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.vcard .en{font-family:'Fraunces';font-weight:600;font-size:18px}
+.vcard .pt{display:none;color:var(--gold);font-size:15px;font-weight:600}
+.vcard.flip{background:var(--rose)}
+.vcard.flip .en{display:none}
+.vcard.flip .pt{display:block;color:#fff}
+.flip-hint{font-size:12px;color:var(--ink-soft);font-style:italic;margin-top:8px}
+
+/* frases prontas */
+.phrases{display:flex;flex-direction:column;gap:10px}
+.ph{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);
+  border-left:4px solid var(--rose);border-radius:12px;padding:13px 16px}
+.ph .en{font-family:'Fraunces';font-weight:600;font-size:17px;color:var(--ink)}
+.ph .pt{font-size:13.5px;color:var(--ink-soft)}
+.ph .say{margin-left:auto;flex:none;border:1px solid var(--line);background:#fff;border-radius:9px;
+  font-size:12px;font-weight:600;color:var(--rose-deep);padding:6px 10px;align-self:center}
+.ph .say:hover{background:var(--rose-tint)}
+
+/* steps */
+.steps{counter-reset:s;display:flex;flex-direction:column;gap:10px}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step::before{counter-increment:s;content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;
+  background:var(--rose-tint);color:var(--rose-deep);font-weight:700;font-size:13px;display:grid;place-items:center;margin-top:2px}
+.step p{margin:0;font-size:14.5px}
+.step .mdl{font-family:'Fraunces';font-style:italic;color:var(--rose-deep)}
+
+/* SPEAKING blocks — coração do método */
+.speak{background:var(--ink);color:#fff;border-radius:16px;padding:20px;margin-bottom:14px}
+.speak .top{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.speak .lbl{font-family:'Fraunces';font-weight:600;font-size:18px}
+.timer{margin-left:auto;display:flex;align-items:center;gap:10px}
+.timer .t{font-variant-numeric:tabular-nums;font-weight:700;font-size:18px;color:var(--gold);min-width:46px}
+.timer button{background:var(--rose);color:#fff;border:none;border-radius:9px;padding:8px 14px;font-weight:700;font-size:13px}
+.timer button:hover{background:var(--rose-deep)}
+.speak .prompt{font-size:15px;color:#EDE7F0}
+.speak .model{margin-top:10px;background:rgba(255,255,255,.08);border-radius:10px;padding:10px 13px;
+  font-family:'Fraunces';font-style:italic;font-size:14.5px;color:#F2D9A8}
+
+/* atividade principal */
+.main-act{background:var(--rose-tint);border:1px solid #EBC9D4;border-radius:16px;padding:20px 22px}
+.main-act h4{font-family:'Fraunces';font-size:18px;margin:0 0 6px;color:var(--rose-deep)}
+.main-act p{margin:.2em 0;font-size:14.5px;color:#6E3349}
+
+/* gramática rebaixada */
+.gram details{background:#F6F2EC;border:1px solid var(--line);border-radius:12px;padding:2px 16px}
+.gram summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-soft);padding:12px 0;list-style:none;
+  display:flex;align-items:center;gap:8px}
+.gram summary::-webkit-details-marker{display:none}
+.gram summary::before{content:'▸';color:var(--gold);transition:.2s}
+.gram details[open] summary::before{transform:rotate(90deg)}
+.gram .gbody{font-style:italic;color:#7A7286;font-size:13.5px;padding:0 0 14px;line-height:1.7}
+.gram .gbody b{color:#5A5368;font-style:normal}
+
+/* homepractice + sucesso */
+.hw{display:flex;flex-direction:column;gap:8px}
+.hw li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:14.5px}
+.hw li::before{content:'✎';color:var(--gold);flex:none}
+.success{background:var(--sage-tint);border:1px solid #C9DDD2;border-radius:16px;padding:20px 22px}
+.success h4{font-family:'Fraunces';color:#3F6152;margin:0 0 12px;font-size:18px}
+.check{display:flex;flex-direction:column;gap:9px}
+.check label{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;cursor:pointer}
+.check input{margin-top:3px;width:17px;height:17px;accent-color:var(--sage);flex:none}
+.success .hand{font-size:20px;color:var(--sage);display:block;margin-top:12px}
+
+.finish{margin-top:30px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.btn-done{background:var(--sage);color:#fff;border:none;border-radius:12px;padding:14px 24px;
+  font-weight:700;font-size:15px;box-shadow:var(--shadow);transition:.2s}
+.btn-done:hover{background:#5A7567;transform:translateY(-2px)}
+.btn-done:disabled{background:#C4CBC6;cursor:not-allowed;box-shadow:none;transform:none}
+.finish .msg{font-size:14px;color:var(--ink-soft)}
+.btn-next{background:var(--ink);color:#fff;border:none;border-radius:12px;padding:14px 22px;font-weight:700;font-size:15px}
+.btn-next:hover{background:#332C44}
+
+/* skeleton banner */
+.wip{background:#FFF6E5;border:1px dashed var(--gold);border-radius:12px;padding:12px 16px;
+  font-size:13.5px;color:#8A5E1E;margin-top:20px}
+
+/* toast */
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);
+  color:#fff;padding:14px 22px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:var(--shadow);
+  opacity:0;pointer-events:none;transition:.35s;z-index:100;display:flex;align-items:center;gap:10px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--ink-soft);font-size:12.5px;text-align:center}
+
+@media (max-width:540px){@media (max-width: 540px) {
+  /* 1. Margens gerais (ganha 12px de largura útil na tela) */
+  .wrap { padding: 0 16px; }
+
+  /* 2. Barra Superior mais fina */
+  .topbar .wrap { height: auto; padding: 8px 16px; gap: 10px; flex-wrap: wrap; }
+  .mark { font-size: 17px; }
+  .progress-mini { order: 3; max-width: 100%; width: 100%; margin-top: 2px; }
+
+  /* 3. Textos da Home (Hero) */
+  .hero { padding: 28px 0 10px; }
+  .hero h1 { font-size: 26px; } /* O original travava em 30px */
+  .hero .sub { font-size: 14.5px; }
+  .hero .note { font-size: 19px; }
+
+  /* 4. Cards da Trilha (~15% mais compactos) */
+  .grid { gap: 13px; padding-bottom: 50px; }
+  .chunk { 
+    padding: 16px 16px 14px; 
+    min-height: 148px; /* O original era 182px */
+    gap: 8px; 
+  }
+  .chunk .num { top: -11px; left: 14px; width: 33px; height: 33px; font-size: 14px; }
+  .chunk h3 { font-size: 17px; }
+  .chunk .cando { font-size: 12.5px; }
+
+  /* 5. Dentro da Aula (Lesson View) */
+  .l-head h2 { font-size: 24px; }
+  .b-label h3 { font-size: 18px; }
+  .b-label .ic { width: 26px; height: 26px; font-size: 13px; }
+  
+  /* Caixas de conteúdo e exercícios */
+  .card-soft, .speak, .main-act, .success, .review { padding: 15px; }
+  .speak .lbl { font-size: 16px; }
+  .timer .t { font-size: 16px; }
+  
+  /* Botões principais do rodapé da aula */
+  .btn-done, .btn-next { padding: 12px 18px; font-size: 14px; }
+}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ================= VISUAL PREMIUM · ENGLISH BY NEVES ================= */
+body.visual-premium{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(199,91,122,.10), transparent 28%),
+    radial-gradient(circle at 90% 5%, rgba(224,164,88,.13), transparent 24%),
+    linear-gradient(180deg,#FFFDFB 0%,#FBF7F2 58%,#F8F1EA 100%);
+  background-size:auto;
+}
+body.visual-premium .topbar{
+  background:rgba(255,253,251,.82);
+  border-bottom:1px solid rgba(233,223,212,.85);
+  box-shadow:0 10px 35px -28px rgba(31,27,46,.35);
+}
+body.visual-premium .topbar .wrap{height:74px}
+body.visual-premium .mark .logo-img{height:50px}
+body.visual-premium .level-badge{
+  background:linear-gradient(135deg,var(--ink),#352B48);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 10px 22px -16px rgba(31,27,46,.55);
+}
+body.visual-premium .reset{display:none}
+body.visual-premium .bar{height:8px;background:#F1E5EA}
+body.visual-premium .bar > i{background:linear-gradient(90deg,var(--rose-deep),var(--rose),var(--gold))}
+body.visual-premium #lessonView{max-width:960px;padding-top:24px}
+body.visual-premium .back{
+  background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;
+  box-shadow:0 10px 26px -22px rgba(31,27,46,.42);text-decoration:none
+}
+body.visual-premium .l-banner{
+  min-height:250px;border-radius:30px;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(224,164,88,.34), transparent 28%),
+    radial-gradient(circle at 18% 88%, rgba(199,91,122,.28), transparent 30%),
+    linear-gradient(135deg,#1F1B2E 0%,#342845 50%,#1F1B2E 100%);
+  box-shadow:0 28px 70px -42px rgba(31,27,46,.80);
+  border:1px solid rgba(255,255,255,.10);
+}
+body.visual-premium .l-banner::before{
+  content:"Real-life English Method";
+  position:absolute;right:22px;top:18px;z-index:4;
+  color:rgba(255,255,255,.78);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:7px 11px;
+}
+body.visual-premium .l-banner-copy{padding:34px 28px 34px 38px}
+body.visual-premium .l-banner-copy .btag{
+  width:fit-content;color:#1F1B2E;background:var(--gold);border-radius:999px;padding:7px 12px;
+}
+body.visual-premium .l-banner-copy h2{font-size:clamp(30px,4.7vw,46px);max-width:10ch;line-height:.98}
+body.visual-premium .l-banner-art svg{filter:drop-shadow(0 20px 30px rgba(0,0,0,.18))}
+body.visual-premium .l-obj{
+  background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:20px;
+  padding:18px 20px;margin:22px 0 12px;box-shadow:0 18px 48px -36px rgba(31,27,46,.42);
+}
+body.visual-premium section.block{
+  background:rgba(255,255,255,.58);border:1px solid rgba(233,223,212,.72);
+  border-radius:24px;padding:20px;margin-top:22px;
+  box-shadow:0 18px 52px -45px rgba(31,27,46,.50);
+}
+body.visual-premium .b-label{margin-bottom:12px}
+body.visual-premium .b-label .ic{
+  width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--rose-tint),#fff);
+  border:1px solid #EBC9D4;box-shadow:0 12px 26px -22px rgba(199,91,122,.65)
+}
+body.visual-premium .b-label h3{font-size:22px}
+body.visual-premium .b-label .hint{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-style:normal}
+body.visual-premium .card-soft,
+body.visual-premium .ph,
+body.visual-premium .review,
+body.visual-premium .success,
+body.visual-premium .main-act{
+  border-radius:18px;background:#fff;border:1px solid rgba(233,223,212,.95);
+  box-shadow:0 16px 40px -34px rgba(31,27,46,.45);
+}
+body.visual-premium .review{
+  background:linear-gradient(135deg,#FFF8E9,#FFFFFF);
+  border:1px solid #E8CB92;
+}
+body.visual-premium .vocab{grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px}
+body.visual-premium .vcard{
+  background:#fff;color:var(--ink);border:1px solid rgba(233,223,212,.95);border-radius:18px;
+  min-height:86px;box-shadow:0 16px 38px -32px rgba(31,27,46,.48);
+}
+body.visual-premium .vcard:hover{border-color:#EBC9D4;transform:translateY(-4px)}
+body.visual-premium .vcard .en{color:var(--rose-deep);font-size:19px}
+body.visual-premium .vcard .pt{color:#fff}
+body.visual-premium .vcard.flip{background:linear-gradient(135deg,var(--rose),var(--rose-deep));border-color:transparent;color:#fff}
+body.visual-premium .ph{border-left:0;padding:14px 16px;position:relative;overflow:hidden}
+body.visual-premium .ph::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(var(--rose),var(--gold))}
+body.visual-premium .ph .en{font-size:18px}
+body.visual-premium .ph .say{border-radius:999px;background:var(--rose-tint);border-color:#EBC9D4;color:var(--rose-deep)}
+body.visual-premium .step::before{background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:#fff;box-shadow:0 10px 20px -15px rgba(168,52,90,.85)}
+body.visual-premium .speak{
+  border-radius:24px;padding:24px;
+  background:
+    radial-gradient(circle at 88% 12%,rgba(224,164,88,.26),transparent 30%),
+    linear-gradient(135deg,#1F1B2E,#342845);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 24px 66px -42px rgba(31,27,46,.85);
+}
+body.visual-premium .speak .lbl{font-size:21px;color:#fff}
+body.visual-premium .speak .top::before{
+  content:"Speaking challenge";font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+  color:#1F1B2E;background:var(--gold);border-radius:999px;padding:6px 10px;order:-1;
+}
+body.visual-premium .timer{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 6px 5px 12px}
+body.visual-premium .timer button{border-radius:999px;background:linear-gradient(135deg,var(--rose),var(--rose-deep))}
+body.visual-premium .speak .model{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.08)}
+body.visual-premium .main-act{
+  background:linear-gradient(135deg,#FFF,#FDF4F7);border:1px solid #EBC9D4;padding:22px 24px;position:relative;overflow:hidden;
+}
+body.visual-premium .main-act::before{
+  content:"Desafio da aula";display:inline-block;margin-bottom:8px;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--rose-deep);background:var(--rose-tint);border-radius:999px;padding:6px 10px;
+}
+body.visual-premium .main-act h4{font-size:22px}
+body.visual-premium .gram details{background:#fff;border-radius:18px}
+body.visual-premium .hw li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+body.visual-premium .hw li::before{content:'✓';font-weight:900;color:var(--sage)}
+body.visual-premium .success{
+  background:linear-gradient(135deg,#F3FAF6,#FFFFFF);border-color:#C9DDD2;padding:24px;
+}
+body.visual-premium .success h4{font-size:22px}
+body.visual-premium .check label{background:#fff;border:1px solid #DDEBE3;border-radius:14px;padding:12px 14px}
+body.visual-premium .finish{
+  background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:22px;padding:16px 18px;box-shadow:0 16px 46px -36px rgba(31,27,46,.45);
+}
+body.visual-premium .btn-done,
+body.visual-premium .btn-next{border-radius:999px;box-shadow:0 14px 34px -24px rgba(31,27,46,.65)}
+body.visual-premium .btn-done{background:linear-gradient(135deg,var(--sage),#5A7567)}
+@media(max-width:640px){
+  body.visual-premium .topbar .wrap{height:auto;padding-top:8px;padding-bottom:8px}
+  body.visual-premium .l-banner::before{position:relative;display:inline-block;right:auto;top:auto;margin:18px 18px 0}
+  body.visual-premium .l-banner-copy{padding:18px 18px 24px}
+  body.visual-premium .l-banner-copy h2{font-size:32px;max-width:none}
+  body.visual-premium section.block{padding:16px;border-radius:20px}
+  body.visual-premium .timer{margin-left:0;width:100%;justify-content:space-between}
+}
+
+/* Ajustes específicos da marca */
+body.visual-premium .mark .logo-img{
+  height:62px;
+  max-width:160px;
+  object-fit:contain;
+  display:block;
+}
+body.visual-premium .topbar .wrap{height:82px}
+body.visual-premium .hero-cta{
+  border:none;
+  text-decoration:none;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+body.visual-premium .hero-cta:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(199,91,122,.70)}
+body.visual-premium .chunk{
+  box-shadow:0 16px 42px -38px rgba(31,27,46,.55);
+}
+body.visual-premium .chunk:not(.locked):hover{
+  transform:translateY(-5px);
+  box-shadow:0 22px 56px -36px rgba(31,27,46,.55);
+}
+@media(max-width:640px){
+  body.visual-premium .mark .logo-img{height:54px;max-width:140px}
+  body.visual-premium .topbar .wrap{height:auto}
+}
+
+</style>
+</head>
+<body class="visual-premium">
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="mark"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAADMCAYAAAA8nNe2AABlWElEQVR42u19e5xdVXX/d619zr3zyCQhkPBKJoB54ISnAatUnUQhifhs7R1b29raVvhpkWjRVkW4cxGt/SlWEtQfVqv11fbealsfCEEl8QEIJOGVCEkA84Qk5D0z93H2Xuv3xzl3Mgl5zL3zyMxkf/3cT3Bm7j3nnr32+q619noQXgoGIK0z33AeOHyTQiOoEkYqiJQURsn99+anf7oNAAHQfr6bAcjUmQteSWxezeoqCuKjXgqigEHE0X9ue+pnu2q8Vt3fEIBOnb1wIQtNFxYL5eOvB4mywDg1u7du+Mn3h+E+j4EsI7OWUCi46k/a2jKprsqBGTCYA5WXA3QOVM8C0SlQbVSCIYUFUAawG0TbVXUjEa0H69pGbVj39NM/OHDINbCWgIIM93edNmvh24h1mirZfu0VIiXSAKrbNz19bwEjGwRAzz339afbMPjDmvcmKISr/GzThp+vre63Ib3XTIZROEQG6OyXv2mGEXcJOblImWao6jQQToGiiYiMVuWMsI+g2xW0UYGnGfJbE7k1zz338+2HXKW9PcCKKQoclOeheObTZ155tZrwPFXpv1wpjKjs2rL+ijyQG7Jn3dbWluqyrR2ATlCC6+f9CYFSUKzdtO7unx1JfwYveVMmQygUoBJcFgSpJSIVHENHj4wdw4woMmsBbAMy3G9BaW9nrFghTHi74dTHxJVBRMfkL2KDwMoCAH+QXGuoFSABUCP4ew7C15NEAPXHPmCQMVBnn0N7+/9ixQo7TAR6KBEBAHKCAjBjxqLxFdLXgvDWLrv/ChDOJXAzuI8YKgBSUPWbg5J/k39UIeLKRZS3ts5etFIgd0PCe7asz23tI8RmCJXFS9aGgI8zpV+pGvVzryiIUnBS+S2AwvCvSy2I95Oj9Awm/lJNfKIKNilYlfcDWFvdb0N0n/GaJ0bP9JlXXSJk3kHAAnXR+URmPIIAFItX/LipuhZ0cDmp98dQBWxAL7TOWvQEkS5Xwt3nnl56fEW8l45GgIOxbwjIqZL5oKHwKtFK/+WKA0Aqz7S1rf3+2rWoDIFsEQCtVFoblORzxoSnq0rvHj2+PKThbLkA4GdH0tXBUdUZw6paUVUHqBnBfKSAElH9lpcqVZLvagEJjrUWakU4SL1t6qwFn9qyrvDx2FrqFdCh/JJlVallPQQQBqF0YqzqDAM5BwDnzFxwsRDeU4G+ndhMJ2KoCBQCVVGoapWK+lBPn+XtpSoAxAROE9F5ROY8Js04tXtbZy5aRkTf2LjuJz9JhJySjS3D8H1LNe4VgVoGTsja1BmIEFEVqVFonaqterpDKGtZimVtbtg6a/I7Af0bBbUbE0BVEnIRjf/PITJG6CtaUO0jawQQM5sziPgMEF2lYj/13PPpNdNmLfwJC31v44a7H+z1+jMZM9jEFO/5GuUKwylX1KPqRBUCKPfjC1lVGyi0fLQ/CY6upJUIxLGdMKJdJI1dBh2gUBPHIYXjfFcCiYucoeBjZ89YsHLrimXfGyaLnOL76+96aOwmKYY53Fp9FgXXev6CuVD6sCi9gzkIVR1UrKiSgJQTV4+O7fLRkaVTVVWcJh7yRGbTodCO1tmLfkmCz2xcf/ddQE6HZ200kZ9a1oYYAGFUgbi2fdb7PIboe2Y5NjhyOm32VW9hDTqJ+RUKhYqD2MgeJmfmeLT70m8gquoESgpCQBTMYaI5Qu7DrbMX/kqFvppW/PeGQmH/4BNTPXLFrMMmV8oAc+I194cj+HjywPCogxiUoaLG0L9OPe+qC2KFl2X/XGLlP3361We0zlr0/yD0AFPwx4CG4iIbW9jEIAQDVFQxORMZEBmoqkjkVKwQ8WvB9OPWWYv+t3XGoraEjEah8vc4vuGTk7POf8Op02cv/BZT+AMwvSKRA5dISTAIhBgTGcXGu6oVcdZCFUTmNcaYb1RYV0+fvejGc899/emJx5QYQh61whNSnQEMhQiRGc8Bf3v27CtagBxOYqXH8SYsuKmzF7xLG/RhNsG1AEJxUbxB4w09VPKWWL/EKtapOmFj3gqjD0ybvfDaOJQRm49edscKGRXc2TMXXBxI+Evi8M9UrKhYSeRgCMmgalABKtaJRI6IzyMObnVh+Oj02YtuPHPWm08bpjNMT0gevYJp1DnLHF5clJZ/ASBobzcnp3KATJ36qsbWWQvvNBR8h4CpYiMbExGZ4SXqmJjERo5A4w2F/6911sJvTJ/e3hATU9bL/Bggo2mzrnxNQObnxPzyWNaIh/9oISY/VRGxFUdEZxAHt4ZwK1tnLrguNlRB3jv3hDRM8ohAJLJswne2zrzqI3FyQ3twsimHqTNffzY3T1jGJrym6qEkVuSJ24hERuNQnmUT/oWkG++a2rZgUnzm4ElpdCLLQMGdNfOqSwjh/4AwScW6qsdyQvVoVd5sZImpFURLi9p8WuyZZz0heUIaNhiRyIGDf5r6soULgRX25IgfJ2GT866cyZxazhS8JrFUzQhKgiEAgdjIGg7mk+UfnXfelRPiZAdvtY468w85nTXrzaeFMN8nplNVnBva8Fw996hEIKjq/9207t7nkInPuvzyeUIaZiFUsKF/O+Oc+dPHfpJDbKmeM3vhbBME9zLxDBFrR4ClenRP1kXWmODVNjD59vasSaxWT0qjxwBiAFrSyhfJBOeqczYJB48kKJhZJNqZVv4cAEoy7jw8IQ2rxmNVEWZzepgK/2Pqq17VGHcNGIsKL061bT1/4Zmi9ENini7OOmBQyahalzS4pGQjyyZc8Ny2Bz8bW60ZL/+jyRufveAdbMIOkWgwjB897DUYYitMAani9g0b7t5ZJVG/fieckNRBYYf1RXyCF56MuMgZk3oV7x7/hdhLyoy1dGMCgOnT2xtU9HvMZuYgWKraKy9Q1+c6dIgsxb/TAd69ERdZMuaD02cteHuyRj49d8TLXEHa2jIpFmRVVftVhHksvVQtfCWKX731RwOSNSEyLBJtpXLPl2Ld6r2jEUFIxIFhEwTD9ArZhIGQhCd+61Cs8Di8ZtqMhf8nVnhjKfMuw0BOJN2wxJjUqwcYplOoOgBEHBgOwoA5NIluiK1WIjCHhoMwIA5NUgDtAJX6lZsyVFVBt02asWh8ojS8pzRSEWeualdl3wI2wYWqto5C/bgTSFXOiJhUEanKflXZr5Ay0FfWgr6y1j9yUlUiJoV+atOmX+0BMiO4HdTIxWDH/JWISJz9v0T8hKowEQ+5laAacdraJ+P/d8KtEqNqhZiWtM5e8Pimp5fdP4y91YaQizIGhYKbOvPKPzEcvFdcZAHUSbbqADZsAuOctSr2YQLug2CVMG8y0AMA4ETHQ2WaEl0E4LWAXmZM2KKqiLOr6il6JBZxlSBsOG9cVPzYbuBjaG83Q9djzWNAWDFPgBUA4z0EUgXVaECoEhkCAHHu1wT3v47xMCttVgQlAGCqpJTsqU70PCjNBfT3AVxkTNgCACIOUHFJ0zs+UqiO2LBz0dN66v5veO9o5BBS7Ak784NNz/7k1yfoO51oq4QSaylU5e9Mn371qzduLGw/2OZkNCLLKOR02uy3nkUoL1F11SLTOsKR6phDI2J7RKJ/EeJ/3brunseP8YaHAHwPAM455+rpwvZtUPwNm/BCVQdVqSXTSgEVE6RSzlUeI+EfAKBepecx0kBATs6c1X4agPkijmozgmIyEtXnAX3f5vX3/O8x/vg5AI8AyAPAOS+/ero4+zqFvp1ACzhIjVNxUHVJn8RDvDQlYiaST21+8MFiYoB6QhoZhAQ46AS0twfY2mhwdnF4PIMVKwZ+xjB4+4hVnGMTniPp6FtAdmGfJIdR6MavJQCOpHwrm/A0cRVXx7mRAlDm0IhzP4FGH05GEsSKp73dYMoURaHt0OeTWUvYsYOwYoX73e/u2ghgyYwZi+6sqLsGpDcxh5NFrD2+LKsAzMyBEbHfDCJ7/bPP/nRfVel5VTAi3XIGCi6Q1CvImFNiQ4io//JGUNUucvKWTc8sWwlkDNp3UDw6ok2T7ipVowtoX85VXfK73961EcC3AHyrddZV5zqx7yLVv2AOZx7qoasQB0acfWTT+vHf9d7RCCQkInVxkWhGseHuk7OFBpERsZY5deW0Gff/0+YN935kuDqDD7JSiPvTnb/w1ar0FyKR1ElGIDIsam/atP6eW+MftwfAPAFyctTncui0IEZ7O29YcXcZwNLWWVf9SMR9mTlceEySVFgyQQCRopPohs3rln2573fzamCEon0HYQXAzBcQMVSd9NtDUhU2oXHOFjY/s2wl5s4NsbIQHd0RzgErDpkYwPEonjbdtC73HIBPTW7L3N4Q7f8jIvwdB+GFKg4iKqQwMJo7mCTjCale+MPcISZ8kchxkPpw64wFf5qQ9ChLcog9FnWaZTKcjIqo2TOKD5Ldezc9fc+tcfgyy3ERcU3eifTOdWpvDzatu/e5Tevuvto5+1U2oemTpdfn2uo4CAMVedKqmx+TUSZpZ+TJaERjxZRY9hQvSwJj/Ze96pAJol8DYIwbV3PWXNwoNSeJIRTsXFvo2rz+nm+khC4XG31ABduCsDFUtSs2PbXsrmp9nl84T0gjGMoqTsD85amzr7xwdBXNxlXmU2cueCWIrxKxWod35JgDFnUf2rTunq9i7tww7pQwoDCZxsSUZUB18/q736tqv8YcmiRzD0kmHjGHRl30ncDa12xdf+9vYq+sMILCux7HNYZIz4jZpfbJ1SRSHIS1PmgIZTJmw4a7y5vWL7tD2V4uUskD/EkAkoS2PQZiwftHMNQgAkSJgxZyQb619U1XbNqU24uhH+c8eN8AuI45YHG1FiSqYw4DJ/ZfN69b9gWgPcDKFdHg3VlOgBwDWWo2a9/f7fafzyb8feeiCpsgpSolFXfDxnX3fOkgwRasl8nRglwc6gW11G6yUJXMzgOg6OoaDLLQZLwEAe1m89M/3QbgnQd/7b0j7yGNDlJiddYZY87XtP2X2GJrH+lFswwU3NkzFk0l0B+IWIBqSvMWIsNO7EYul26IP2/FUGxYAdbS2rWFirP6lyJunwlSKRV5kqy+fuO6u7+UeKQ+RDdaYwxASmt1ckhZVaBEfzJjxqI0Vq6MBrHxscbhZt/J2xPS6HWUjDhrjQnf0TprQRZYYUf0uIr2do6tU/dWNsE4qLiaNp8qiIgA/oeNG1fsTT5viMJk8WHylmeWbVB1t6u4/6Vy8bUbn7nngVgJ5QQ+RDeaGcnVrveJVZ0YDtoqBt86dfYVLQmJAO3tgzWbS71ceUIaxaQUdwYnMtnWmQvfNKKTHJJCUWJ+I1DrIHR1xAGLsys3rxv3X0CWhz67MA6lbD6r8smNT//k7Rs3rtgbP9sVPkQ3ahGPbSDogfrcEGIRK0wm06wt97fOWPAOIGMSWRQkyTEHPeixg0rlAPXx4Ab9JWKH5HkNyRmSKhm0twfYCcbk9qFZ6BFVd1QDJUFJoQDRv5117huu2PZcYd0ILJolADK1bcEkWP09UUc1tWtRgJggTP8yzP3itPfw+SBJeYxaVJMEaFu8uqS10wZxbAQGF8Dgv1pn7V9NuuA71skPtj770/WxvKxAr+e0Yoomaduj1vMhQC+9tMVu2DAkHpwCwLhxZPcURwkhMbB/9NXbDJu4MFQcc3BqEAbfmTo187otW1DGiCqaTQoSK3KhmnByXP/Rb0JSMBsndh8HJqmML+jw7kcfRhkTSOqQlPF0vLJK9TkyZFRt4vEHlxL4UkPRJ1tnLlwJ0nuJ6d5mHr9y7YpC5RA11t7OcReP0VU4rUrmN0/1jD/9oqsqYivEQWrQ9kP18/bZsAUYfC9pCAhJASNvmTZrwdnkKAXSIVlMG7i7tz31s10jQAHVMeyNjDhn2YSXSdO+LwO5v0yKZkeG15coAiG+nNlArQion+FdVYm7IVTu27j2nhdOQPGpJ6OxgqQOiaAPJ314B3DEEL9XxYoqFMSNZPg1BHqNqst12f3rWmcv/JmoLjNB8ODGtXe9EIetV8S30N5uRj45EasKiDBDy9FvUyAF0oRBdQ3SgIUKHBPhVI3V+6Ad/Qw2IZGqgjn4+/g8ewiffURXAHigas2fQCGgpJtwbaSUDI0LTPgX02YsXL15xT23xwfwI8CzrBYkAhfXpd4JAPFP440ck5uHR+0oCACiUnmVptPPEJnzVGWA3dmJ452qGpMTKQgBEc8iNrNI5X0auV2tMxc+TETLVHDPpg13rz0Y2styHEoc0WG9gMmcPvSe2OBz8xCdISVWyBCCDZ9wxa3QMhQVYmpJOhjUSkpGxDpi/uz0ly18bOMz9ywfGe1selufnKuQ2kIlRKziAMuPAtAquXl41LXF2tuDjStWlKbNWvBVZvOPasX121s/rtlEpnfqljqJIwHKxHwqkVkEokUKa1tnLXhAyXxPrfvxlmdyG3o/Ie6APyKJSVWG455GQ8gOA3St+/vEhU7oRok9ozKgH4DiDiIap7WTUjz+nBCqoe9MnfmmV25ZX9h6gpMcCIDOnTs33Lkfp8XOH2ppaEmiuk8YGw8jtwHe01BPd/UJECMScbYnOW76F7ie65nNGTWeadbiOXHSkFVVI4mD8RQQB69l0GvFyK2tsxYtI/C/bFzXfG9SJIsR2hNxVGYN+k4NA+AkAo1LKf2kwu6viVJ51f50nX7pRlBxjkx4Fkn07blz5y5YuXKt4ASfje3Zc0qTGkygxO3pr11GxASVF6k0ftfgGgCeME5SCJAx254q7GqdveAjRPxtVRnqotS+3lMS2gNAPI7Z/KFC/7B11v5HVBfd0RK2/PvatYVKYkT6uiRPSCfSLYYrq07Z/PS9hWkzFiwxQer62tvrACAy6qw1QWrejgOnfR4ofOBEdwZXlQaCqb1CHgQF9m/Z0lYeLG/tjBmLJgdGX0FOBWAa7B3AKlGzmfDrWLF4jDzEpQObni58p3Xmwss4CD8oNoqSfTbUnkAfclIVFwkIRBxcxqBvdNmuxdNmL8pufjr3w/jPR/PcM09Iox7WqAPAmy+d8Hetj+2bzSZcKC6qfV4QwYitOGOC66bNvGrl5hX3fiNJchhu4SYAGgUIiGrW/pr4daU+m3IAFmOcsBKqXmE49T8KO+j6h0AQkZ7uUvfLALwAnzY+UklJgIzZtL7wd62zFjZxEF4jLpI4oYh42PZGsq9VrGg8Fv1SUvpB66xF3wis/eCzz+b2+bEm9cN3ahiohBIp4lb1Elh9t1P7HLExSbfpWoWdRZwQmy9PnbXocmCFxdy5w93JQQGATShU+6iJKqPZPuQ28GfMsHGijEv+HbSXU7UCom5m40lohAckYlJSbFp3z7XibJaImThgxJbKMK8fMUAmDudZYRP8pQ2DFWe//MqZw1wM7gnJ46WYO3du8Oyz9+4gqxlVdCePtvZ4V3w21cDQ70xtWzAJK1eekLBdJGEEwFHN9w8oKNWH3AZOSqrVThGcKILBfanfB6OHlAhAljetu/sW1ehKVXmMgzAgIopHj+gwRxRiGRJbsUx8sRHz8+kzr3z56Boz4wlpzGHlyjfHce5nlq1Ude8nZgZQR6ErsYpY5nAmWfpW0s+LAR3WrBkbHCiBUOrlmP6TBwAd39aWSXmp8BgaUsrF4bt1P/1ZtH/nFeqiG1SxiU3KEBmOSUmHt8icKBBxlslMVTL/c8aMRZOTJAevY088IamDwg7pi3gEhlgKDu3tweb1y74pEn2OOQziTsU1+0mBuMgaE17dOuv+ePhXbaMfBoyda1ECsO+go9O/XRkPaaVT99gd4/328hjSvYaMef75lT0b193zeQnkUnH2I6r6NFHAzKEBer2m4SKnIOnAMitF8tX4R9kTxdsJKQ/Za0g80SEhJObAcBAGQ/kSknBE7pMVKxyQMZvXXfEP4ir3sAmCJMZdKykZcZEjDj/eOnPhm6C0a5hKCxKrboUF8GK140r/HSQFESY1oPGsZEP6eTEeQ0hKICBjtqxdtnvT+rs/Jz17L7Xi3qFi/wtANwcpwxyYxFhyyUThoSMnQiA2smzCt7bOuOodVW9ueJ8LgThg4sAM4WtIuCMYiofhxH2XYNeJUEjQIVh8BoE3xf+dlxFWA6ZJM1EJ3FXvtuR+Tcwz6ijmI0AZqlDSr0Gxb+D9vPqLDAEFAHiOQO3a/y7LBKgwh0HkKm0AnkD7csYK+DRYj6HcbzExZTK8pVAoAvg+gO+3zrrqXFF6E0TeCsWr2IQtceGrg6oTaHxgm9TZDZ4SIaVkINg/ANnvD28aOAGQoog8DsVQ1DMS4mp+o9CLCZQeyYSkRETWyhe3PbPs/mFagJGYHSVAxjz7bGFH6/kL/hjKvwC4ofaed0SqAgKfTozTk95RQ8++1f5zymtqvpqSgIgZ1A7gP7y+9Bg2YuodL55hoE03rcs9B+AOAHdMn73wHNHo90npjQqaR2TOJmaoahLVgwUpD47BR0bECrG5bOrM+1+zZT1+MTyp4CpEzKJ47rwzy69ZMYR1jG1t7eMOROkniXn6wPsLDqmHBJDyRLS3B9jaaHB2cWgWYcTPQyo4oD3Y9NSyldNmvuF9bNL/ps46ENUxDEyrCdjD4wpW+88RVqsIko3aX/uJVRyUcPXpF13VvH3FvT2DZKUJQP21NP1oae8xxaGU9nbGihVu49P3/A7A7wB857zzrpzggvAK0WghQK8H6EIOgkBFoOo0Ph+hgQ3tUxJiw0TyVgC/GO4mwzt3TuG+Hs1ge0iVSiP3fzueaEIidck0VMWGu0/iArEVFu3tweYVP/vmtFkLLjBB6iNi6+jkMOzKNe4/RwGvEWv3EvHEGprHsqoT5qA11e2uBPADZDJ8sO9XHXtbiZmYQdJvYlT1UUIPSHXyMQBGJkMoAM8+W9gH4CcAfoK5c8NpXVMudjZ6CxH+gIguJAqMiEV8eE/1nf+QkkJAwOV9DGiPE0FIHod7chmz+WJ8rPXR/RdyECwSW0cnh2G3MkEb1971QuushY8RcXs84Kzf96wEAlivBfC/KLTVaaHFxFhReTBtozc7EjkOCzExLCtNVfAdBGqoazSIx9gkp0Khj4GXNOtdWYg2A48AeATI3NI6a888Vfw1QO8kNkbF1tnIlarH5+dOmrFo/O4Nd++H7wLiCWmEhBAUBYg9/w1/Fjh6kDiYkSj4kVuj0OvV6M8J3F6bWo9j6My8YNqsK1+zeV3uV3XG0BUAtj977w4AP+7vm84778oJ1ugX+t0T1mO0gfrKR5170h38rCzFyTcFu2kdfgbgZ9PPX7RERf6JOHhdnaQUNzpRTGpGefJuYH+ccZrzhHSs8Ip/BMNknSFjtj31s12C6F1Q6YlHuujIFc6qV8P4sYjV5Oyrtj1PbEj58+3t7cFhiqQOBZQxx3tNn97eAACWaQGxaUxqJTwrjT0ySrpqD0o6dVxoGycA9MrZxqfufnDTupbXi7pvM4dcX92NAoQmpqDFL5snpJGm4R3QHmxZ97OHVeQaxJ0cRvDUyZwAoE1PLVulkN8QB0gKDPurN1jFCpvw8ue2pj4GFBzmzg3qVxoFd+zXDtq4cUVp+uwF88Hmawod2KG0x0hz2Q0AtM5Y8K7ps9+Ybz1/4Zl965AGMZrhqnsVKDg7LrzWOfdc3AGipr1andxCFkhSo9d6efSENJIQJzls2rDsOyLR59ikDICRe9iZycSbUOlOSuZK1GjMkoh1MCY77WVXvhUrV0aYO3ewC5qpOvp92vlXLVCY/yGiFgxXirzHMHlFbTp37twQTB9hE2ag9Jtpsxf+JfrWIcXERIO5V59f+aMekP6IyKCOrivxjlHj5dAT0kjlpGonh3v/3rnKj5mDIKkeH4FOXZxUEDr3307sZmJT9epqUCTKBDCb4Duts658A1aujBCH8Aa+STMZE2/6FbZ11qK/JjE/JGB8UoTslcCYcY4yDORkx/5T/4Q5uNhGpQqBphkKvt46a9F902e98Y19iEkHTb4AAFmG4vk6P42gqibQZM5Wmz8/8oQ04qBVwUwLv0fEPlPnuIrhuddMxjz77E/3QfFlYkOoeSQFkaooCOOIgh9MnbnwT5J4vcaeTc1bPbGElVAouBkzFo1vnf3GLzHzVwENh2a8tccJ9Y4KBZkxY1EawEdURYkQqIqIRMLM80C4a/rshT+bNnvRW4DewZbxGVNstAxAHnICwll1BNY1CSqUDWyXX8YTSkiadKh+NhkZMGyvUYKcABnesOHunXBRh6p2x0kOI7DFTuwlUVrpi85VNtbhJQEgVhVRoMkwf3farIVLp7YtmJT0y+ujOLLVcx86SD4gIMvI9CqXxBImbZ296I8qBr9hMu8TsVK91ijcgyfiNUo8yDhsHBl5hzHhBX0Mjnjsg1in6pQoeD2DfzBtVvo302YvXDx15uvPBgouqX+Lk1va24MkrHes7x/L29xrQqxYYWfMWDSeQG9VdQqqTccQEQDdG7F5Mdn33kM6DoYk7VvVVGIhWOmrE4+u6ZNxFYVVrTOu+j8UhN9SsW4E6gkFMmbDhsL+aTMX3EzM/6bipPaIGHHccELVmPA65+ybWmcu+ueIgn9/fl3hRRSOdu1kIye/P/2iq5pTpfBKqPsAEb8BqhCp1F/AeMKfre/zd2xvuCDTp7c3iNIn+IhZqfG6i0Rxo0cOXkHgVzhCZ+vMBctI8b+OwhVb1v94K47cSodeuiY5xUrI9OntE8us3zIctIpENXreKgAZUtqyee09ew+VZ49hJSTDeta02VeeVSmZlAmG/nxEVYg5kK0bWp4fXaOD43EVm1bc++3WmVfN4SD90To7OQz9fWYyZnOh7dvTZj7wbmPCN8QKoGYSIAAktuKYzblkeEnooo+2zlp0j0LvFutWN3KwfcOGlu7qgLPZs1c397jKFCZcpKxXooQFRJhBHCBWEgeV0ijko/TZMxZNFbFMwzhOJbRl09OMF3euXTGyQ0lJLZykGv7YcPBycccqKO8zWlyhxDyROehQaAeJ3ds6a+FqJfxSgfsDNk+Vm3jn8yt/1HM4SUyf3t6AdPocAb9Roe9nNjNqJyMASkpMKtDHkJR9+LHmw09IpCpQ1q+SskunQcNg8asiYFLtetnL9r3imWewOXHJR4flmSQ5bFpfuHHarAUXGRNefeyNd6I4qU2BnBDecI0KP0LEEzTuz1N7iIzIqDpRdUrMZxEF7wH0PWQQVUi2T5u1bz/pAqv0QFBUjAdhCpkwRURQcYjHj0NHLxERqzgQ6HzDss7wMH4NhUVDc7rJyfsA/Cvae89cRp53VChIW1tbqivSD6tqPzvOE8eVSqoikcS9vHkikZnPRPNVBc65UrDfvjBt1oLdpNgPQjnWXWhRwhRVajUmCFUd6u7UQEpJWOCnADDcvew8IR0iSZQeztATVSVQZTRmVlWTHNSxezcJ3U9sZo28w/lkSuf6wrNTZy78W8PBd6HWou5GpsmgJVVVqUj8KRQSmalx26FqH/c4qiUSOcRjMHgMJS0wwI3DLG5CbNhZF47oJ9PebrBihT0QTXuXMcGcOow06v17VVWNJB6jokzgBmI+B0TnHNQfgEKTWnWBuIpLRlPUI2tKZNiJ3c6Vyt0HDU+PfmyIoVKyOlwvSaRoFC94nOSw7amf7Yoc/kRVe4h4BPa9is+9tqy/59+dVD6dTMQdqHWdKA4yVbtW1UocerGStLaPvaE4lDnGMuhUh/cFB6jSyBzbclAmVqxwU6e+qhHQjyVZmjSgz+uVH+LEeI1lTKwTiZxI5DROkIjlLZZJrlP7uWT/fnvjxhV7k0QKf350AgmJTtBrFCOuDn/+mXtWich7EQv0CByxURAgY7asu/dGkeibHIThIJBSX7lJPKDqC2O944LfK4cjKcim5gnvNCYcimhBXzkzh70GKm9KROzE7jfGLI0/q+DJ6AQTkkddiKvDt2xY9l110WfYhEEd1eFDbtLHpJTlTReP/yvnou9y0OspjZCN52dPjGqCLhTkvPOunECCj6mKHVUGicKRCRjQ7O9+e9fGJG3dy6MnpNHKSSviwX7rr7jRRZUfsxmRnRzi1NhCQTave9WfOxf9C5swiH9+oslAJek75jEqkSUAGgXBhWB6GREFo8fIUMsmDJyr3LV53bLbk8w6T0aekEY1FFghQE41hXeL2PXEgamtselw3ScA5HTzunuuca7yCSJmIsODGMKr8X7UEYesIk+posu3shuNiJv6bl53968V9lWq8nPigIkDjvfACCUmRcQcBiL2ybTwX8Y/LIzg5smekDz6DwEyvGXtst1g/LGqdGFEJjlU7yfLm9cv+5Q69xZV/I6DXm9peEhU1YFAbFJGxX7FGH4bCK43ecpjFBpl0M1P//SRjU/f/QZV6VBxjzCHJiYmaBI1GAFrqwKF5SAMRWS1aGXRhg1376x6en4pPSGNEcRJDpueumeVqHsvgRkjM5NQe1PCNyz7EZXp1eLs14mImMOkR99QKY/4s9mEBkrd6qIbNq2759oilcqkGnp1MNoRt5La9PTdhU3rxr9KnX2XqPs1EROb0MS9edQNnXwdxwxSWCLDbILAuei/JHBXbln/863xfed8qM4T0lhDkuSw/t7/UIk+M0hp1kNIoBmzceNdL2xad/dfAfJ6dfZnxAHHxASK710HGsZIrGOV6meruHututdsXHfP5wFQGCHAyE5r9ugXcomsxF0ONq6/5983P33Pa2Blvoj7BhS7mUPD3IecBkfGjmF8qYOqIyIycSRgi4j7m83r7slsWbtstyejgeGohbFEFG98hRvZnicpoASqPzxERBKHfTSZq9Lfa5LDULd8OdjJ4WOtsxbOYRO8xbmoQoTjFQkKVJVoOM+eeufS8ManC/cBuK915sI3KeFaBRaYIEyrClQc4o1NWq1oP/q4CI2ngyZFjSBm5sBozEsPA/qFjeuWfRcAMHduiJUrI+Kg6pUllrPSUddRlUAD9jzd6NgrAAgOqlQzYVf1QW3fzyXt53Sw5AoouI3P3LMcwPLW8xeeKWLfpMDbCPr7zOEp6O3mIbEHrSRHkLH+HC4mU2lVD8opG2JjCAzVaKs4+28mCpc899wPtyfGvQ4mGVG8h2uRK4lrzIYnkkLUK/fSr+nXvbJ39HPAY3RqkBSbBgOCGfmHwwQVO965cl0en6o0cdBo4NTU0jRUVU3kMNR9X5I0a5Bl+55A8EAQpGfqcc921RAZWFeZONyhjKq3BBRk0/p7fgzgx9NnLThfxb5DoW9T4ELmsCHpsJFMtNCkUv4QgQfARElpiEKg4vY4dfeR6r9uWj/+7oPKKktYmXMAII6MMTw+mXJ7PGMEzkaniDgawBeeYExoNC6mHNlbRdWwSUFcKV3L20QQmFRoauIWVcMmhIhND55cAdUJsZueKjwP4KsAvjpt9pVnOYleS0oLFXoFgHPZBCkiZmhVtqQ6PSX5P0cgZdKkOwMREVHciahX9rpV5CFV++8Rlf/7+XUrXjx4P4Pfp06Bljg02V8dPHx7XsQSyEzkIDSqYmqRPefsuP4TUiGe1eNAz8KV/1MgEXREt2rR2J/Tsm0MDvSxbvrhfcwTYAWI9WHnSgWIrSj1/7uqwoUs+5Lwgg7td8zytqdyu86eteiP4KJ/SAw4OqYXR2IAbMGKKVrTcxk8b6m6WXXjumVPAfgUgE+dM3vhbLHRZcp0qUJfTkRnQzAZ0BYlCgElApwKepRoByCboPIkKz+g7B7c/PRPtx28TlUZ5LRq+aZU91vIN1SihsRqPLqHBLASDgSmUqxvXQAC/bdz0dMKZ0f4XgFUnVqkQHZtvAemHEcm4qJOgd0O0e/WaukpJATp2r77bfBkC5Q0YNVEJv4TwH+2tWVS3XbfeSLuIoK7SBWziTBToWdB6RRmDoiqDQRf2uxb1AGqRVV9XkU2EuMxcvqwgn+zecPdzxwmezL4ZBTrEiX8WFzlBddfuSIVEheAdNPayTtkKPd8pdJVoabx33YumqykDtqP4x9Vp0BKWX4R/+ClAwt9XuzowijO3Mky2pfz0UYAnDr7reMmRMVGNGiDtWSUtMwNUc/Gx9CVzE069LOwlnxarccheyPu8IBkBtJLfn/eeVeOL6XC09nZM0A0iVQnECgtRCGrRiAqKsletvyiUbfVuWjHxo0rSi+5Ttxnz3nZGxoFd4zfZUZZ0kPdlkoc8sFaGsZr1gsGMjXcZ5uOsEPW+Flnkmdd6M/9ZRmZtRTPROovCVVJazieUS3XGjF7pVYyH4A+GHbD4eB+bt9BsWdW9/r2Ibrh3kv1ytVw3We991c46hww7yF5jDTDiI4QavCWqMcgyVhCVBkAO3a8VP9NmZIMgywkSQ1e9jw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8RhP8gD4PD48hhwLUmc3SnLVzKJMBlq9Zc4jumTdnjhYKQKZtjaKzU4nID8bzhOSh2SwD4OUD/Jyda+doR6HjqOPNVZWWd3aagVxj3pw5Sh0drhalsDybNSPlWc/L5RwdYyJnNpvleQAP5BrLAcnl+j/OeTCuOa+z0x1PoQ7G+g8m5udyDoM8HTWbzXLnnDkEALXIad/nM2/OHEUmI56gPCF5eHh41GvUgfoYAprPmzVr9pxdlsrZUExWlhYjFCqTGmgFQt0g3VNWt4PHNb1w2Uev3df3M/OZvAEK6CgUnH/CnpDGPLLZLOdyOVl909I/CA3PqzhbJnDNlrJCJGWCdCT2oUtvWfyd6ucefp1V2dvb0ib13rKrRCS1XUdINc0miJx75tJPXn+HAnQsT0NViYj0sexXpqqU/04BUdUTvvbjGps/M+vGv95Zvb++Co1yOVmVXXLlhIamzP6eoqMavRZR1XGNjVwqlb5x0Sc/8ED1M4+lRCmXk9U33T6/paHpjw+USjVfUwFpaWg03ZXur1+cW/zgka7Zu/4fu70tCIP3OqhVET4Rz1+JlIkIinLI6c9dkHvv7sPXolavBp2dVP3Oj2S/0BoieL0TvRLQy4loqmFuCk0Aw9yrfBSAE4F1DtY5S4ydpHgGTA86h18x8wOX5N6/o9frOozsPMYOAv8IYnTOmUM5AAp9y+kTJr1nT08Xgtr5CE4VLelGbNu36wkCvtOZy2nuCNcR5tmnjZvwwf2lbhjiGq8haEk3Ydve3U8CuOP4X66TAGiE4tTJ4yZ8yMnIMDL37q98DcDO6v1Vf748JgIhlWkt6aZrRBRc41o4EUxqbsHmcmkTgAeqn3m0v+/9PZmrT2luuUYAmBqvKapoTjVgf6n7LgBAEq7qizlrkxBWwLNPbRn/wWJUBtOJsQ0EioAMusoliERfBbC787C16C/ymbwhIgdAH8t+6VVM+gFVfWNjKn0KEaFiLSJn4UTUuooSqWpyFSJAlQikxMxBwHxmaIIzA2NeE1n74VIUbX8898VlaulfLs69/5c5APl83nTUGAb08IQ0GtG1r9htu0slW9/zUS1VKgTF5DWfXnoqffwDu45odVqt7Ct22+5yyUFR21kCwYmogWJPTW8zYbSv2G1FRFVPvHfMqbQ90s/nJcQh1jzx/L49TtQJtGatbQ1zQKDT+vPH8+bMqa7PxL09daw/QaGgrlKPWtZnAABr1ugxrIrKvmK3LUeRYIBnVvXHR1QZhgTSnQob61buVXK4/+O3nd2SarhFoe9pSKWpp1LGgVLREUgVYJASgYgIBBD6rmj83wRR1YS8BBq/LzTm9MYw9eclRH/+ROcX/7uiUefcjo7HEw9UMchnXx4nUCf4R3DEZxIACED1vCiw4gImPr1c1pf18VAOuwpRfB2t/RrQAEBAVCOROUcAAq37uw3ui5w9Isl0Vm+XeLuIVJg4VIKp5bMVGopIIKrnAHGSyTGfTS95yBmiEig0rOl6qoExHADoGhc27krW/ajXpN71P3HPvyoHCgQVG9VloGhCRg/f9IWrWtKNDzalGv7KiuBAscc5cUpEBoSACHwoBR2N10FERMDB90XO6v5ij6vYSBvC1B80cPr+Vdk7rqdcTrLZLKk/evCE5HGsPaWuKZ0mVXr50UI3HseKMMaKPFXq2a2kLxo2IK3VCiYSVRDhbADIFDqOfebQmasGkCa7OJZEtS06acAGUOzaHm3bg5o/YfRB83lDHR1u5Y23/3ljkPoJE03dV+y2CamY/hBQ/1aS4s8jogOlorPimsenG25fffPS23O5nBQyGYYnJU9IHkfbqaSGGKS4EHhpzYXHcRWQAsAlt32kG4rtAXPNMRkCYMVBgdPuy369gQA9miWtABFB77r99rSqniIites3UuX4Pl+Yn8uV4ijU2E1Vzidk9PAnbv+jxnT635wIl6JIiCgYYtkwTkQPFIt2YlPz9StvWvq5jkLBaT7vdZknJI8jKzglJwKQXgTEtTD+qdT4DJPUYRBtiZMLVOtaA8Wpk9E9Mf7hUT4i+fmU3Q0tBJroVADUmIWopIYIBNoa37+OWSMkn8mYjo4OtzL7hYsawtTXrTg4EWWiYdEnRERKavZ1d9sJjY03rLp5yV9TR4fL5/PG7xxPSB5HeK4VZ6GKlz+SvbMpl8uJQr2XVAuSMCcDW+JT8Bq9DSKICIi02cLGiQ1HOsvr8/O0LU0AoUVEUE+0iYgAyJb4/gtjcr0VoExbm97/odsaWfjrKWPGWeeEhomMDnrARApwMapIwOa2R29ccm4mk5FeQ8bDE5LHQcUUOatMfFZoKnFiQ7bTE1INqIY5nermqsdTm8ICiaqmgtBY8BQAKKw99lmeDVKnAmiQAaQgKmhT3/sfayjk80y5nDSMS/3thKbmV3SXS5aIToxnQmBrrTSl0hMs66eJSI+3xh6ekE5KTlJVaU6nObJSDdv5Z12Pglfa4uIznZoVDREkYAN2dAYAZDLH9sZUolPTYUiqqPkQSQG2zkEVW4BD0sjH0FoovbOjw92fvW0SQW/orpSVQCdWronMgVJR0iZ85+rskld2FDpc3NXBwxOSR9+QghIxWPgi/zRqRzVNOzS0pWItQLU7LaqAIQYzndkvr4VoiiEGkWo9C15xDmxiQioUCmPPa+3sNAqgEal3j29sPiOyVkAnXIcQFNKYSpE6XAcAyPj94wnJ41BlSEqiAmK9AIgbbvqn0n9k2uK6IIW+YMWVTZx6VxNRxEYBQSBnHVPRJkRFqqcbZkBrO69SVTVE5JztcUi/AABr2trGlIdEiBuwPnLnnaGK/k3FWSWikbLXTE+lDDDe/PjHvnB6R0eHGwmtsTw8IY0kRqLIWUAx6/4P3dZIROoTG2pAUovEDWanKvYyc62JdlBoXIuksYc077jZjjSlDkfsYA0SYVdlf9dOAOjM5cYUIf1nJmMAaLixNDcwwctLUQUARkRojEBknXPjG5pOcangjVVvzm8iT0gevbtEyToHgKY2NDdNBYBOn9jQ/8eXWN/fK23fR8DOOPW7Ns+FCBAVKOEMAEDuyJ0TquFBJZwu0JoTKBSAMQwFtl3xzzcUcZxmt6MRk9vaCACsoSubUimGYuAev0JUIQe72g2IlFQVqiLv6J/x4eEJ6WRSqCByotKQSjUQRbOAuLGqfzL9V1eadMZW0m0BG9Rci6REEtciTb4vmw2SnmovWYNqeJCBKfU0+SPEyROk9DsAGItFmssTBc9EV4gqQPV7+0nSCMIg4IYw5NAENFBiUqgp2QoBuOyZz9w5gXI58WE7T0gehymqVBCAMLY6NihUobADfYUm0OMoQU6e4yZDXHstEpScCgh62kRMHFfVhi9Zp1xOFCABJosItJ6MPhAUGPaUb9X614LQ599je4CUy+XkkeydTQq9oOIs6mh2CyAeC9KYCpmJEFm7qWQrT1uxu5rSaTbGUL2cRERknVPDfPq+A6U5AIBO305otMF3+x56hQElmtsbGpoz2skICNhQc6phwLKz70ClX58hoA11qRYiOBEoMJHQMBHA3sPHKyjiuQcPfOi2hkbFqU6krktp/L9Nw2wYIAwCagrTQb3vN2zQVS5OUNGjG6fZLCGX0xTKrQI6K4qzHmufFaaQplSay1HlIav6YVTSj4/vKZVK43RiEZW3G6LbAmOabLwGdWRVqjSlG0yXlC4AcP9ydB5z5IiHJ6STi4wArlgLhV74yDV3hpd9pSO6ry07ap+5xoWmVLHR7w6Uuv8VlITE6kSD8vbYku1U5HJHv67Qc7HnolRL0kG1ODYwpiFSexqA33UCyB3OsAQ0jW9sUbGnOBUo1Xadag0SD2MNkqpqOgypYu1v90vxu6owUFfTdZlI48M6rSjc7ngpOjV3+FokoWYneFljKmV6KhWhGglJVTUMAoqcewFk3nLZLfHAvQTbAdz5yI1fKI1raPyGdRWpJ82/mlWpFDc1Hou1YJ6QPOoHgSrOghTTg8nlqQCeaznrrFEbRiCCpIwxZVvZcMktiz85eJ9LR0k2WKsAYEi2lm2E+mpeVNJBykhUOqOvcu1Fr8dUmQKYZpGadaESgUs2gpLZCuDYc5AGD5I2KVOx9slLc9fdOpRrUQ1BKnFraAIQKjXPcCKQa0qlgz3dXd+87NbFO57MZlNzcrkIAAqZDCOTwY5fPv8fzOVcOginl2wUT7OtzeOLsyoh5w3jOnh4QhotfAQSUWkIUw0VZ2cDeK5h2ymjOq6tAFg5vC+bDVrOOosObNtW96afn8s5HCMbLZPU8gjz9opzZUOcTgpManBfSA0TVOK5SIef7xQOWv+nN6VSXKzR+lcoAjZwIgfSgh3AwXlOQ78WChBS92WzQXH3JNM4abcbwFrYfnDglLpPZUjJOQEZXq2qhELB9WYiFgoOcSGxW33zkm2BMdPZRYKa08pjj10VUwE/5twTkseRSElSQcBlW7kQwN2p3c+P+oNWJdX5uZw94iTcwUQSygvLvMuFbjcbPtNZW3MXISYGFNOP9LvJvUWx5vTAVDP5aggLKikzk3Vujwa0K77tI4S9hmotFDr/lpzNZ/J69dLFbohlefxAErQVCgYJEanm84cbOkSAitafLk+IR9cT4dT7b7ut8YobbijqGEzBH8vwWXZDb8WSKqDJbKTKpDP95uh/+AgAcGF6+z4i7IhTv2snwKQW6Uzg6JNjiel0ikNLNY65AAJiEGH7Bbnruvre91hB9SxGgaa6dbuSBsaAVKYpQEORiahJVqUqtTTtl5YqY3t4QvLoo1adOBDwcs1mec5a+BZCNeiYbDbLlMuJqD5fV585UnKiIIq7NaxpO/K5gkLPqI9I4sF8AG1LbpgxRi1y0vojKgolEYGA5hOg84Yi+40ISdp4c4DxDYm36lO/PSF59DUNI2chwMsew+mnUaHDE1INqBYTE2grM9XRZ45I4oF7k/P5vMklNUfV3/d6TCpT4pIerXl0OceKcAswtru6K7R+2SXinkoZBjT/0RuXnIvOTj3K7CKBqgPgAK31JaLiCDAVI2lg+M7zPDwhjRL/iCgSp6kgOMVJ+WX+idSG3sanjLpqfOJzBQcoTp35660vCeNUuzQQ0ZR65yDFAwSxacyvAbiL6sxqIICciGtuaGhyJO8nIj0KeY9rbmg0jWE61ZxuNLW8xlX/bWwMUIma/O4ZffBJDcMS6iDXFKaDyNpLATzgn0gd1rlis/a2rKkpyS4+VyBMoIkvKY6laiaWKp1W7dJQ6+xy5wREZiMw1mtfdMeAeh8QcXelLA1h+n2rPrHk26/IXf9YPpM3HX2jBqr3d5WL+0tRxYlqzQ1SKTEQ1HB37GIfu8bNwxPSyewtzfUPvjb0Nj5VtyVyDjXWxoJAEFEQqEmlPBl9imMVCgIh7saOU1wdB+CajKsnshsBYAyOQToYTmF+1onUbBT09ZKsE02lgmbD/N37s7e99opcx25NzgkBYO6ti/92kPecz2rwhORxqNJSjpyFAhf03Xwex0dvSE2DbRUbORBM0lyh/3pQIelUyCVLk4GDtUfVLg0NDcE4qJ4Sd53ov7JVqBpmipwtijPPA0dPmhjNmJckIFhHa3rKZUcgU++XZAIXK2XX0tDYJhV898ls9q2Uy1Wq+yKbzXLnYBCR32OekDyOvj9i617Pe4gmTwHwAkR89k9/kIRcnCltZ0ntC00wKXK2tsgaqQZswFo5E+gzULQaumtMTdQoGicqNdU4UZzKTBVrd2oQJnOQOjWHMRYiSmY7bd9nnz1zIj2XDlMzSlFUc/ugPl6LOVDqceMbmxd2lSYX8tlspi8p+QDbyQuf1DAcbEREVpwy86kh3HkAQMyekGoIufwQB3YTaEc9c5GgpIYYApwFvLRbA0dukmFuqDWpQQEYZoB0+2W5a3tid2zshYgI0HwmY65eurgM4IHQBEoDTNsmYnOgWLQtDY1vnUWTC49k72yiXE40q14neULyGHqoNKXSxBq8HACckCek/j65ZC4SiDYe7KZQ42dAQRoXx/YmHiShO+vktHQQVuf01LAuqoYNFHFT1aOkMY8JZDKZhNvxE1EhHQzdQQj2FXtsS7rxrSHs/zx6w2ebKUeSj6fTenhC8hg6rRpb6Qq5yD+M2rA8kVNVrWsuUtwtQwGKPaRCknlQ9ZRMQFOYay+6jbtLA0i6fGMsD2DsyAgApKjxnp5yeWcYGIIOvLiVCMG+nm7bnE5fxS1Nd93/odsmdRQKzpPSyQl/hjRscY8k/TgZ1jcYY5tP3FcBaT5vsHw5aT5f3/fIZKTWDCiqc94QEcGpAkqnA0CmUJBD/Rw93TDHRbd1UYoO+2C+PgqdNJ83a9bAHN4fbjDXgkCq+byhjo7dq26+4ztNqfQH99seNxhGLREF+4s9dnxD0+swAXf9+obPvvX3b/vIjpekhHt4QvIYNA+JImsB1fPjDe7saDSn4wpJiqhj+BWFkmyOSb3G3G8FOXEAMOXJbD5FuY6KArT84Hc6o677AdiJQJWHbQ7SYSQBAJVkLYZ+PdZUi4ij27vK9DfGcJMVqS8H/EikVOqxLQ2Nv6fjsOz+j9/2pis+3bFVM3nju5t4QvIYfO3BFWcRGHPGEzd+cZozrjTamnCqElkRKOmZK29a+g4mcHycUMNniGpzU4p7SsVHX3HrB9f3p2N4tRbJmGBLpY5ppUpKLh4keFol9fwEADuhinmFQrVp6JkiWvsAQAKXrYUxtAU4GAocLt8oEgtVTF9909I/gFKoNSYaKKk2ByneXznw4Cs/9eHNx1sLyuUkn8mYS3Mf+t3Km27/2sSmcYv39nQ7IjKD840oOFAq2nENjRcTY9mDNy55M32q47nEM/Ok5AnJY3AVurpx6UazX7svtlb2UsPoIqTqILqAzZyGIPVfB12m/sM5wYTGZhQrpY8C+KflnZ0GwDFn8VRrkSTCC0LWMnMgNcxFIsSjzAEaZ4p8BoCd6OykzqQJKgFnKLSmqRYKqCEi62wJGm6P77NNh3MtilEFAfMrG4Lw+6hj6Lc4QUtTE4pR+c8BfLtfa5HPS7azkw3CTx8o9rwzHYSnV6ytOwX8SKTUVepxzenGNoS49zcf/dzV1NGx7r5sNujfzCaP0Yx6hchniNUXYlEighO9xDDr6PwOgBXR7krRdVeKrrtc26tkK+XuctFBUe73RTs7FQBKzr5IhD2GuNZEO1JVaUynOEoSG5YDnMvlRDN5A9BpThxUa6AkVcRdvrE3aNYX+97n8K6F0+5Kqa61KEblSne56GC0UgNh6Jy1c+iS3Pt3WJHFoTHEg9y5m4hNd7nkUkHwssaGpp+u/NgXLpqfy9n7sllvQHtCqlqESprNsubzBn7gVZ07LW7BT6ALBNIwWvMaYlucTF0vRfxvTYWt8Z+Guxp3q2JXXbVIgMbjK2JCank+HiW/cu6ecQo9zfZ2aej/YsbzmbDze6Xt+xJlfSKMnPrXAvFakNZ24x2FDqf5vLns1sX5rkrxG+ObmgMVHVTvhYhMd7nsQsPTUg2pex786OfmelIa+wiOElqixH1HYk0K5UiQi4noyWw+NQdrrG/PUaNGVKJIHIh0phCdap0gDtv7Z3McAlQFiL5ybbTqpiUvGObz4xTtGjgtGRPBSXFsw5nb4pTvYs8pimCCSI1dGkg1JkY8n8vl5KRrCdWREc1m+bFxp1y378D+C8Y1NFx2oFx0TDxo6dpMZIqVimsIU2c0Nzbf8/BNn3/b5bm/+7UP351khJQcbB6y4I9+9pvNsv9AW1NoOnqi7RPA+D9DPsJ67GlWipyFKqay0DTLtu5GlScd8nlGR4cDaCszJwxVo0EABame2fdnRtKnCksq6dJQUxvxuCaKNyVGG2Mohs6NXFFWRZYu+ci7u1dnv5wpW/vLplTD1GKlPGhJDlVPqRRVXDoIT20MG3/00Mdue/srczes8KR0EhBSlWBWZu+YEYLeZcWlQDSBgPPkwL6XA5h+asskLu/Z9feUy8l98fu9UNQQ6nIiIMIpBJoZOZeEXDyOh2qNjyo2M6ju4lhNJseWzjorTpSAOy0dhFSs1N6bjQhQyDMnrTz3Zt2973erPrHkzQDubQhTk0tRZQhIKZKGMJzY2ND0g4c/tuTqy3PXe09pDOLQDZiM+2XIJAVmgfD2SU3jrmtKpa9OmeBcItC2fbtKjtyPgYNdgD1qUIyqysShkl6kqo68d1QTjMFGreMIs1ocq8DpAHBg2zZNfjHFsKl9NDriVHJV+t3JvB4dhYLL5/PmFbde/1ipUnyzqGxvDFNGVQc1TZuZuBRFwoTxDengh7/5+Ocvm5/L2Xx8pu0xFgmpGgO/NHf9Qxfn/vbPXnHL9Rfs7el6SFRcxUaVdBiSON1wKS5aB6C3C7BHbbpRVKGKi0HE6vND+oWDRaf0u8g51NpLTRVJQglOuy/79YZ5nZ0OAET19HgEea10BC7bCEK6GegzCv1kJKWOOMnh8k/f8NCBUmWBE9nclE4bURl0UipHkTPMpzSlG/77oY9+/ryOjg43lnsIntweUt/wxp13holF/0LAgQGRpkwAVf0V5ebbfD5vyGfbHZlx+rW5uMkfHtWApEuAOmyu1DX6ICmOVT11QkVa+px9TqEaQ4AKVSaminPlNAdjdg5STTKfkNKr//GDj/fY8lUVa9ePSzca1cHPvitFZZcywdRUOvU/q7P/PBG5nGY9KY1dQgIIdO210aYP3daowEUVFwEK45yAoPcBfWbKeBzJGrfH/xvP5TUhqfFR53Y4lb0Bm9r6ARJBVKBELZLqPvUgueB00bhLQ78/SuOUb1Ld1dxodsW313nSL2iVlF5564eePhD1XFW20ZpxDY3B4JMSm+5SyY5LN1yoEnwdqpgzZw5pTWn7HqOGkAqZPAPAnvGNFwfGTC/bSA1T0F0pdUNSvwYAZDL+/OgIlnPABiBsUMUBJm+0DaIWAgBcmrp+Vz1zkQggp6qhMekAfNrBn+uUeJR5Lescz0FS0I7z/uGa/X3vz5NSTEq//6mPbCx26ZWlqPLQ+MamwSclpmB/sWgnNjW/fdVNSzs7OjpcIVPwG24sEtLktmpGk5vflEoTFFFDmAITPXTpp9+3NZvNsk/3PpKmIk0FAQh4BsDWMDAYjBb9HkktkipRjkQJ24I6EhEIkJQJIM6dAQD5TN4Q4VQRqbVxkBpmEGEbEWk2m2Ufvj6UlPKZvPm9z133AmvpjcVK+RcxKQ1yRi7BHCj1uIYwvPHhm5b8fkchvq5fgTFGSNUDXwVe7+KxzhoYAwe5BwDmHZxPQ3FLsX4bmKSq/XKtkzTdUWZ2xh6Sqr4I0t+mTACQj80NGgqJBay6lZnicRE1rY7Gng3zmQDQ2vZ8M0CTnNZmM1SLbFWxFQA6x/IcpDrRUYiTDS7I3bD7Rd3xpq5ScdnEpsElJQLIOSHDbAzwpfuyX2/ItK2prWLaY2QTUrUW6TfZO84AcHk5ikBA2FUqqlGzHIjbrmjiJSWekuqx0y+p2nKIiJRAmlgyRxQczWY56fumoy2DhoighDKBfmPY1Kw0PfoltvXNRUqIhFTPBoAgamhW1VOk5rZBvZtlM3Bi5iCNir2QdLCYn8t19RyovL2rVPrehMamAINJSkzcUym7CU3NF02QA9dQLifI533obpTiJZ0aqh1/jXOva25smtBdLkapIAzLUfSscPqJfCZvLvtKRwQAv/2nr7Z097j0ZblrX6SODpe07z+SAtZq+/hHsp87LejS4iW3dXQfS5B/9ZF/amngiUy5a/eNKh8JClUyAFZZZ6EAj0FtpVp/vrooIPVkdVQVPxE2a+JF11rHJapg0FQA4LB0CoTGSc1tH5REFSagTSde3mKRq9PDEAVIaega/VIuJ9lslq/I3VDMZ/LvnDVnxzfHNza9a3+xx4IGZ9oAgagUVZRAN/z2I1/9Ojo6uo6hizxGk4e0M6n3MMxvYiJVkKRMAAAPzO28pthR6HArs3e87vHOL/6s2NWzgaX8xJOdX3po9c1L3kugw9Mvqeo+P3rz0g880fnFB4ymnuCWxidX37z0Hx+55s6wb/iu+t5VN91x/YTmlicaGu2alTcvvbHv70aDpmZGynD6t12lkmUmVoytsB0TU1MqxfW8UkGQakqlGaBUrdftrfVR2hI5e0T5PTaNxEQi0GkAAIuJYRCkXA2jLBIS4Mg5wMVzkE5UDZICCJipse61CMOmVIqhLhzK+8wlpJQpZOSSzuv+dH+552vjB9NTInA5iqSlsam13FT8UwJ0ebbTnyWNdg9JoUQd5B7JZptU9DVlGxGpMsUNblYQkT6aXfphAv6OQL8BwTWnGs50Imec0thy+cqblpw+N3f9rdVGk5rNEjo7dfXNS76bDsM/YWIgmZM6uWXcR3dh3wsEul3zeYM1a5RyOVmVvb0tZHO7IYJC0cB86xOf+PKPLsy977HR0MBSAaggdRFv3bYap25JmfCcShQpxkBLBlVIQxhyOYoe76mUPwpmMiK1neMw6+6eA0FZsAYA5uU6HZDr13urc5FI7bZyJNW2tIr+kokSWXEgikeZc8CTUiaAdU4AmH6ub1yDZCtOWZ/ve1/DbPhIYyrNpaj8gKjeYp0GIdXWHcEB2NvVbZx1K+O1yA3ZELxcLied2knZzixfmvvA36y+eSm1NDb91YFB85SIImfVif7tI3fe+bW5115rE7nwXtJoJaRCpsAowIWYdBEZc045ssrMYXelFIFc4dHskner6J8HnHrVBZ3Xblr9iTvmlKLoAVVttOIQGpN97BNfKlDu/U/nM9kU5XKVVTj1/QCfe6DU1Rqa9BcbU+k395TLla5SMXDAX2g2uxSZjCxfs8YAEIGeZ5hQKlcsMbQp1RAc4NIrATy2fDQ0sNQ4B4RyOVl909KnQmPOKduKjoUWQUSqATPKwI5XfPL6nwxSuKX/CqOzU5HLgQx2quh+Y8wE61wNYx+q7X70DFWl1Z9YerpJm6Trav9ZmY2Bc7qvidI7+t7XcEtayAF6UN46N3fd3YOzFkOrvImoWjrGl+Y+8Nerb1oaTmhq+vN9Pd0WRMHAPhtcrJQ1ZYI5lW09rybgF/l83nT4SbOjl5Cq6d5OMX98Os37iz2V5lRDqqtcXE4UTFHFDaahYcEFN753+yN33hleeu21a1bdvPTR5lT6td2VUnliY3N6r+t5J4BbgDlu3QduT3cr/bFhfc8rPvnhzas+seS/DNFbCDBlGxlSnP8bmnTWq4i2aD6vABBYXlPWqGICE4g4x3GXxnGjyI/obWtDhMcN8SJS0rGS9xNXp2qo+bzB5MmEnTvrU2KZjNRcOpAQz3iMf3EPde02zBOck/57SBRPjiVQyxOf+fJEMCYHXGskmDRgJidu5+Nrf7onUbQnTNIYFGo+b9asgZkzB24o10KzWV4O8ME2TrWj0FEA2qDxZ734VyieNnFcQ+Nb9pd6Bjy6gkCuMZUKKj32LQB+Mdknm4xuQlqeeB8EfoMkxx4cFwDepyI3keAjF9343u33ZbPBsz/9qagqPXrzHduZuDomWgm4EIjTPlfdtGQBVDdddMv1TyW1Gk91l8sKghFRSYVBI8p2BoAthQKQz+fNJR0dz626ecmnJzY2d+7qOmBFVQHuGY0PVwSPxWnzY2vEhFKcpDLc40d65yLl3lNaddPS7YbNuSBbU3Gsimo6DFlK5TOJzOSa8wFINTAGpSja2FEouBMdRtYkYSifyeOC3NB6A8n3HJTv2hln39lffeSf/pSAXzSnGy/pKZcG1iWclKw4MFO7qhKIvHc0Wgkpm81yLpeT1R//8tkK+6pipQJmDvcXew4AaAPw/KWfWrys2vI9n8kYItLVNy1NIhlKokpKOOWgQcp/SJAfKuKCxrd8/PObjQn3BIYnWXE2HYRcqUTnVL2zeR25ZINff8vKm5eMa0ylPgwAom4b0LfB5ggPbYEFANi4x3vKZUdgI1BfHDEYSOYiEenWgLm2cFuiwANjaH8ZUwPW3rZB/Q2pUjIHCcDGxIgb83OQqobHqpu+eHnAmO1gK7VOmU08SeOc23vpJxf/hIgkn8mb13y248DK7B2ZyEUPhEEwKbK27pGVCuJyZKGqcx698fNnXQpsreo1v3FGGSHNAzgHCMJofkuqsbmrVLTGBIEVWwTorLLVDyeFqg65HNa0tcXRG5KWOC5MvVIBAL/J/t8zVGWGK/d8uHpO8OwlU3fMfPKFrQGbSZETJRCE6Ly+FnC1UeLc3PUfWX3z0ocCpjtZzbMAehtsjoYtDAA9+90zDeN4czoMz6lEVlBzQ1CPw9Gb+q30bD16i0iViGACPkdEJ4tqXV1/iGJCOikQFyQ7hVs8uWXSn+7p6YKpMdQpqmgKU9jd3bVpeWfnywDYTKFD7stmg7m56zas/MQXPjSuoelbkbWCOsMJybwxaUylm0rWzAGwdc5aX7Q8msB9CCm2IoSvrGZrR85qKginEOH7r/7HD25HodDbMiiXy0lMUDylWunO8c7eDwATMMFC8MHL/umj+xQgzSrHB4z0bGAMiOLemAQ953DvpxNxvFocPRSJPlvsLj+bhAxGS8aMAsAV/3xDkQiPp4IAYy31+0RDRJ4b0OqozmTQxLgDeE1tg0hUIJBNo8lrHxzPn3q6K0VXtlG5p1JytbxKUTnqrpScEg70/cz5uZy7L5sN5t76wW93l4s/H9fQyAOZpUSApIIArPLyauTF75ZR5iFVQ2qPZO9sUim/puIsKZTSQYDIRtvA7juJdyR9XfiHPnbHpDDUM604EJSYGKTxRj0/d+0uAC8iGax5HzoNACHg6ap15VRAhFYAQMfBZq3LAZ7X2enoptvfDjW/veKfbyhqPm9oVGbM8KMMfqsv0hsc9BJAYDZWbO2Fx6pELh7TM1OB05y4mkJ2CnDZWijR1th5OHmefZysQyYOk9Z21pNMiGd6ae2YVuu4mE02cm7egKcoK+AU0/1uGa0eUjbejYFEFwYmOLdiIwVIm1JpEtDXLs19aG9f76g6WTYIzTlMPMU6BwWRQqFMjwPAI9dcEyRtfw5VxMRrnCqgyrF1ijPvy369gUBaLZKdB8RZP8ztpPo9ABit+15UH4/E1jxQzuMoSMK2AeyWsq1oPXORInFQxRyFnuJE+t2loVqDFLkoSjtzwmqQxho6CnGCzMW5635diioPNabSDKBu4zM+VtTTAWDeSTw4cdQS0nJ0xpuaZX5zOs2A2sBwsL9UPBCwfAUAdfY5v1kev49I3aXNDWmGwjIh6CqVrIq7HwDmnnmm65t9NK83g0+eLFbKAMhYcVDQlInR7lMBoDPbSXFH55w8ceMXp5Hi9L2GfwoAmY6OUXkwSSy/LZYrlbhjgy/SGzCSuUMRzIsius8w1zQXiYjIOgcA5xJoQpwG3l/3SGEMA6C9+4u0q+/9eAwMyzs7DQEaEP0oMEmySn1kFE9kJowHAHiDYfQR0sFxznS1dQ6qpI1hCiJ618W5xVs0m6W+mSqJi63EOp9AUEDSYQoObs0zT9+/Lk7NPSyzpVeRpDZZ53Ybw+zEKRONN6bxDCA+O0p66cEa/RsF/WZ+7rqu+7LZYLS29xc0/E6BrSEbkJ9XPggMH3PHfry4m4h2GTaoJxxKRKb2JJNqhp2+mJ5l9vS9H4+BoTcUq+7Bso2gUFOveMRn02j0BsMoJKRq1+6VN94xnYDLSlEFBDVOBMyaV4CW9wk3qSp1FDrcM5+5c4IqrizGf0+hMTDgH3YUCm55NmuOoAAAAD/Ett1EtDmM++PZhlTIFjK16nnNy3W6R2/4bDNBr1SmLwGgeaM0rVaz2eCy3LU9gD4d+sSGweGjpFXQ/FyuJMALhnnYRnwQxXOQVOn5y669NlJV8nOQBsnxTSIwZQnXVaKox7ChgewXVYTeYBiFhNRLNsa9rimVbhRRa4wxPZXK3mJFfk2ALu9DCIkHQ/uK0VXN6YYpkbMOREF3uRRVyP0n0Cdj73AZ6a0JoA1BXHAr8YTVONPu7EmTDIFUm9PvEsUTc3PXbcjn8yO+f93RsAZzqkT+mGGGT2wYHOQzmbgThmKrIR42mleNC8WBeA4SOvyE0kEjpCSD9sUpdocCLwSGQX50y8lHSNUMFwN+fWxtwjWEKRDpw6/+xw9u18MKyxJyUhX3p3GaN9mWhkYSlbtemfvgk8esXK8OMlNZR3FzeCUiKHAeAGzdvdttzd7ZpKC/aGB8XqGUWTN6Y8Br4/6hgOojTgRK6s21QUAmk6k+1y1EGDaiJ5AmZkU8B+kkSynmIfREqxOBr168uExEuxJDdQDXI9trRXiMHhnrKHS457JfbxDV15WthSrIMAOqdyUEdDBcl81yZy6nj2aXzgo5WNhdKSsTgmJUsSR63O6S1aJGp1gXV8iDnQhYMSMJw9gdWvkQVB9ty31gHfKFUesdAcDkXk9RH+splyImNj6xYeDoHYjHwz+PKJbaEz8H6USAdIhb8STZu1DsG0h/QCICEcrxR3Z6I3A0ERIA7JF9F4YmOK8cRUqEsKtUdKRYAQDz0Cl9PRwC1Dr5++aGhkYnUhnf0GSiyH71klsXrz5eX6+da9fG3hhhfSmqANAgThnHeQB09cdvO1sUb22IKJvNZhmZzKhu+VH1PlNmz0ZV3ZgyQd3ZQx4HUT0AV8UW62TYUuoVYCsCJbu5732cLAaAQCsD7Vqvx2j0VFi7lhLSL1Gdzs3B+eXaAwC+U8MoJCQmXtScbgCgUToIyYk8s8fs/i0AIBeHQ/KZuDB1dfaOS9JB8O79xR7bmEql9xeLz6RMdKNms3y8jJZquyFm3WidO2CY2YoDSM+8L5sN1KQ+w8DX2j7zgV2dc+YMa+POIQktta1RzWb5glyuAsLa0BgfQxgEFJJqVHWyteIshmvWFBG4FFVUK9gSC/TJlVJM4K7635vYYoTw7EmTzHH+WOu/DsXHAIp9AFCN7nqMIkJS0FWRsyAilzKBI9Av5+dypXwmbyhJRshk4gw7qN5uTGCIyIiTYkTyrgtyN+wurF17XALJJQeXu7H7BRC2BcZANA5iTcRpnyGi4NJPfuArmhmtXRmOYF1Wn7HQ40TkExsGAVXDxoSpF5xzRRML3pA+V1VVwwYiuodAzychppNrLVn21kv9CiURBVQnlJ4Pm3rdmUMMuLZkACM1K+pPkEvsk519vTuP0YHgkRtvf5mqXFSyFQlN0NiQSmF/secXAHB5W3eo2SxRLmcBYNUnlvxzYzr9umQYX6m7UvrjV976oYfymbzpKPSLQDSfyZj5uZxddfPSDakgnF2JoigVBOMi6/7U2PQlChDyGRkrrbF7wzpGHkvCkzzavxoR0X3ZbLDyK1+h+7LZupXyvFipu1o94c5cTnMApoB37IDuMWwanbVDnOJLGhgm59yOSz59/Yv4x8UnbA7SYV4b3ZfNBsXdz5v7stkB3dC8XKc7lsEkSju1xu7ofWQGThyY6BRJV84GsDc5M9KqB0W5nGgmbx7F9jOcOGi9fb8J4KS1k8coIyQ29MqmMD3BsEFXubhix4H9/0mEd6zO/vMPzs29Zy8APHLNnaE5o/zpcemmDxIB1rlny7byV6+89UMrNJM3VOi/NzO5rS0J8eqTDHqTgjQwxlSs/J+L/vG92zWTNzSW5pgcDOusLUaViIlCgY7aAUmxItLK/MRIGTDqmLR6cC7StT2rb16yNTDmrIp1/R/UVx8fqSEDUGUrEelIGGuQhKbK82/JWQCDsB5HXoudiVFFpJsrztXru5CoupaGRnOgWHoVgCdx1lkBksSf/8znDQrAmrY9Z0NxbsXauuaIKcCRc7CE5w4xCD1GByEB9F4mOtBVKn38En7xS5TLyaqbloQBpe97PPfFe511DUzROyaNm3DW3p6u7ar4brEsn/q9zyzelR9Iw1PFWitOWhoaUnuLPZ++/NbF/3tfNhtQrsOOqSecjLc+bfyZz+3a98K2MAimVyKrGIUzzRXgiosAYNbqm5d+KubV+mNgQRiaCum/zb35b39bs4JP5iIB2BhwcDmhIhjC5AZSUsMEaHx+1DlnDuVO7HJwOU4MumT1zUs/BQHXnSZNpAwwh/ylC2/6282HD16sll5wmTZVNLJMFNRnVBFZETDjGgBfpWuvjTSb5U4A1VHjq26+/U9b0k2NB0rFeob1KTNxsVJyTUTrDjMIPUYDIRH0l/tLBxZfdusNTwDAfdls8Irc9Useyd7+UEqDDhBNUOg3th/Y/4hjeuD3cte9AAD5TKauefU7165VzWZ5lTMPp4KQ9/Z0FS6/dfGN+XzezB8j50aHWbGq2SzTDR3FVTcveSo0wfRKFOlodJAIRBXnEHIwvTmd/vhAPktU0ZRKY/v+vSsB/LZWBd+b+aW0cVifZJLyfaLPJoiIyi5CygSzmlIDWwsFEJoAu7v3/BjA5kJHx6HNTXOdCuSAqLRVUg0vpEwwNbK1G1VE4GKlIo2p1OWP3nzHt1yIT9BN120EgAezt49Pq/kTw/hET6WsIOI6voiGxlDFytZxEyqbD7l3j9FBSJfecn0WAJLxDjI/l7Nx+vbiBwE8+BLDNJM3mXxGjhZWSzp8A7lOPTwerQChrY0ol3OP3Lz09Xu6Dyw/beIZfxGPG44LbsfiQ16eTBVVpYcC5oUYxYkNBCByVvf1uAEZDwpI5CyLxPUi9d+QDMugPIWSxl3qN48gAwEVazWyA1sLUDxFF6zRUa6jidfUvermpevDIJga2fqMqpiUyjou3fhn3ZXS21bftHQNoEJK0xtTqbNLUSUeS1PHZytUwyBAxdq1rTfcUMxms0w58tNiRxMhaT5vsGaN9g29US4nms3ycoDnzZmjy9esoXlz5igyCRHRUaMwRFQVgBz6JjtU08KJyK6+aekHVfEWaU6/vfWGjmJ2f5ZzGLtjhnvj2IxHojGQ2JAcNQcD1PACgOsdV119pqy8JXJ2yJ8pgShyDiq8Nfb0R8bZxGCsRZKhSCRHf4RJyzCrilWGaP5AjCoiou5K0Rk2LekgfBUARM6hu1wSEKjeeUgE0mRI6G+AERFW9aiVkI52BpQUuEqNgqYrP/HFlxNF47gnWnvJbR3dVWKjXM5qrpNWfWLpUiU9Wyj9lss+em3P8YppxwKqjSPJBb/t0UrZMKWdjt7EhpGAai0SWLeWbQQawvHw8RwkcDmKhAxtA06+OUi9BgDrryLnbhi4AUDGOqdOXLz3lYjqCdMd6iGZUhRB4H4JjN4Zaic1IQ3KhlWlNZ2dYcWd+v9SIf2ZdSYIx6efWXnz7bdQbvG3AMjq7B2XrJaltxPo4Utvuf4PASB7EpARcDBN+RTTsHmPHNgcBqkZLopGZWLDSEG1FgkIdziJuowx45xz9SYKH0/AwcbAOre/EdgBxKNSTiokXVMIwf3FqLwnMOYUO8DnnbzXJO7NQK0GSQUhV2y0tVga9xAAZDoyPlw3yjBgq1LzeUNEWpbJr53Q1PyeyFkWVXEqM8alGr+5+ualtz9689JPkuKLxPjnSz/5gQ8n8XjKnQRklOw1zWazfG7uPSUi+m1gDIh8x4YBkXxSlNrQE+4i0G5DQ9dNnUBqmEFEuxrw4u6qkXEyPW8i0nwmYy7JvX8HAT9vDNOKkTUWRhrDFAD8+DWf/ZsDms8bX4R+EhJSbxsXdt2Rs2hKNZjGVNo0hmk4FTDo7YBWJk2YcuWluev/J+7+QDra2wLVHPLofdbyBBMBvrX+QBUkAOD8z/51l0J3xONMhupiqgEbQHX7ublcSZM5cCefkxT34XGkX7HiaCQNG1KCKUYVIcbXYr3k98hJSUgdhYJTKF2WW/xgd6n4V5FzvyhF0QPFqPQlZ+UtW/e4WZfccv0nW2/oKNbQ0WHsEVJvgR4/6kSgUD9LZ4A6SLNZjo0bbIvnFA2N16kKMDEE2AYAhUz+pFw77uhwqkoHcNHPi5XyysZUiqDqRoAkuOZUGhUb/eqSzg88XB0i6rfI6MOgnCFVXeO5n/rg1wF8/SXyks8bdHQIncxCkiQ2KMmannJZiJj9JIoBojpfC7SFh7BPIIGUmcCE3wHA5LaTsz+axhYozy902EezSz5tmL83tO0xalsmhn6OiFQzeYO+dVQeJ4+HdDjxqCop4v5ams8bBYg6OtxJP+o5OXPYh93PCnRTKjDV1GePOtGnOHXTcOSHiGLjyf7MqdDhNJvlS3LXf39/sfjD8Y1NRlVPWHcVVXXjGhpNV7m07OJbFv9Is1km7x15QgIA6uhwRKQE6Pxcznoi6mtlQ/OZvJmfy5WY8FgqCKB+FMWgwInbLCpQDM1E3rg/mgUpPwsA89b6/mgKUGj0/d2V8gsNYSrQExC6U1UNTEBFW+kJOb2YyOsaT0ge/UY11KOC1TyEWWEnC6rFqYEJNkXOgYbokJ0IXKpEysbGk2LbTu7+aJTLSSGT4Ytzi7dY1XeKSk8qCI0MIympqjKxa0qlOLL2Qxflrn1KMxlDJ0nmrickjwGjmthAwGORtcM26XSsolqcyuBtpSgqExMP9lykeA4SQ1T3lRG8CJyENUhHQEeh4PKZvJmbu+4XPRX7NgL2tKQbjKpaVR3q2VSOiNDS0BjsK3bn5n5y8Vc0nzdUKPhQnSckj34jSWxwDk8Vo0qZh0CBnlRIzuW6xp/2PEhfDNmABn1EPGnABgS8uGu32wOcfDVIRyelDqf5vHnlp67/aTGy7WUbPTihsTkITUCq6nSQz0hVIarqmlJpExoje3q6/37uJxd3DmjqgIcnpBEOUVWngIs3VS2v6nuOshFzcTFn5bQzNgLYFDA7ii3Kuq4DqjGTyBhVVQet57sN7gvo/e8BjKuOyeeKGzqKUNrKTE4BO8j3aYnIKXTb1UsXl/ted0DKlVQPew4nbi2q8sCm5u9FHR0un8mby279wBObd9l5XaXi34PwwvjGJtOYSsX6RatrAqnh3FRjQJL3a2MqxS2NTSZy7vGSja667NbrP6vZLHd4MhozCPwjeAmaxzc2GSdqDNfG107EjG9sQlelPO7ICvTgKIrVNy/deOq48TP3FXuMqbGFl6iYloZG9FQqE2qzMCVoaWwyzp34MLuomuZ0CqXKgdRAPqe3to10zylNLYbQZQybQbtPJ2ImNjejJ6rsOeR6A/5gSo1vaTLFSsWc6MmzCiAMDLpKB+rSBx1J5h3lFpcBfPY32Tu+hXL5zxz0j5l57rh0Q+BEEDkL6wSiAlUI0UvNESJUJ8VyaAKExlBoAi7ZCiLrVpaj6Gvb9rh/vXrp4nI+kzeU82TkCWkMh9NU9dc7D+yfFFlbVGitmk2ss2mF/hJA73C+viisjWtnCPTNXV0Huuq6DrGUrU0RsKZff5/cR0p45/5iT0FFZagy0vr9FYilHFVCNfq7vs+/VmTaMpow3H+92LW/WOe6HcMLI2fFNRLwP4dcr14xq557hdi4p7vre1bE4gSvBUDKxEYC2RHfY1vtnlIuJwoQ8nmmjo4XAHxOgdtWZZfOLZaKV5ZFXsvALAWdyUzNjWHIzAzqk4qiCigUTgTFSkWts7ucyvqKc79WlR9e1Pm3v6x2eDmZi+zHMnxzTw8Pj8H1uFQJhQIffq5z/4dua2wc33S6iD3TgE8Du1MEGEegFFQJikiJDpDRF8XqC4bDzZfk3r/jkM+uFtn7s1dPSCcDstksz1k7h+Lm9Zka3x2/Z03bGj1e49jBuE6mbY3WmOZK+RHT9ib5DoXBUS4De56Ds6Y1KW2A4hZEg32/9aOj0DHYQzJJs1laDvA8QOpNyb4vmw12rp2jQ3B/Hp6QPDw8TkrPCUqd2U6as3YtVRu1Hj4Kvrfn45o1mgz09ATk4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHRb1D8yvpBfR4eHh4eJxA5/wg8PDw8PEaIhzS1bcEktTyV2AhUvKfk4eHh4TGMLMSq4jg0vC8gRx2G8EUV6wBl/3Q8PDw8PIYN6oTIGHHyowCqBGIGlADyHpKHh4eHx3AyEgNECmeC6k8ACADvIXl4eHh4DCcS7iGtEhL1eXl4eHh4eAwXerknAJEmHlL15eHh4eHhMVxQxGdGGqhoQIYJgPHPxcPDw8NjmPnIEDFUbSogoh0qdq0CEdRn2Xl4eHh4DCOIBOpCAq3//8AFqnNiFYYTAAAAAElFTkSuQmCC" alt="English by Neves" class="logo-img"></span>
+    <span class="level-badge">A0</span>
+    <div class="progress-mini">
+      <span class="bar"><i id="barFill"></i></span>
+      <span class="pct" id="barPct">0%</span>
+    </div>
+    <button class="reset" id="resetBtn" title="Zerar progresso (pra reutilizar com outro aluno)">↻ Zerar</button>
+  </div>
+</div>
+
+<!-- ===================== HOME ===================== -->
+<main id="home" class="wrap">
+  <div class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Trilha 1 · primeiro contato</span>
+      <h1>Você vai <span class="hl">falar</span> inglês desde já.</h1>
+      <p class="sub">Cada aula desbloqueia a próxima. Sempre começamos relembrando o que já apareceu.</p>
+      <div><button class="hero-cta" id="continueBtn" type="button">▶ Continuar aula 1</button><span class="note hand">um passo de cada vez ✦</span></div>
+    </div>
+    <div class="hero-art">
+      <img class="wm" src="assets/logo-white.png" alt="">
+      <svg viewBox="0 0 560 480" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="430" cy="120" r="170" fill="#2A3358"/>
+        <circle cx="120" cy="380" r="120" fill="#34406E" opacity=".7"/>
+        <rect x="70" y="200" width="150" height="190" rx="40" fill="#E0A458"/>
+        <circle cx="145" cy="180" r="58" fill="#F8D9A8"/>
+        <rect x="330" y="220" width="150" height="190" rx="40" fill="#C75B7A"/>
+        <circle cx="405" cy="195" r="54" fill="#F3C9D6"/>
+        <path d="M190 110 h150 a18 18 0 0 1 18 18 v55 a18 18 0 0 1 -18 18 h-95 l-30 28 v-28 h-25 a18 18 0 0 1 -18 -18 v-55 a18 18 0 0 1 18 -18 Z" fill="#fff"/>
+        <text x="225" y="160" font-family="Fraunces" font-weight="700" font-size="26" fill="#1F1B2E">Hello!</text>
+        <path d="M250 58 h195 a18 18 0 0 1 18 18 v50 a18 18 0 0 1 -18 18 h-135 l-26 24 v-24 h-34 a18 18 0 0 1 -18 -18 v-50 a18 18 0 0 1 18 -18 Z" fill="#FBF7F2"/>
+        <text x="284" y="102" font-family="Fraunces" font-weight="700" font-size="19" fill="#1F1B2E">Nice to meet you!</text>
+        <path d="M40 330 q10 -22 20 0 t20 0 t20 0" stroke="#F8EEDD" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/>
+        <path d="M500 300 q10 -18 20 0 t20 0" stroke="#F8EEDD" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/>
+      </svg>
+    </div>
+  </div>
+  <div class="grid" id="trilha"></div>
+</main>
+
+<!-- ===================== LESSON ===================== -->
+<main id="lessonView" class="lesson wrap"></main>
+
+<div class="toast" id="toast"></div>
+
+<footer>Inglês da Vida Real · Nível A0 · método fala-primeiro com repetição espaçada</footer>
+
+<script>
+/* ================================================================
+   DADOS — edite só aqui pra criar/ajustar aulas.
+   Aulas 1–5 completas · 6–10 em esqueleto (preencher depois).
+   Campos: n, tag(EN), title(PT), cando, objComm, objEN,
+   review[{from,items[]}], warmup, vocab[{en,pt}], phrases[{en,pt}],
+   guided[{p,model}], speaking[{lbl,sec,prompt,model}],
+   main{title,body[]}, grammar[{html}], homepractice[], success[], wip(bool)
+   ================================================================ */
+const LESSONS = [
+{
+  n:1, tag:"Welcome", title:"The school system",
+  cando:"Eu entendo <b>como a aula funciona</b> e já consigo dizer minhas primeiras frases em inglês.",
+  objComm:"Entender como a escola funciona, combinar a rotina de estudo e sair da primeira aula falando frases básicas em inglês.",
+  objEN:"I understand how our classes work and I can say my first English phrases.",
+  review:null,
+  warmup:"Antes de tudo: nessas primeiras aulas você não precisa acertar tudo. Seu único trabalho é <b>tentar falar</b>. Errar aqui é parte do plano.",
+  vocab:[
+    {en:"a class",pt:"uma aula"},
+    {en:"homepractice",pt:"tarefa/prática de casa"},
+    {en:"flashcards",pt:"cartões de revisão"},
+    {en:"to review",pt:"revisar"},
+    {en:"I try",pt:"eu tento"},
+    {en:"I speak",pt:"eu falo"},
+    {en:"I have a question",pt:"eu tenho uma pergunta"}
+  ],
+  phrases:[
+    {en:"Hello! Nice to meet you.",pt:"Olá! Prazer em te conhecer."},
+    {en:"My name is ___.",pt:"Meu nome é ___."},
+    {en:"I'm ready.",pt:"Estou pronto(a)."},
+    {en:"I have a question.",pt:"Eu tenho uma pergunta."},
+    {en:"Let's start.",pt:"Vamos começar."}
+  ],
+  guided:[
+    {p:"Como a aula funciona: você vai falar bastante, mesmo com frases simples. O objetivo não é falar perfeito, é começar.",model:"I try. I speak. I learn."},
+    {p:"Onde fica tudo: materiais, tarefas e flashcards. Durante a aula, você pode sempre dizer:",model:"I have a question."},
+    {p:"Nossa rotina: revisar um pouco todos os dias. Pouco e constante funciona melhor do que estudar muito só uma vez.",model:"I review every day."}
+  ],
+  speaking:[
+    {lbl:"Minha primeira frase",sec:30,prompt:"Repita 3 vezes, cada vez mais natural: “Hello! My name is ___. Nice to meet you.”",model:"Hello! My name is ___. Nice to meet you."},
+    {lbl:"Eu consigo começar",sec:30,prompt:"Fale estas 3 frases em voz alta: “I'm ready.”, “I try.”, “Let's start.” Depois escolha uma para repetir sem olhar.",model:"I'm ready. I try. Let's start."}
+  ],
+  main:{title:"Nossos combinados",body:[
+    "<div style='display:flex;flex-direction:column;gap:12px;margin-top:4px'><div style='background:var(--rose-tint);border-left:4px solid var(--rose);border-radius:10px;padding:14px 16px'><b style='color:var(--rose-deep)'>① Eu tento falar, mesmo errado.</b><br><span style='font-size:13px;color:var(--ink-soft)'>I try to speak, even if I make mistakes.</span></div><div style='background:var(--gold-tint);border-left:4px solid var(--gold);border-radius:10px;padding:14px 16px'><b style='color:#7A5A22'>② Eu reviso um pouco todos os dias.</b><br><span style='font-size:13px;color:var(--ink-soft)'>I review a little every day.</span></div><div style='background:var(--sage-tint);border-left:4px solid var(--sage);border-radius:10px;padding:14px 16px'><b style='color:#3F6152'>③ Eu peço ajuda quando preciso.</b><br><span style='font-size:13px;color:var(--ink-soft)'>I ask for help when I need it.</span></div></div>",
+    "Agora diga em voz alta: “I try to speak.” / “I review every day.” / “I ask for help.”"
+  ]},
+  grammar:null,
+  homepractice:[
+    "Revisar por 5 a 10 minutos as frases: “My name is ___”, “I'm ready”, “I have a question”, “Let's start”.",
+    "Escolher um horário fixo para revisar inglês todos os dias.",
+    "Treinar em voz alta: “Hello! My name is ___. Nice to meet you.” até sair sem ler."
+  ],
+  success:[
+    "Eu entendo como as aulas, tarefas e flashcards funcionam.",
+    "Eu consigo dizer: “Hello, my name is ___.” em voz alta.",
+    "Eu consigo dizer pelo menos 3 frases da aula sem apenas ler.",
+    "Eu escolhi um horário fixo para revisar inglês durante a semana."
+  ]
+},
+{
+  n:2, tag:"Study smart", title:"How to study",
+  cando:"Eu sei <b>revisar sozinho(a)</b> e fazer o inglês grudar.",
+  objComm:"Aprender a estudar fora da aula com repetição espaçada e flashcards.",
+  objEN:"I know how to review and study every day.",
+  review:[{from:"Aula 1",items:["I tento falar mesmo errado","Reviso 10 min/dia","Trago minhas dúvidas","Hello! My name is ___"]}],
+  warmup:"Pergunta rápida em inglês, só pra aquecer: <span class='mdl' style='font-family:Fraunces;font-style:italic;color:var(--rose-deep)'>“Are you ready?”</span> — responda <b>“Yes, I'm ready!”</b>.",
+  vocab:[{en:"every day",pt:"todo dia"},{en:"to remember",pt:"lembrar"},{en:"to forget",pt:"esquecer"},{en:"a word",pt:"uma palavra"},{en:"a phrase",pt:"uma frase"},{en:"again",pt:"de novo"}],
+  phrases:[
+    {en:"Can you repeat, please?",pt:"Pode repetir, por favor?"},
+    {en:"Again, please.",pt:"De novo, por favor."},
+    {en:"I remember this!",pt:"Eu lembro disso!"}
+  ],
+  guided:[
+    {p:"Por que esquecemos: o cérebro joga fora o que não usa. A <b>repetição espaçada</b> revisa a frase pouco antes de você esquecer — por isso toda aula começa relembrando.",model:""},
+    {p:"Como usar flashcards: frente em inglês, verso em português. Você fala em voz alta <b>antes</b> de virar o cartão. Nunca só leia.",model:""},
+    {p:"A regra dos 10 minutos: pouco e todo dia ganha de muito e raramente.",model:""}
+  ],
+  speaking:[
+    {lbl:"Explica de volta",sec:30,prompt:"Sem olhar: me explique em português como você vai revisar essa semana. Depois diga em inglês “I study every day.”",model:"I study every day. I remember my phrases."}
+  ],
+  main:{title:"Monte seu 1º maço de flashcards",body:[
+    "Junto comigo, escolha 5 frases das aulas 1 e 2 e crie os cartões.",
+    "Vire cada cartão e fale em voz alta. Acertou de primeira? Vai pro fim do maço. Travou? Revise amanhã de novo."
+  ]},
+  grammar:[{html:"Sem foco gramatical. Estrutura que já aparece por imitação: <b>I + verbo base</b> (I study, I remember) e <b>can you...?</b> em pedidos. Apenas modele, não explique."}],
+  homepractice:[
+    "Criar os 5 flashcards e revisar nos próximos 3 dias.",
+    "Fazer 10 min de revisão por dia (marque um ✓ no celular cada dia que cumprir).",
+    "Trazer 1 frase que você ainda acha difícil."
+  ],
+  success:["Eu entendi o que é repetição espaçada.","Eu montei meu primeiro maço de flashcards.","Eu falei as frases em voz alta antes de virar o cartão."]
+},
+{
+  n:3, tag:"Survival English", title:"Survive in the english class",
+  cando:"Eu consigo <b>pedir ajuda em inglês</b> sem voltar pro português.",
+  objComm:"Pedir ajuda durante a aula: repetir, não entendi, como se diz, escreve aí.",
+  objEN:"I can ask for help in English during class.",
+  review:[
+    {from:"Aula 1",items:["Hello! My name is ___","Nice to meet you"]},
+    {from:"Aula 2",items:["Can you repeat, please?","Again, please","I study every day"]}
+  ],
+  warmup:"Ping-pong rápido: eu digo <b>“How are you?”</b>, você responde qualquer coisa. Depois inverte. 4 trocas, sem pensar muito.",
+  vocab:[{en:"sorry",pt:"desculpa / como?"},{en:"slowly",pt:"devagar"},{en:"to understand",pt:"entender"},{en:"to mean",pt:"significar"},{en:"to write",pt:"escrever"},{en:"to say",pt:"dizer"}],
+  phrases:[
+    {en:"Sorry?",pt:"Como? / Não ouvi."},
+    {en:"Can you repeat, please?",pt:"Pode repetir?"},
+    {en:"I don't understand.",pt:"Eu não entendo."},
+    {en:"How do you say ___ in English?",pt:"Como se diz ___ em inglês?"},
+    {en:"What does ___ mean?",pt:"O que significa ___?"},
+    {en:"Can you write it?",pt:"Pode escrever?"},
+    {en:"Slowly, please.",pt:"Devagar, por favor."}
+  ],
+  guided:[
+    {p:"Regra de ouro da aula: quando travar, <b>não fale português</b> — use uma das frases acima. Elas são seu “botão de socorro”.",model:""},
+    {p:"Vou falar uma palavra difícil de propósito. Você reage com a frase certa: travou no som? <span class='mdl' style='font-family:Fraunces;font-style:italic;color:var(--rose-deep)'>“Sorry? Can you repeat?”</span>",model:""},
+    {p:"Não sabe a palavra? <span class='mdl' style='font-family:Fraunces;font-style:italic;color:var(--rose-deep)'>“How do you say [palavra] in English?”</span>",model:""}
+  ],
+  speaking:[
+    {lbl:"Botão de socorro — ping-pong",sec:60,prompt:"Eu vou falar rápido, baixo ou com palavra difícil 6 vezes. A cada vez, você escolhe e fala a frase de ajuda certa. Sem português.",model:"Sorry? · Can you repeat? · I don't understand. · Slowly, please."},
+    {lbl:"Como se diz?",sec:30,prompt:"Pense em 3 objetos perto de você que você não sabe em inglês. Pergunte os 3 usando “How do you say ___ in English?”",model:"How do you say 'caneta' in English?"}
+  ],
+  main:{title:"A aula só em inglês (3 min)",body:[
+    "Combinamos: pelos próximos 3 minutos, qualquer dúvida sai em inglês usando as frases de hoje.",
+    "Cada vez que você usar uma frase de ajuda em vez do português, ganha 1 ponto. Meta: 5 pontos."
+  ]},
+  grammar:[{html:"Foco é função, não forma. Estruturas que aparecem: <b>can you + verbo</b> (pedido), <b>do you...</b> embrionário em “how do you say”, <b>question words</b> (how, what). Modele a entonação de pergunta; não nomeie a gramática."}],
+  homepractice:[
+    "Colar as 7 frases de ajuda num lugar visível (mesa/celular).",
+    "Usar pelo menos 3 delas na próxima aula.",
+    "Flashcards: adicionar “How do you say ___?” e “What does ___ mean?”."
+  ],
+  success:["Eu peço ajuda em inglês sem travar.","Eu uso a frase certa pra cada situação (repetir, não entendi, como se diz).","Eu evitei o português quando travei."]
+},
+{
+  
+  n:4, tag:"Spelling", title:"Alphabet and Spelling", wip:true,
+  cando:"Eu consigo <b>soletrar meu nome e e-mail</b> em inglês.",
+  objComm:"Soletrar informações pessoais (nome, e-mail, palavras simples).",
+  objEN:"I can spell my name and email.",
+  review:[{from:"Aula 3",items:["Sorry? Can you repeat?","How do you say ___?"]}],
+  warmup:"Cantar/dizer o alfabeto uma vez, relaxado.",
+  vocab:[{en:"to spell",pt:"soletrar"},{en:"a letter",pt:"uma letra"},{en:"an email",pt:"um e-mail"},{en:"double (LL)",pt:"dois (LL)"},{en:"at / dot",pt:"arroba / ponto"}],
+  phrases:[
+    {en:"How do you spell that?",pt:"Como se soletra isso?"},
+    {en:"It's ___, ___, ___...",pt:"É ___, ___, ___..."}
+  ],
+  guided:[{p:"Esqueleto: letras difíceis pro brasileiro (G/J, E/I, H, W, Y, R), depois soletrar nome e e-mail.",model:""}],
+  speaking:[{lbl:"Spell-it Challenge",sec:60,prompt:"Soletre seu nome completo, depois seu e-mail, depois 3 palavras que eu disser.",model:"My name is Ester — E-S-T-E-R."}],
+  main:{title:"(a completar)",body:["Atividade principal a definir."]},
+  grammar:[{html:"Em uso: alfabeto, sons das vogais e acrônimos."}],
+  homepractice:["(a completar)"],
+  success:["Eu sei soletrar meu nome e meu e-mail sem hesitar."]
+},
+{
+  n:5, tag:"Greetings", title:"Greetings and Farewells",
+  cando:"Eu consigo <b>cumprimentar, responder e me despedir</b> com naturalidade.",
+  objComm:"Cumprimentar, perguntar como vai, responder e se despedir.",
+  objEN:"I can greet people and say goodbye.",
+  review:[
+    {from:"Aula 4",items:["How do you spell that?","It's E-S-T-E-R"]},
+    {from:"Aula 3",items:["I don't understand","Slowly, please"]}
+  ],
+  warmup:"Eu entro na “sala” e digo <b>“Hi! How are you?”</b>. Você responde do seu jeito. Trocamos de papel. 3 vezes.",
+  vocab:[{en:"Hi / Hello",pt:"Oi / Olá"},{en:"Good morning",pt:"Bom dia"},{en:"Good afternoon",pt:"Boa tarde"},{en:"Good evening",pt:"Boa noite (chegada)"},{en:"fine / good / great",pt:"bem / ótimo"},{en:"so-so",pt:"mais ou menos"},{en:"tired",pt:"cansado(a)"},{en:"Bye / See you",pt:"Tchau / Até mais"}],
+  phrases:[
+    {en:"Hi! How are you?",pt:"Oi! Como você está?"},
+    {en:"I'm good, thanks. And you?",pt:"Estou bem, obrigado(a). E você?"},
+    {en:"I'm fine. / I'm tired today.",pt:"Estou bem. / Estou cansado(a) hoje."},
+    {en:"Nice to see you!",pt:"Que bom te ver!"},
+    {en:"Bye! See you later.",pt:"Tchau! Até mais."},
+    {en:"Take care!",pt:"Se cuida!"}
+  ],
+  guided:[
+    {p:"Cumprimento muda com a hora do dia: de manhã <b>good morning</b>, de tarde <b>good afternoon</b>, à noite <b>good evening</b>. “Good night” é só pra dormir/sair.",model:""},
+    {p:"A resposta tem 2 partes: como você está + devolve a pergunta. <span class='mdl' style='font-family:Fraunces;font-style:italic;color:var(--rose-deep)'>“I'm good, thanks. And you?”</span>",model:""},
+    {p:"Despedida combina humor + próxima vez: <b>Bye! See you later. Take care!</b>",model:""}
+  ],
+  speaking:[
+    {lbl:"Greeting ping-pong",sec:60,prompt:"Vamos cumprimentar 5 “pessoas” diferentes (eu mudo a hora do dia e o humor a cada vez). Você escolhe o cumprimento certo e responde com as 2 partes. Sem parar.",model:"Good morning! How are you? — I'm good, thanks. And you?"},
+    {lbl:"Entra e sai",sec:30,prompt:"Encene: você chega numa reunião (cumprimenta) e depois precisa sair (se despede). Faça os dois sozinho(a), em voz alta.",model:"Hi everyone! How are you? ... Ok, bye! See you later. Take care!"}
+  ],
+  main:{title:"60-Second Hello",body:[
+    "Improviso de 60s: você é o recepcionista simpático de um café em Londres. Cumprimente 4 clientes que chegam em horários diferentes do dia.",
+    "Regra: nenhum cumprimento pode se repetir e cada um precisa de uma pergunta (How are you? / Good to see you!)."
+  ]},
+  grammar:[{html:"Estrutura em uso: <b>verb to be</b> em “I'm / you are” dentro de fórmulas (I'm good, How are you), e contração <b>I am → I'm</b>. Apenas modele; o aluno usa sem conjugar."}],
+  homepractice:[
+    "Gravar um áudio de 20s cumprimentando e se despedindo de manhã e à noite.",
+    "Usar “How are you? And you?” com alguém de verdade essa semana.",
+    "Flashcards: cumprimentos por hora do dia + respostas (good / so-so / tired)."
+  ],
+  success:["Eu escolho o cumprimento certo pra cada hora do dia.","Eu respondo “How are you?” com 2 partes e devolvo a pergunta.","Eu me despeço de forma natural (não só “bye”)."]
+},
+{
+  n:6, tag:"About me", title:"Name, Age and Country",
+  cando:"Eu consigo <b>me apresentar</b> com nome, idade e de onde sou.",
+  objComm:"Dar informações pessoais básicas: nome, idade, país e nacionalidade.",
+  objEN:"I can introduce myself with basic information.",
+  review:[
+    {from:"Aula 5",items:["Hi! How are you?","I'm good, thanks. And you?","See you later"]},
+    {from:"Aula 4",items:["How do you spell that?"]}
+  ],
+  warmup:"Cumprimento + pergunta nova: eu digo <b>“Hi! What's your name?”</b>. Você responde como conseguir. Eu repito devagar pra você copiar.",
+  vocab:[{en:"name",pt:"nome"},{en:"years old",pt:"anos (de idade)"},{en:"country",pt:"país"},{en:"Brazil",pt:"Brasil"},{en:"Brazilian",pt:"brasileiro(a)"},{en:"from",pt:"de (origem)"}],
+  phrases:[
+    {en:"What's your name?",pt:"Qual é o seu nome?"},
+    {en:"My name is ___.",pt:"Meu nome é ___."},
+    {en:"How old are you?",pt:"Quantos anos você tem?"},
+    {en:"I'm ___ years old.",pt:"Eu tenho ___ anos."},
+    {en:"Where are you from?",pt:"De onde você é?"},
+    {en:"I'm from Brazil. I'm Brazilian.",pt:"Eu sou do Brasil. Sou brasileiro(a)."}
+  ],
+  guided:[
+    {p:"3 perguntas que abrem qualquer conversa: <b>name → age → country</b>. Vamos fixar uma de cada vez e depois juntar.",model:""},
+    {p:"Idade em inglês usa “ter” diferente: não é “I have 30”, é <span class='mdl' style='font-family:Fraunces;font-style:italic;color:var(--rose-deep)'>“I'm 30 years old.”</span> (ou só “I'm 30”).",model:""},
+    {p:"País x nacionalidade: <b>I'm from Brazil</b> (país) / <b>I'm Brazilian</b> (nacionalidade). Modele 3-4 países dos interesses do aluno.",model:""}
+  ],
+  speaking:[
+    {lbl:"Pergunta ping-pong",sec:60,prompt:"Alternamos as 3 perguntas em ritmo rápido: você me pergunta, eu respondo, eu te pergunto, você responde. Cobrir name, age e country pelo menos 2 vezes cada.",model:"What's your name? — My name is ___. How old are you? — I'm ___."},
+    {lbl:"30-Second Self-Intro",sec:30,prompt:"Sozinho(a), sem parar por 30 segundos: diga nome, idade, país e nacionalidade — e termine com um cumprimento da aula 5.",model:"Hi! My name is ___. I'm ___ years old. I'm from Brazil. I'm Brazilian. Nice to meet you!"}
+  ],
+  main:{title:"Conhecer um “estranho”",body:[
+    "Encene: você senta ao lado de alguém num voo internacional. Puxe conversa usando as 3 perguntas — e responda quando eu perguntar de volta.",
+    "Meta: manter a troca viva por 1 minuto, usando greeting (aula 5) + as 3 perguntas pessoais. Travou? Use o botão de socorro da aula 3."
+  ]},
+  grammar:[{html:"Em uso: <b>verb to be</b> (I'm / you are / it is) para identidade e origem; <b>question words</b> what / how old / where; possessivo <b>your/my</b>; <b>from + país</b>. Tudo modelado em bloco; o aluno reproduz frases inteiras, não conjuga."}],
+  homepractice:[
+    "Gravar sua self-intro de 30s e me mandar.",
+    "Aprender o nome de 3 países dos seus interesses (séries/jogos/viagem) e a nacionalidade de cada.",
+    "Flashcards: as 3 perguntas + as 3 respostas pessoais."
+  ],
+  success:["Eu me apresento com nome, idade, país e nacionalidade sem travar.","Eu faço as 3 perguntas pessoais a outra pessoa.","Eu mantive uma troca de ~1 min juntando cumprimento + apresentação."]
+},
+{
+  n:7, tag:"My life", title:"Profession, City and Languagens", wip:true,
+  cando:"Eu consigo dizer <b>o que faço, onde moro e que idiomas falo</b>.",
+  objComm:"Falar profissão, cidade onde mora e idiomas.",
+  objEN:"I can talk about my job, my city and the languages I speak.",
+  review:[{from:"Aula 6",items:["My name is ___","I'm ___ years old","I'm from Brazil"]}],
+  warmup:"Self-intro relâmpago da aula 6 antes de adicionar a informação nova.",
+  vocab:[{en:"a teacher / a student",pt:"professor(a) / estudante"},{en:"to work",pt:"trabalhar"},{en:"to live",pt:"morar"},{en:"to speak",pt:"falar (idioma)"},{en:"Portuguese / English",pt:"português / inglês"}],
+  phrases:[
+    {en:"I'm a teacher. / I'm a student.",pt:"Sou professor(a). / Sou estudante."},
+    {en:"I live in ___.",pt:"Eu moro em ___."},
+    {en:"I speak Portuguese. I study English.",pt:"Eu falo português. Estudo inglês."}
+  ],
+  guided:[{p:"Esqueleto: completar prática guiada (job → city → languages), no padrão das aulas 1–5.",model:""}],
+  speaking:[{lbl:"30-sec Self-Intro 2.0",sec:30,prompt:"Junte a apresentação da aula 6 + profissão, cidade e idiomas, sem parar.",model:"My name is ___. I'm a student. I live in ___. I speak Portuguese and I study English."}],
+  main:{title:"(a completar)",body:["Atividade principal a definir no mesmo molde — fala contínua testando o objetivo."]},
+  grammar:[{html:"Em uso: <b>a/an + profissão</b>, present simple <b>I work/live/speak</b>. (Detalhar ao finalizar.)"}],
+  homepractice:["(a completar)"],
+  success:["Eu digo minha profissão, cidade e idiomas numa frase conectada."]
+
+},
+{
+  n:8, tag:"Numbers", title:"Numbers 0 to 100", wip:true,
+  cando:"Eu entendo e digo <b>números</b>: idade, telefone, preços simples.",
+  objComm:"Entender e dizer números básicos no dia a dia.",
+  objEN:"I can understand and say numbers.",
+  review:[{from:"Aulas 5 e 7",items:["I'm ___ years old","How do you spell ___?","soletrar e-mail"]}],
+  warmup:"Contar 0–20 em voz alta, depois de 10 em 10 até 100.",
+  vocab:[{en:"a number",pt:"um número"},{en:"a phone number",pt:"um telefone"},{en:"a price",pt:"um preço"},{en:"How much?",pt:"Quanto custa?"}],
+  phrases:[
+    {en:"My phone number is ___.",pt:"Meu telefone é ___."},
+    {en:"How much is it?",pt:"Quanto custa?"}
+  ],
+  guided:[{p:"Esqueleto: armadilhas 13 vs 30, 14 vs 40, etc.; depois idade, telefone e preço.",model:""}],
+  speaking:[{lbl:"Number ping-pong",sec:60,prompt:"Eu digo um número, você repete e me diz o próximo; depois você dita seu telefone bem devagar.",model:"My phone number is nine, eight..."}],
+  main:{title:"(a completar)",body:["Ditado de números / preços — completar no molde."]},
+  grammar:[{html:"Sem foco gramatical. (Detalhar ao finalizar.)"}],
+  homepractice:["(a completar)"],
+  success:["Eu digo idade, telefone e um preço simples com números corretos."]
+},
+{
+  n:9, tag:"Week & routine", title:"Weekdays and class routine", wip:true,
+  cando:"Eu falo os <b>dias da semana</b> e quando tenho aula.",
+  objComm:"Falar dias da semana e a rotina semanal simples.",
+  objEN:"I can talk about the days of my week.",
+  review:[{from:"Aula 8",items:["números 0–100","My phone number is ___"]}],
+  warmup:"Dizer os 7 dias em ordem, depois “hoje é...”.",
+  vocab:[{en:"Monday…Sunday",pt:"segunda…domingo"},{en:"today",pt:"hoje"},{en:"tomorrow",pt:"amanhã"},{en:"yesterday",pt:"ontem"},{en:"on Monday",pt:"na segunda"}],
+  phrases:[
+    {en:"Today is ___.",pt:"Hoje é ___."},
+    {en:"I have a class on ___.",pt:"Eu tenho aula na ___."}
+  ],
+  guided:[{p:"Esqueleto: dias, today/tomorrow/yesterday, “on + dia”.",model:""}],
+  speaking:[{lbl:"My week",sec:60,prompt:"Diga que dia é hoje, amanhã e ontem, e em que dias você tem aula/trabalho.",model:"Today is Monday. I have a class on Wednesday."}],
+  main:{title:"(a completar)",body:["Falar a semana — completar no molde."]},
+  grammar:[{html:"Em uso: preposição <b>on + dia</b>, “I have”. (Detalhar ao finalizar.)"}],
+  homepractice:["(a completar)"],
+  success:["Eu digo os dias da semana e quando tenho meus compromissos."]
+},
+{
+  n:10, tag:"Time", title:"Time and hours", wip:true,
+  cando:"Eu digo <b>horários simples</b> e as partes do dia.",
+  objComm:"Falar horários simples e partes do dia.",
+  objEN:"I can tell the time in a simple way.",
+  review:[{from:"Aula 9",items:["dias da semana","Today is ___","on Monday"]}],
+  warmup:"Apontar partes do dia: morning / afternoon / evening / night.",
+  vocab:[{en:"morning",pt:"manhã"},{en:"afternoon",pt:"tarde"},{en:"evening",pt:"noite (início)"},{en:"night",pt:"noite (tarde)"},{en:"at 7 / at 8:30",pt:"às 7 / às 8:30"}],
+  phrases:[
+    {en:"What time is it?",pt:"Que horas são?"},
+    {en:"It's 8 o'clock. / It's 8:30.",pt:"São 8 horas. / São 8:30."},
+    {en:"My class is at ___.",pt:"Minha aula é às ___."}
+  ],
+  guided:[{p:"Esqueleto: o'clock, half past (básico), “at + hora”, partes do dia.",model:""}],
+  speaking:[{lbl:"My day's times",sec:60,prompt:"Diga a que horas você acorda, come e tem aula — com a parte do dia.",model:"My class is at 7 in the evening."}],
+  main:{title:"(a completar)",body:["Falar horários do dia — completar no molde."]},
+  grammar:[{html:"Em uso: <b>at + hora</b>, <b>in the morning/afternoon</b>. (Detalhar ao finalizar.)"}],
+  homepractice:["(a completar)"],
+  success:["Eu digo horas simples e a que horas acontecem meus compromissos."]
+}
+];
+
+/* ================================================================
+   ENGINE — render, trava, progresso. Não precisa editar abaixo.
+   ================================================================ */
+const KEY='ivr_a0_progress';
+const mem={};
+const store={
+  get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return mem[k]}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){mem[k]=v}}
+};
+let done = store.get(KEY) || {}; // {1:true,2:true,...}
+
+const $=s=>document.querySelector(s);
+const home=$('#home'), lessonView=$('#lessonView'), trilha=$('#trilha');
+
+function isDone(n){return !!done[n]}
+function isUnlocked(n){return n===1 || isDone(n-1)}
+function status(n){return isDone(n)?'done':(isUnlocked(n)?'open':'locked')}
+
+function updateProgress(){
+  const total=LESSONS.length, d=LESSONS.filter(l=>isDone(l.n)).length;
+  const pct=Math.round(d/total*100);
+  $('#barFill').style.width=pct+'%';
+  $('#barPct').textContent=pct+'%';
+}
+
+function renderTrilha(){
+  trilha.innerHTML='';
+  const tones=[
+    {bg:'var(--gold-tint)',fg:'#9A6A1E'},
+    {bg:'var(--rose-tint)',fg:'#A8345A'},
+    {bg:'var(--sage-tint)',fg:'#3F6152'}
+  ];
+  LESSONS.forEach((l,i)=>{
+    const st=status(l.n);
+    const tone=tones[i%3];
+    const b=document.createElement('button');
+    b.className='chunk '+st;
+    const pill = st==='done'?'<span class="pill ok">✓ Concluída</span>'
+              : st==='open'?'<span class="pill go">▶ Disponível</span>'
+              : '<span class="pill lock">🔒 Bloqueada</span>';
+    b.innerHTML=`
+      <span class="num">${l.n}</span>
+      <span class="stamp">você conseguiu! ✦</span>
+      <div class="art" style="background:${tone.bg}">
+        <svg viewBox="0 0 96 96" fill="none"><circle cx="48" cy="48" r="40" fill="${tone.fg}" opacity=".18"/>
+          <path d="M28 34h40a6 6 0 0 1 6 6v18a6 6 0 0 1-6 6H46l-14 12v-12h-4a6 6 0 0 1-6-6V40a6 6 0 0 1 6-6Z" fill="${tone.fg}"/></svg>
+      </div>
+      <div class="body">
+        <span class="tag">${l.tag}</span>
+        <h3>${l.title}</h3>
+        <p class="cando">${l.cando}</p>
+        ${pill}
+      </div>`;
+    b.addEventListener('click',()=>{
+      if(st==='locked'){ b.classList.add('shake'); setTimeout(()=>b.classList.remove('shake'),420);
+        toast('🔒 Conclua a aula anterior pra desbloquear.'); return; }
+      openLesson(l.n);
+    });
+    trilha.appendChild(b);
+  });
+  updateProgress();
+}
+
+const LESSON_ART={
+  1:`<svg viewBox="0 0 420 220" fill="none"><circle cx="340" cy="60" r="110" fill="#2A3358"/>
+    <circle cx="80" cy="180" r="70" fill="#34406E" opacity=".6"/>
+    <rect x="60" y="80" width="90" height="120" rx="8" fill="#E0A458"/>
+    <rect x="88" y="110" width="34" height="50" rx="5" fill="#C8882E"/>
+    <circle cx="118" cy="135" r="4" fill="#F8EEDD"/>
+    <path d="M170 55 h160 a14 14 0 0 1 14 14 v55 a14 14 0 0 1 -14 14 h-110 l-22 20 v-20 h-28 a14 14 0 0 1 -14 -14 V69 a14 14 0 0 1 14 -14Z" fill="#fff"/>
+    <text x="200" y="92" font-family="Fraunces" font-weight="700" font-size="18" fill="#1F1B2E">Welcome!</text>
+    <path d="M175 168 q8-16 16 0 t16 0 t16 0" stroke="#F8EEDD" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
+  </svg>`,
+  2:`<svg viewBox="0 0 420 220" fill="none"><circle cx="340" cy="50" r="120" fill="#2A3358"/>
+    <circle cx="70" cy="190" r="80" fill="#34406E" opacity=".5"/>
+    <rect x="55" y="90" width="110" height="75" rx="10" fill="#C75B7A" transform="rotate(-8,110,127)"/>
+    <rect x="65" y="82" width="110" height="75" rx="10" fill="#E0A458" transform="rotate(-3,120,119)"/>
+    <rect x="75" y="74" width="110" height="75" rx="10" fill="#fff"/>
+    <text x="105" y="118" font-family="Fraunces" font-weight="700" font-size="22" fill="#1F1B2E">study</text>
+    <text x="102" y="140" font-family="Inter" font-weight="600" font-size="13" fill="#A8345A">estudar</text>
+    <path d="M215 100 q60-40 80 0 q20 40 -20 60 q-20 10 -40 0" stroke="#F8EEDD" stroke-width="3" fill="none" stroke-linecap="round" marker-end="url(#arr)"/>
+    <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#F8EEDD"/></marker></defs>
+  </svg>`,
+  3:`<svg viewBox="0 0 420 220" fill="none"><circle cx="350" cy="50" r="115" fill="#2A3358"/>
+    <circle cx="60" cy="185" r="75" fill="#34406E" opacity=".55"/>
+    <circle cx="110" cy="120" r="52" fill="none" stroke="#E0A458" stroke-width="14"/>
+    <circle cx="110" cy="120" r="52" fill="none" stroke="#2A3358" stroke-width="14" stroke-dasharray="50 32"/>
+    <circle cx="110" cy="120" r="30" fill="#34406E"/>
+    <text x="90" y="127" font-family="Fraunces" font-weight="700" font-size="18" fill="#fff">SOS</text>
+    <path d="M185 60 h155 a12 12 0 0 1 12 12 v46 a12 12 0 0 1 -12 12 h-100 l-20 18 v-18 h-35 a12 12 0 0 1 -12 -12 V72 a12 12 0 0 1 12 -12Z" fill="#fff"/>
+    <text x="210" y="90" font-family="Inter" font-weight="700" font-size="13" fill="#1F1B2E">Can you repeat</text>
+    <text x="210" y="108" font-family="Inter" font-weight="700" font-size="13" fill="#1F1B2E">that, please?</text>
+  </svg>`,
+  4:`<svg viewBox="0 0 420 220" fill="none"><circle cx="350" cy="55" r="115" fill="#2A3358"/>
+    <circle cx="60" cy="185" r="75" fill="#34406E" opacity=".55"/>
+    <text x="48" y="155" font-family="Fraunces" font-weight="900" font-size="100" fill="#E0A458" opacity=".9">A</text>
+    <text x="148" y="140" font-family="Fraunces" font-weight="900" font-size="80" fill="#C75B7A" opacity=".85">B</text>
+    <text x="230" y="155" font-family="Fraunces" font-weight="900" font-size="100" fill="#fff" opacity=".15">C</text>
+    <rect x="270" y="90" width="32" height="22" rx="6" fill="#fff" opacity=".15"/>
+    <rect x="308" y="90" width="32" height="22" rx="6" fill="#fff" opacity=".15"/>
+    <rect x="346" y="90" width="32" height="22" rx="6" fill="#fff" opacity=".15"/>
+    <rect x="270" y="118" width="32" height="22" rx="6" fill="#fff" opacity=".1"/>
+    <rect x="308" y="118" width="32" height="22" rx="6" fill="#fff" opacity=".1"/>
+  </svg>`,
+  5:`<svg viewBox="0 0 420 220" fill="none"><circle cx="350" cy="50" r="115" fill="#2A3358"/>
+    <circle cx="60" cy="190" r="75" fill="#34406E" opacity=".55"/>
+    <circle cx="100" cy="82" r="32" fill="#F8D9A8"/>
+    <rect x="72" y="115" width="56" height="80" rx="22" fill="#E0A458"/>
+    <path d="M128 120 q30-30 50-10" stroke="#F8D9A8" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="290" cy="88" r="28" fill="#F3C9D6"/>
+    <rect x="264" y="118" width="52" height="75" rx="20" fill="#C75B7A"/>
+    <path d="M264 124 q-28-26-46-8" stroke="#F3C9D6" stroke-width="11" stroke-linecap="round"/>
+    <path d="M148 48 h80 a10 10 0 0 1 10 10 v34 a10 10 0 0 1 -10 10 h-50 l-14 14 v-14 h-16 a10 10 0 0 1 -10-10 V58 a10 10 0 0 1 10-10Z" fill="#fff"/>
+    <text x="167" y="73" font-family="Fraunces" font-weight="700" font-size="20" fill="#1F1B2E">Hi! 👋</text>
+  </svg>`,
+  6:`<svg viewBox="0 0 420 220" fill="none"><circle cx="350" cy="50" r="115" fill="#2A3358"/>
+    <circle cx="60" cy="190" r="75" fill="#34406E" opacity=".55"/>
+    <circle cx="110" cy="115" r="68" fill="none" stroke="#E0A458" stroke-width="2.5" opacity=".7"/>
+    <ellipse cx="110" cy="115" rx="30" ry="68" fill="none" stroke="#E0A458" stroke-width="2" opacity=".5"/>
+    <line x1="44" y1="115" x2="176" y2="115" stroke="#E0A458" stroke-width="2" opacity=".5"/>
+    <circle cx="110" cy="115" r="68" fill="#2A3358" opacity=".6"/>
+    <circle cx="110" cy="88" r="24" fill="#F8D9A8"/>
+    <rect x="88" y="114" width="44" height="52" rx="16" fill="#6E8B7B"/>
+    <rect x="195" y="65" width="130" height="90" rx="10" fill="#fff"/>
+    <rect x="195" y="65" width="130" height="24" rx="10" fill="#C75B7A"/>
+    <circle cx="228" cy="113" r="16" fill="#F8D9A8"/>
+    <rect x="252" y="100" width="58" height="8" rx="4" fill="#E9DFD4"/>
+    <rect x="252" y="114" width="42" height="8" rx="4" fill="#E9DFD4"/>
+    <rect x="252" y="128" width="50" height="8" rx="4" fill="#E9DFD4"/>
+  </svg>`,
+  7:`<svg viewBox="0 0 420 220" fill="none"><circle cx="350" cy="50" r="115" fill="#2A3358"/>
+    <circle cx="60" cy="190" r="75" fill="#34406E" opacity=".55"/>
+    <rect x="42" y="100" width="50" height="110" rx="4" fill="#6E8B7B" opacity=".8"/>
+    <rect x="98" y="70" width="40" height="140" rx="4" fill="#E0A458" opacity=".85"/>
+    <rect x="144" y="88" width="44" height="122" rx="4" fill="#6E8B7B" opacity=".7"/>
+    <rect x="52" y="112" width="10" height="10" rx="2" fill="#fff" opacity=".5"/>
+    <rect x="68" y="112" width="10" height="10" rx="2" fill="#fff" opacity=".5"/>
+    <rect x="52" y="130" width="10" height="10" rx="2" fill="#fff" opacity=".5"/>
+    <rect x="68" y="130" width="10" height="10" rx="2" fill="#fff" opacity=".5"/>
+    <rect x="104" y="82" width="10" height="10" rx="2" fill="#fff" opacity=".5"/>
+    <rect x="120" y="82" width="10" height="10" rx="2" fill="#fff" opacity=".5"/>
+    <circle cx="270" cy="100" r="28" fill="#F8D9A8"/>
+    <rect x="246" y="130" width="48" height="60" rx="18" fill="#C75B7A"/>
+    <path d="M308 72 h95 a10 10 0 0 1 10 10 v36 a10 10 0 0 1 -10 10 h-62 l-16 14 v-14 h-17 a10 10 0 0 1 -10-10 V82 a10 10 0 0 1 10-10Z" fill="#fff"/>
+    <text x="318" y="96" font-family="Inter" font-weight="700" font-size="12" fill="#1F1B2E">I'm a teacher</text>
+    <text x="318" y="112" font-family="Inter" font-weight="600" font-size="11" fill="#5A5368">from São Paulo.</text>
+  </svg>`,
+  8:`<svg viewBox="0 0 420 220" fill="none"><circle cx="350" cy="50" r="115" fill="#2A3358"/>
+    <circle cx="60" cy="190" r="75" fill="#34406E" opacity=".55"/>
+    <text x="38" y="165" font-family="Fraunces" font-weight="900" font-size="110" fill="#E0A458" opacity=".9">4</text>
+    <text x="128" y="155" font-family="Fraunces" font-weight="900" font-size="90" fill="#C75B7A" opacity=".85">2</text>
+    <text x="238" y="85" font-family="Fraunces" font-weight="700" font-size="28" fill="#fff" opacity=".3">7</text>
+    <text x="278" y="120" font-family="Fraunces" font-weight="700" font-size="22" fill="#fff" opacity=".25">19</text>
+    <text x="315" y="80" font-family="Fraunces" font-weight="700" font-size="18" fill="#fff" opacity=".2">100</text>
+    <text x="340" y="140" font-family="Fraunces" font-weight="700" font-size="26" fill="#E0A458" opacity=".35">3</text>
+    <text x="260" y="165" font-family="Fraunces" font-weight="700" font-size="20" fill="#fff" opacity=".2">55</text>
+  </svg>`,
+  9:`<svg viewBox="0 0 420 220" fill="none"><circle cx="350" cy="50" r="115" fill="#2A3358"/>
+    <circle cx="60" cy="190" r="75" fill="#34406E" opacity=".55"/>
+    <rect x="48" y="58" width="160" height="140" rx="12" fill="#fff"/>
+    <rect x="48" y="58" width="160" height="38" rx="12" fill="#C75B7A"/>
+    <rect x="48" y="84" width="160" height="12" fill="#C75B7A"/>
+    <circle cx="76" cy="72" r="6" fill="#F7E9EE"/>
+    <circle cx="96" cy="72" r="6" fill="#F7E9EE"/>
+    <text x="60" y="116" font-family="Inter" font-weight="700" font-size="9" fill="#9A8F84">MON</text>
+    <text x="84" y="116" font-family="Inter" font-weight="700" font-size="9" fill="#9A8F84">TUE</text>
+    <text x="108" y="116" font-family="Inter" font-weight="700" font-size="9" fill="#9A8F84">WED</text>
+    <text x="132" y="116" font-family="Inter" font-weight="700" font-size="9" fill="#9A8F84">THU</text>
+    <text x="156" y="116" font-family="Inter" font-weight="700" font-size="9" fill="#9A8F84">FRI</text>
+    <text x="62" y="138" font-family="Fraunces" font-weight="600" font-size="16" fill="#1F1B2E">1</text>
+    <text x="86" y="138" font-family="Fraunces" font-weight="600" font-size="16" fill="#1F1B2E">2</text>
+    <text x="108" y="138" font-family="Fraunces" font-weight="600" font-size="16" fill="#C75B7A">3</text>
+    <text x="134" y="138" font-family="Fraunces" font-weight="600" font-size="16" fill="#1F1B2E">4</text>
+    <text x="158" y="138" font-family="Fraunces" font-weight="600" font-size="16" fill="#1F1B2E">5</text>
+    <circle cx="113" cy="133" r="12" fill="none" stroke="#C75B7A" stroke-width="2"/>
+    <text x="60" y="175" font-family="Fraunces" font-size="14" fill="#E0A458">★</text>
+    <text x="60" y="190" font-family="Inter" font-size="9" font-weight="600" fill="#9A8F84">class day</text>
+    <circle cx="310" cy="95" r="30" fill="#F8D9A8"/>
+    <rect x="284" y="127" width="52" height="65" rx="18" fill="#6E8B7B"/>
+  </svg>`,
+  10:`<svg viewBox="0 0 420 220" fill="none"><circle cx="350" cy="50" r="115" fill="#2A3358"/>
+    <circle cx="60" cy="190" r="75" fill="#34406E" opacity=".55"/>
+    <circle cx="120" cy="115" r="74" fill="#fff"/>
+    <circle cx="120" cy="115" r="74" fill="none" stroke="#E9DFD4" stroke-width="2"/>
+    <circle cx="120" cy="115" r="6" fill="#1F1B2E"/>
+    <line x1="120" y1="46" x2="120" y2="58" stroke="#1F1B2E" stroke-width="3" stroke-linecap="round"/>
+    <line x1="120" y1="172" x2="120" y2="184" stroke="#1F1B2E" stroke-width="3" stroke-linecap="round"/>
+    <line x1="46" y1="115" x2="58" y2="115" stroke="#1F1B2E" stroke-width="3" stroke-linecap="round"/>
+    <line x1="182" y1="115" x2="194" y2="115" stroke="#1F1B2E" stroke-width="3" stroke-linecap="round"/>
+    <line x1="120" y1="115" x2="90" y2="78" stroke="#1F1B2E" stroke-width="4" stroke-linecap="round"/>
+    <line x1="120" y1="115" x2="152" y2="78" stroke="#C75B7A" stroke-width="3" stroke-linecap="round"/>
+    <text x="114" y="72" font-family="Fraunces" font-weight="700" font-size="14" fill="#1F1B2E">12</text>
+    <text x="115" y="168" font-family="Fraunces" font-weight="700" font-size="14" fill="#1F1B2E">6</text>
+    <text x="52" y="120" font-family="Fraunces" font-weight="700" font-size="14" fill="#1F1B2E">9</text>
+    <text x="180" y="120" font-family="Fraunces" font-weight="700" font-size="14" fill="#1F1B2E">3</text>
+    <path d="M210 65 h130 a10 10 0 0 1 10 10 v38 a10 10 0 0 1 -10 10 h-85 l-18 16 v-16 h-27 a10 10 0 0 1-10-10 V75 a10 10 0 0 1 10-10Z" fill="#E0A458"/>
+    <text x="224" y="88" font-family="Inter" font-weight="700" font-size="13" fill="#1F1B2E">It's ten</text>
+    <text x="224" y="104" font-family="Inter" font-weight="700" font-size="13" fill="#1F1B2E">o'clock!</text>
+  </svg>`
+};
+
+function openLesson(n){
+  const l=LESSONS.find(x=>x.n===n); if(!l) return;
+  window.scrollTo({top:0});
+  home.style.display='none';
+  lessonView.style.display='block';
+
+  const reviewHTML = l.review ? `
+   <section class="block">
+     <div class="review">
+       <div class="rt">🔁 Relembrar antes de começar</div>
+       <p>Diga em voz alta o que já apareceu — é a repetição espaçada fazendo o conteúdo grudar.</p>
+       ${l.review.map(r=>`<div style="margin:.4em 0 .2em;font-size:12px;font-weight:700;color:#9A6A1E">${r.from}</div>
+         <div class="chips">${r.items.map(i=>`<span class="chip">${i}</span>`).join('')}</div>`).join('')}
+     </div>
+   </section>`:'';
+
+  const vocabHTML = l.vocab?`
+   <section class="block">
+     <div class="b-label"><span class="ic">🗂️</span><h3>Vocabulário útil</h3><span class="hint">clique pra virar EN ↔ PT</span></div>
+     <div class="vocab">
+       ${l.vocab.map(v=>`<div class="vcard"><span class="en">${v.en}</span><span class="pt">${v.pt}</span></div>`).join('')}
+     </div>
+     <p class="flip-hint">Fale em inglês antes de virar o cartão.</p>
+   </section>`:'';
+
+  const phrasesHTML = l.phrases?`
+   <section class="block">
+     <div class="b-label"><span class="ic">💬</span><h3>Frases prontas</h3></div>
+     <div class="phrases">
+       ${l.phrases.map(p=>`<div class="ph"><div><div class="en">${p.en}</div><div class="pt">${p.pt}</div></div></div>`).join('')}
+     </div>
+   </section>`:'';
+
+  const guidedHTML = l.guided?`
+   <section class="block">
+     <div class="b-label"><span class="ic">🧭</span><h3>Prática guiada</h3><span class="hint">professora modela, aluno repete</span></div>
+     <div class="steps">
+       ${l.guided.map(g=>`<div class="step"><p>${g.p}${g.model?` <span class="mdl">“${g.model}”</span>`:''}</p></div>`).join('')}
+     </div>
+   </section>`:'';
+
+  const speakHTML = l.speaking?`
+   <section class="block">
+     <div class="b-label"><span class="ic">🎙️</span><h3>Speaking practice</h3><span class="hint">fala contínua — o coração da aula</span></div>
+     ${l.speaking.map((s,i)=>`
+       <div class="speak">
+         <div class="top">
+           <span class="lbl">${s.lbl}</span>
+           <span class="timer"><span class="t" id="t${n}_${i}">0:${String(s.sec).padStart(2,'0')}</span>
+             <button data-sec="${s.sec}" data-tid="t${n}_${i}">▶ ${s.sec}s</button></span>
+         </div>
+         <div class="prompt">${s.prompt}</div>
+         ${s.model?`<div class="model">Modelo: ${s.model}</div>`:''}
+       </div>`).join('')}
+   </section>`:'';
+
+  const mainHTML = l.main?`
+   <section class="block">
+     <div class="b-label"><span class="ic">⭐</span><h3>Atividade principal</h3></div>
+     <div class="main-act">
+       <h4>${l.main.title}</h4>
+       ${l.main.body.map(p=>`<p>${p}</p>`).join('')}
+     </div>
+   </section>`:'';
+
+  const gramHTML = l.grammar?`
+   <section class="block gram">
+     <details>
+       <summary>📎 Apoio da professora — estruturas que entram em uso (não é conteúdo do aluno)</summary>
+       <div class="gbody">${l.grammar.map(g=>g.html).join('<br>')}</div>
+     </details>
+   </section>`:'';
+
+  const hwHTML = l.homepractice?`
+   <section class="block">
+     <div class="b-label"><span class="ic">🏠</span><h3>Homepractice</h3></div>
+     <ul class="hw" style="padding-left:0;margin:0">${l.homepractice.map(h=>`<li>${h}</li>`).join('')}</ul>
+   </section>`:'';
+
+  const successHTML = l.success?`
+   <section class="block">
+     <div class="success">
+       <h4>Critério de sucesso — eu sei que consegui quando…</h4>
+       <div class="check">
+         ${l.success.map((s,i)=>`<label><input type="checkbox" class="succhk" /> ${s}</label>`).join('')}
+       </div>
+       <span class="hand">marque tudo antes de concluir ✦</span>
+     </div>
+   </section>`:'';
+
+  const wipHTML = l.wip?`<div class="wip">🚧 Esta aula está em <b>esqueleto</b> — estrutura pronta no mesmo molde das aulas 1–5, falta preencher o conteúdo final.</div>`:'';
+
+  const next=LESSONS.find(x=>x.n===n+1);
+  const finishHTML=`
+   <div class="finish">
+     <button class="btn-done" id="markDone">✓ Marcar aula como concluída</button>
+     <span class="msg" id="finishMsg">Marque os critérios de sucesso acima pra liberar.</span>
+     <span id="nextSlot"></span>
+   </div>`;
+
+  lessonView.innerHTML=`
+    <button class="back" id="back">← Voltar pra trilha</button>
+    <div class="l-banner">
+      <div class="l-banner-copy">
+        <svg class="blogo" viewBox="0 0 260 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="42" font-family="Inter,Arial,sans-serif" font-weight="800" font-size="38" letter-spacing="2" fill="#ffffff">ENGLISH</text>
+          <text x="4" y="72" font-family="Georgia,serif" font-style="italic" font-size="22" fill="#C75B7A">by</text>
+          <text x="34" y="74" font-family="Inter,Arial,sans-serif" font-weight="800" font-size="30" letter-spacing="1" fill="#C75B7A">NEVES</text>
+          <line x1="0" y1="84" x2="240" y2="84" stroke="#ffffff" stroke-width="2.5"/>
+        </svg>
+        <span class="btag">Aula ${l.n} · ${l.tag}</span>
+        <h2>${l.title}</h2>
+      </div>
+      <div class="l-banner-art">${LESSON_ART[l.n]||LESSON_ART[1]}</div>
+    </div>
+    <div class="l-obj">
+      <div><span class="k">Objetivo:</span><span>${l.objComm}</span></div>
+      <div><span class="k">Goal:</span><span class="en">${l.objEN}</span></div>
+    </div>
+    ${reviewHTML}
+    ${l.warmup?`<section class="block"><div class="b-label"><span class="ic">☀️</span><h3>Warm-up</h3></div><div class="card-soft"><p>${l.warmup}</p></div></section>`:''}
+    ${vocabHTML}${phrasesHTML}${guidedHTML}${speakHTML}${mainHTML}${gramHTML}${hwHTML}${successHTML}
+    ${wipHTML}
+    ${finishHTML}`;
+
+  // back
+  $('#back').addEventListener('click',goHome);
+  // vocab flip
+  lessonView.querySelectorAll('.vcard').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('flip')));
+  // timers
+  lessonView.querySelectorAll('.timer button').forEach(btn=>{
+    btn.addEventListener('click',()=>startTimer(btn));
+  });
+  // success gating
+  const chks=[...lessonView.querySelectorAll('.succhk')];
+  const markBtn=$('#markDone'), msg=$('#finishMsg');
+  function refresh(){
+    const all = chks.length>0 && chks.every(c=>c.checked);
+    markBtn.disabled=!all;
+    msg.textContent = isDone(n) ? 'Aula já concluída ✓ — pode revisar à vontade.'
+                    : all ? 'Tudo pronto! Pode concluir.' : 'Marque os critérios de sucesso acima pra liberar.';
+  }
+  chks.forEach(c=>c.addEventListener('change',refresh));
+  if(isDone(n)){ chks.forEach(c=>c.checked=true); }
+  refresh();
+  markBtn.addEventListener('click',()=>{
+    done[n]=true; store.set(KEY,done);
+    refresh(); renderNext(n); updateProgress();
+    toast(next?`✓ Aula ${n} concluída! Aula ${n+1} liberada.`:'✓ Você concluiu o A0! 🎉');
+    confettiStamp();
+  });
+  renderNext(n);
+}
+
+function renderNext(n){
+  const slot=$('#nextSlot'); if(!slot) return;
+  const next=LESSONS.find(x=>x.n===n+1);
+  if(isDone(n) && next){
+    slot.innerHTML=`<button class="btn-next" id="goNext">Ir pra Aula ${next.n}: ${next.title} →</button>`;
+    $('#goNext').addEventListener('click',()=>openLesson(next.n));
+  } else { slot.innerHTML=''; }
+}
+
+let activeTimer=null;
+function startTimer(btn){
+  if(activeTimer){clearInterval(activeTimer.id); activeTimer.btn.textContent='▶ '+activeTimer.sec+'s';}
+  let sec=+btn.dataset.sec, left=sec;
+  const t=document.getElementById(btn.dataset.tid);
+  btn.textContent='■ stop';
+  const tick=()=>{ t.textContent='0:'+String(left).padStart(2,'0');
+    if(left<=0){clearInterval(id); btn.textContent='✓ feito'; t.textContent='0:00'; activeTimer=null; return;}
+    left--; };
+  tick(); const id=setInterval(tick,1000);
+  activeTimer={id,btn,sec};
+  btn.onclick=()=>{clearInterval(id); btn.textContent='▶ '+sec+'s'; t.textContent='0:'+String(sec).padStart(2,'0'); activeTimer=null;
+    btn.onclick=null; btn.addEventListener('click',()=>startTimer(btn));};
+}
+
+function goHome(){
+  lessonView.style.display='none';
+  home.style.display='block';
+  renderTrilha();
+  window.scrollTo({top:0});
+}
+
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),2600);
+}
+function confettiStamp(){ /* leve: o stamp já aparece no card ao voltar */ }
+
+$('#resetBtn').addEventListener('click',()=>{
+  if(confirm('Zerar todo o progresso? (use isso pra reaproveitar o material com outro aluno)')){
+    done={}; store.set(KEY,done); goHome(); toast('Progresso zerado.');
+  }
+});
+
+const continueBtn=document.getElementById('continueBtn');
+if(continueBtn){
+  continueBtn.addEventListener('click',()=>{
+    const nextLesson = LESSONS.find(l=>!isDone(l.n) && isUnlocked(l.n)) || LESSONS[0];
+    openLesson(nextLesson.n);
+  });
+}
+
+renderTrilha();
+</script>
+</body>
+</html>
